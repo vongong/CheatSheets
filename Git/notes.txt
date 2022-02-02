@@ -1,0 +1,11 @@
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+git log
+git status
+
+git add -A
+git commit -m "commit Message"
+git push
+
+git fetch
