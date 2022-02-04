@@ -1,0 +1,10 @@
+//Export Studio 3t
+As Json
+Format Option: Json - Mongoexport
+Filename: filename.json
+
+//deleteMany from local
+db.Authorization.deleteMany({})
+
+cd C:\MongoDB\Dataload\
+mongoimport --db MyDb --collection Authorization --file fileName.json
