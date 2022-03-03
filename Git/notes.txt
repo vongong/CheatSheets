@@ -11,3 +11,8 @@ git push
 git fetch
 
 git remote set-url origin https://github.com/example/repo.git
+
+git stash
+git stash -u        //Untracked files files
+git stash list      //List stash
+git stash apply 0   //Apply from list
