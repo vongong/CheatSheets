@@ -12,7 +12,10 @@ git fetch
 
 git remote set-url origin https://github.com/example/repo.git
 
-git stash
+git stash save "comment on save"
 git stash -u        //Untracked files files
-git stash list      //List stash
-git stash apply 0   //Apply from list
+git stash list      //List stash id and comments
+git stash apply 0   //Apply from list, left in stash
+git stash pop       //Apply from list, remove from stash
+git stash drop 0    //Remove from stash
+git stash clear    //Remove all stashes
