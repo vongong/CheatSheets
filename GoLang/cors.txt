@@ -1,0 +1,21 @@
+--CreateServer
+r=*mux.Router
+
+handler := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{http.MethodOptions, http.MethodPost, http.MethodGet},
+		AllowedHeaders: []string{"*"},
+	})
+return &http.Server{
+		Addr:    ":" + conf.Port,
+		Handler: handler.Handler(r),
+	}
+-------	
+srv := reporting.CreateServer(c, r, &wg)
+
+	go func() {
+		defer resurrection()
+		if err := srv.ListenAndServe(); err != nil {
+			log.Debugf("Server shutting down... %s", err.Error())
+		}
+	}()
