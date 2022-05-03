@@ -104,3 +104,36 @@ func translate(reflectType reflect.Type, reflectValue reflect.Value) error {
 
 	return nil
 }
+
+{
+    "name": "metadata-load-wc",
+    "port": 3000,
+	"log-level": "info",
+    "is-prod" : false,
+    "get-limit": 1,
+    "load-limit": 100,
+    "update-limit": 100,
+    "cron-location":"America/Chicago",
+    "cron-schedule":"@midnight",
+    "cron-autostart": false,
+    "client": {
+        "url": "https://test-internal-tc.example.com/loadMemberDocuments",
+        "timeout-ms": 6000,
+        "insecure-skip-verify": true,
+        "max-connection-per-host": 100,
+        "max-idle-connections": 100,
+        "max-idle-connections-per-host": 10,
+        "idle-connection-timeout-ms": 5000,
+        "max-retry": 5,
+        "retry-delay-ms": 100
+    },
+    "sql": {
+        "url": "c3Fsc2VydmVyOi8vdXNlcjAxOnBhc3MwMUBsb2NhbGhvc3Q6MTQzMz9jb25uZWN0aW9uK3RpbWVvdXQ9MCZkYXRhYmFzZT1EQk5hbWU=",
+        "options": {
+            "max-open-connections": 30,
+            "max-idle-connections": 30,
+            "max-lifetime-ms": 30000
+        }
+    }
+	
+}
