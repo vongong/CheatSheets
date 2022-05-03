@@ -1,37 +1,3 @@
-package config
-
-import (
-	"encoding/base64"
-	"encoding/json"
-	"errors"
-	"metadata-load-wc/pkg/httpapi"
-	"metadata-load-wc/pkg/mssql"
-	"os"
-	"reflect"
-
-	"github.com/rs/zerolog/log"
-)
-
-const path = "config/config.json"
-
-//Config ...
-type Config struct {
-	Name          string         `json:"name"`
-	Port          int            `json:"port"`
-	IsProd        bool           `json:"is-prod"`
-	GetLimit      int            `json:"get-limit"`      // Limit documents to be processed
-	LoadLimit     int            `json:"load-limit"`     // Limit the document passed to loadMemberDocument in one batch
-	UpdateLimit   int            `json:"update-limit"`   // Limit records to be updated in one batch
-	CronLocation  string         `json:"cron-location"`  // TimeZone of schedulder see: time.LoadLocation()
-	CronSchedule  string         `json:"cron-schedule"`  // Scheduler's schedule see for format: https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format
-	CronAutoStart bool           `json:"cron-autostart"` // Should scheduler run on start up
-	Debug         bool           `json:"debug"`
-	LogLevel      string         `json:"log-level"`
-	Client        httpapi.Config `json:"client"`
-	SQL           mssql.Config   `json:"sql"`
-}
-
-// GetConfig mappings for app
 func GetConfig() (Config, error) {
 	conf := Config{}
 
