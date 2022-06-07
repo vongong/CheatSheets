@@ -1,0 +1,5 @@
+* Recent Addition to product
+* Text Based -- yaml
+* Version controlled by git
+* build & release are "stages" in same pipeline
+
