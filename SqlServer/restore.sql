@@ -68,7 +68,7 @@ restore database CompressionDemo
 from disk = 'C:\Demo\CompressionDemo.bak'
 with stats = 10, standby = 'C:\Demo\Restore.txt' ;
 
---... same as log1, log1, log2
+--... same as log1, log2, log3, replace norecovery w standby
 
 restore database CompressionDemo
 with recovery;      --runs recovery process. now fully operational
