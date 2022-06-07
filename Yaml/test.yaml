@@ -1,0 +1,51 @@
+# comment here
+app: user-authentication
+name: "this is a string"
+version: [1.7, 1.9, 2.0]  # List
+microservice1:  #object
+  port: 9000
+  name: dbreader
+  version: 1.7
+
+#List
+microservice2:
+  - app: user-authentication
+    port: 9000
+    version: 1.7
+  - app: shopping-cart
+    port: 9001
+    version: 1.9
+
+multilineString: |
+  this is a
+  multiline string
+multilineString2: "this is a /n multiline string"
+
+multilineStringInSingle: >
+  this is a
+  multiline string
+
+command:
+  - /bin/sh
+  - -ec
+  - >-
+    mysql -h 127.0.0.1 -u root -p$MYSQL_PASSWORD -e 'SELECT 1'
+
+ apiVersion: v1
+ kind: Service
+ metadata:
+   name: {{ .Values.service.name }} #placeholder
+
+ #multi file
+ ---
+ apiVersion: v1
+ kind: ConfigMap
+ metadata:
+   name: {{ .Values.service.name }} 
+
+---
+ apiVersion: v1
+ kind: Secret
+ metadata:
+   name: {{ .Values.service.name }} 
+
