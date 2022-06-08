@@ -12,6 +12,9 @@ https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops
 Predefined variables: 
 https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
 
+Pipeline Tasks:
+https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/?view=azure-devops
+
 
 -----------------------
 --Stages, Jobs, Steps
@@ -78,4 +81,9 @@ yaml conditional
     https://docs.microsoft.com/en-us/azure/devops/pipelines/process/conditions?view=azure-devops&tabs=yaml
     https://docs.microsoft.com/en-us/azure/devops/pipelines/process/expressions?view=azure-devops
  
-keyVault
+Pipeline variable
+    Can set variable at Pipeline level.
+    Reference at yaml.
+    ie.
+        Name: connectionstring-test
+        Ref:  $(connectionstring-test)
