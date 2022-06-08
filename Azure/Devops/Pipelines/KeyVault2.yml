@@ -1,0 +1,28 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Your-Azure-Subscription'
+    KeyVaultName: 'Your-Key-Vault-Name'
+    SecretsFilter: '*'
+    RunAsPreJob: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'echo $(Your-Secret-Name) > secret.txt'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: secret.txt
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
