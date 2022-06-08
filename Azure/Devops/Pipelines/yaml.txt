@@ -3,3 +3,70 @@
 * Version controlled by git
 * build & release are "stages" in same pipeline
 
+Examples:
+https://github.com/microsoft/azure-pipelines-yaml
+
+Azure Pipeline Doc: 
+https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops
+
+Predefined variables: 
+https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+
+
+-----------------------
+--Stages, Jobs, Steps
+--https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/?view=azure-pipelines
+
+Pipeline
+  - Stage A
+    - Job 1
+      - Step 1.1
+      - Step 1.n
+    - Job 2
+      - Step n
+  - Stage B
+  - Stage n
+
+* If no stage or Job, it will just create one.
+
+Suggestion of stages:
+    Build
+    Deploy to Test
+    Approval
+    Deploy to Prod
+
+Jobs can be run in parallel
+
+tip: each step runs in its own process. If set environment variable in one step and don't do anything to persist it. it might not be there in the next step.
+
+Pools: Hosted by microsoft or Self-hosted 
+    Hosted:
+        ubuntu-latest
+        macOs-latest
+        winodws-latest
+    Self-Hosted
+        name of pool that you set.
+
+Containers as part of Pipeline
+   docker is installed on hosted  
+    see: https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml
+
+Authorize AzureSubscription:
+    Project Settings | service Connections
+    create service Connections
+    Azure Resource Manager
+    service principle (automatic)
+    Choose the options that match
+
+Self-Hosted Agent Pool
+    yaml - pool: default
+    Project Settings
+    Agent Pools
+    Default is the self-hosted
+        click on Agent tab.
+    Should use PublishBuildArtifacts instead of PublishPipelineArtifact
+
+yaml conditional
+    https://docs.microsoft.com/en-us/azure/devops/pipelines/process/conditions?view=azure-devops&tabs=yaml
+    https://docs.microsoft.com/en-us/azure/devops/pipelines/process/expressions?view=azure-devops
+ 

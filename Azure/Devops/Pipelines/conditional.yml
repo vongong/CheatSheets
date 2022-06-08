@@ -1,0 +1,19 @@
+variables:
+   - name: isRunningUsingAzureDevOpsCloud
+    ${{ if startsWith(variables['System.CollectionUri'], 'https://dev.azure.com') }}:
+      value: true
+    ${{ if not(startsWith(variables['System.CollectionUri'], 'https://dev.azure.com')) }}:
+      value: false 
+
+stages:
+- stage: deploy_to_test
+  jobs:
+    - job: deployToTest
+      displayName: 'deploy to test'
+      steps:
+      - task: DownloadPipelineArtifact@2
+        condition: eq(variables['isRunningUsingAzureDevOpsCloud'], true)
+        inputs:
+          buildType: 'current'
+          artifactName: 'drop'
+          targetPath: '$(System.ArtifactsDirectory)\drop'
