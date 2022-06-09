@@ -1,0 +1,5 @@
+## How to Get extension
+- add market place, make sure devops is selected
+- search & Select ansible
+- Click get it Free.
+
