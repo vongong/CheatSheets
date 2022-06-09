@@ -27,4 +27,12 @@ Service Connection ssh to vm
 ## Pipeline
 - Pull Artifact
 - Start AZ VM
-- 
+- Ansible Task, run Playbook
+    - Remote Machine
+    - Ssh endpoint
+    - Select playbook file name
+    - uncheck fail on STDERR?
+- Add wait Task (10 sec)
+- Azure App Service 
+    - use variable app service name
+- Stop AZ VM
