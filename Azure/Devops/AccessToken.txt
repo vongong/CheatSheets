@@ -2,3 +2,5 @@ in devops, Click on Personal Settings (icon next to Account)
 Select Personal Access Token
 Click on New Token.
 It will generate a new token.
+
+When the password for account is the token

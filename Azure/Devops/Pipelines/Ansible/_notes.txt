@@ -3,3 +3,28 @@
 - search & Select ansible
 - Click get it Free.
 
+Should be able to Run Ansible Playbook
+
+ARM Template to create ubunt VM for Ansible
+Config Ansible on VM
+Control Node = VM
+Need Python 3.8
+Pip 3
+Ansible 2.11+
+Ansible Azure Modules
+
+Service Principle
+    Azure Cloud Bash
+    az ad sp create-for-rbac --name sp_advworks
+    az account show --query '{subscriptionid:id}';
+
+Assign Service Principle to VM
+
+Config VM for SSH
+
+Service Connection ssh to vm
+
+## Pipeline
+- Pull Artifact
+- Start AZ VM
+- 

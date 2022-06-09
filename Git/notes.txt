@@ -13,6 +13,7 @@ git push
 
 git fetch
 
+git remote add origin https://github.com/example/repo.git
 git remote set-url origin https://github.com/example/repo.git
 
 git stash save "comment on save"
