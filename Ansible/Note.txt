@@ -42,3 +42,4 @@ config file
       become_user ie root
       become_method - sudo 
       become_ask_pass - no/yes
+  ansible-config dump --only-changed
