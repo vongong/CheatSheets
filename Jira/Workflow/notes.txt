@@ -1,2 +1,23 @@
 Need to be jira adminstrators
 
+In workflows, Can add or import from market place
+
+Workflow Designer
+    Status and transistions
+
+Status
+  - switch to allow all status to transistion to this task
+  - Name, Description, Category (To Do, In Progress, Done)
+  - changes to status, seen by all.
+  - Could make new status, but reuse possible
+  - Can't remove initial Status, but change the inital status then delete
+
+transistion
+  - parts to status
+  - associate a screen with transistion
+  - should be an activity
+  - can click and drag to create transistion
+  - Can add Screen
+
+All workflow needs resolution
+  - Add screen to resolution
