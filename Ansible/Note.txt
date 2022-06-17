@@ -43,3 +43,19 @@ config file
       become_method - sudo 
       become_ask_pass - no/yes
   ansible-config dump --only-changed
+
+ansible modules
+  idempotent - only apply change if needed. It checks to see if in desired state.
+
+adhoc commands
+  use ansible commands
+    host-pattern 
+    -m modules
+    -a all arguements
+    ie. ansible all -m ping
+  override default
+    -k or --ask-pass will prompt password
+    -u override remote_user
+    -b privilege_escalation
+    -K prompt password for escalation
+    --become-method
