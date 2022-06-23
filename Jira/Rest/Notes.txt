@@ -1,5 +1,10 @@
 
+https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-issueidorkey-get
+
+
 generate api token: https://id.atlassian.com/manage-profile/security/api-tokens
+
+api Key:bbl4XP2gQxzEMCapIApyF430
 
 base64 encode: useremail:api_token
 
@@ -9,4 +14,3 @@ curl -D- \
    -H "Content-Type: application/json" \
    "https://your-domain.atlassian.net/rest/api/2/issue/QA-31"
 
-bbl4XP2gQxzEMCapIApyF430

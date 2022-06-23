@@ -1,0 +1,19 @@
+
+
+csv file:
+Region,boba
+Hawaii,100
+Wisconsin,99
+Nevada,90
+
+Get https://postman-echo.com/get?{{Region}}={{boba}}
+
+Open Runner:
+  on api - Bottom status bar
+  on folder - Run button
+
+Uncheck/Check API to run
+
+Delay: x ms delay
+Data: Select File
+Data File Type: select text/csv
