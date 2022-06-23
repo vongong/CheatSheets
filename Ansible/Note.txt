@@ -59,3 +59,10 @@ adhoc commands
     -b privilege_escalation
     -K prompt password for escalation
     --become-method
+
+playbook
+  yaml must start with ---
+  ansible-playbook filename.yml
+    --limit limits hosts
+    --syntax-check verify that it can ingested
+    -C DryRun

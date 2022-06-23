@@ -1,0 +1,12 @@
+
+generate api token: https://id.atlassian.com/manage-profile/security/api-tokens
+
+base64 encode: useremail:api_token
+
+curl -D- \
+   -X GET \
+   -H "Authorization: Basic ZnJlZDpmcmVk" \
+   -H "Content-Type: application/json" \
+   "https://your-domain.atlassian.net/rest/api/2/issue/QA-31"
+
+bbl4XP2gQxzEMCapIApyF430

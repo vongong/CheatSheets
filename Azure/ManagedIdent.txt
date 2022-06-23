@@ -1,0 +1,8 @@
+
+Logic App Add Managed Identites
+  Logic App | Identity | System assigned
+    Select on
+    Grag Object Id or use name
+  Key Vault | Access Policy 
+    Add Access Policy
+    Principle: Name of Logic App or Object Id
