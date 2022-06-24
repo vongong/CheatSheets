@@ -4,8 +4,6 @@ https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#ap
 
 generate api token: https://id.atlassian.com/manage-profile/security/api-tokens
 
-api Key:bbl4XP2gQxzEMCapIApyF430
-
 base64 encode: useremail:api_token
 
 curl -D- \

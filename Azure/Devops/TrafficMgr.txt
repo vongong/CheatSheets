@@ -1,0 +1,16 @@
+https://docs.microsoft.com/en-us/azure/traffic-manager/quickstart-create-traffic-manager-profile
+
+Create
+  Name, Routing Method=Priorty, Sub, RS, location
+
+Add EndPoints
+  Name, Type=Azure endpoints, 
+
+Check DNS name on overview
+
+---
+Pipeline Add
+  ARM Template Deployment
+    Create/Update Global
+    /Global/template.json
+    /Global/ParameterDev.json
