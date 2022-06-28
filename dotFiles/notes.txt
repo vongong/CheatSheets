@@ -1,0 +1,18 @@
+--- .bash_profile
+if [ -s ~/.bashrc ]; then
+  . ~/.bashrc
+fi
+
+--- .bashrc
+if [ -s ~/dotfiles/alias_list.sh ]; then
+  . ~/dotfiles/alias_list.sh
+fi
+
+--- alias_list.sh
+alias clr="clear"
+alias cd..="cd .."
+alias ..="cd .."
+alias ~="cd ~"
+alias ls="ls -GFa"
+alias ll="ls -GFal"
+alias grep="grep --color=auto "
