@@ -14,6 +14,8 @@ docker images
 
 # create container
 # -d = detached/deamon
+# -rm = clean up
+# -it = interactive processes
 # -pxxx:yyy = bind port xxx=host yyy=container
 # -e = env var
 # -v = volume (3 types)
@@ -27,6 +29,7 @@ docker run -d --name dreamy redis:latest
 docker run -d -p6000:6379 redis:latest
 docker run -e username=admin redis:latest
 docker run -v /home/mount/data:/var/mysql/data redis:latest
+docker run -rm -it ubuntu /bin/bash
 
 # shows what containers running
 # -a = all containers
