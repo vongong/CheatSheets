@@ -1,0 +1,43 @@
+# start docker compose file all at same time
+docker-compose -f mongo.yml up
+
+# stop docker containers in compose file
+docker-compose -f mongo.yml down
+
+docker-compose -f mongo.yml start
+docker-compose -f mongo.yml stop
+docker-compose -f mongo.yml ps
+
+---
+# docker-compose.yml
+version: '3'
+services:
+  mongodb:  #containerName
+    image: mongo:latest
+    ports:
+      - 27017:27017 #host:container
+    environment:
+      - MONGO-INITDB_ROOT_USERNAME=admin
+      - MONGO-INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - 8080:8080
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+  web:
+    build:
+    # build from Dockerfile
+      context: ./Path
+      dockerfile: Dockerfile
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/code
+volumes:
+  mongo-data
+    driver: local
