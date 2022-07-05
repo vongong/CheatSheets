@@ -1,5 +1,6 @@
 # start docker compose file all at same time
 docker-compose -f mongo.yml up
+docker-compose -f mongo.yml up -d
 
 # stop docker containers in compose file
 docker-compose -f mongo.yml down
