@@ -30,3 +30,16 @@ $env:TF_VAR_aws_secret_key="YOUR_SECRET_KEY"
 terraform state list
 terraform state show aws_instance.nginx1
 
+########################
+# test function with console
+terraform init
+terraform console
+
+# Now we can try some different functions and syntax
+min(42,5,16)
+lower("TACOCAT")
+cidrsubnet(var.vpc_cidr_block, 8, 0)
+cidrhost(cidrsubnet(var.vpc_cidr_block, 8, 0),5)
+lookup(local.common_tags, "company", "Unknown")
+lookup(local.common_tags, "missing", "Unknown")
+local.common_tags

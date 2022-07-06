@@ -1,5 +1,4 @@
 https://www.terraform.io/language
------------------------------
 
 Datatype: 
   string
@@ -7,6 +6,13 @@ Datatype:
   number
   list([type])
   map
+
+Variable precedence
+  Environment Variable
+  Variable Defination file (.tfvars)
+  Variable Defination json file (.tfvars.json)
+  Command Line -var or -var-file
+
 
 Providers: 
   https://registry.terraform.io/
@@ -20,3 +26,6 @@ Common Functions:
   IP network
   Filesystem
   Type Conversion
+
+Function Testing: 
+  Console
