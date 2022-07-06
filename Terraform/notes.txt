@@ -1,0 +1,22 @@
+https://www.terraform.io/language
+-----------------------------
+
+Datatype: 
+  string
+  bool
+  number
+  list([type])
+  map
+
+Providers: 
+  https://registry.terraform.io/
+
+Loops:
+
+Common Functions:
+  Numeric
+  String
+  collections
+  IP network
+  Filesystem
+  Type Conversion
