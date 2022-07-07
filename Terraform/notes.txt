@@ -17,7 +17,25 @@ Variable precedence
 Providers: 
   https://registry.terraform.io/
 
-Loops:
+for Loops:
+  tuple:
+    [for item in items : tuple_element]
+    local {
+      toppings = ["cheese", "lettuce", "salsa"]
+    }
+    [for t in local.toppings : "super ${t}"]
+    #results = ["super cheese", "super lettuce", "super salsa"]
+  object:
+    {for key, value in map : object_key => object_value}
+    local {
+      prices = {
+        taco = 2.99
+        burrito = 9.99
+        enchilada = 3.99
+      }
+    }
+    { for k, v in local.prices : k => ceil(v) }
+    results: { taco = 3, burrito = 10, enchilada = 4 }
 
 Common Functions:
   Numeric
@@ -29,3 +47,8 @@ Common Functions:
 
 Function Testing: 
   Console
+
+Modules
+  Versioned like Providers
+  Already using - Root Module
+  only way to pass data from Parent Module to Child Module is by inputs and output variables
