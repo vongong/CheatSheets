@@ -4,6 +4,7 @@ terraform -help
 
 # Now we will follow the standard Terraform workflow
 terraform init
+terraform fmt
 terraform validate
 terraform plan -out m3.tfplan
 terraform apply "m3.tfplan"
@@ -43,3 +44,26 @@ cidrhost(cidrsubnet(var.vpc_cidr_block, 8, 0),5)
 lookup(local.common_tags, "company", "Unknown")
 lookup(local.common_tags, "missing", "Unknown")
 local.common_tags
+
+
+########################
+# workspace
+terraform workspace list
+
+terraform workspace new Development
+terraform plan -out m9dev.tfplan
+terraform apply m9dev.tfplan
+
+terraform workspace new UAT
+terraform plan -out m9uat.tfplan
+terraform apply m9uat.tfplan
+
+terraform workspace select Development
+terraform destroy -auto-approve
+
+terraform workspace select UAT
+terraform destroy -auto-approve
+
+terraform workspace show
+terraform workspace delete Development
+terraform workspace delete UAT

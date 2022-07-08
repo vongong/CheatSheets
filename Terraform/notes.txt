@@ -52,3 +52,16 @@ Modules
   Versioned like Providers
   Already using - Root Module
   only way to pass data from Parent Module to Child Module is by inputs and output variables
+
+Workspace
+  Uses for Multiple Environment
+  creates terraform.tfstate.d directory
+  manual:
+    terraform plan -state=".\dev\dev.state"
+      -var-file="common.tfvars"
+      -var-file=".\dev\dev.tfvars"
+  run: 
+    terraform workspace new dev
+    terraform plan
+  default workspace - can't be deleted. all projects starts with it.
+  
