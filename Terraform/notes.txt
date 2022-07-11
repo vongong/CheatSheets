@@ -9,6 +9,8 @@ Datatype:
 
 Variable precedence
   Environment Variable
+    Environment Variable with prefix "TF_VAR_" will assigned values to variables
+    TF_VAR_sec_vnet_id will assign value to sec_vnet_id
   Variable Defination file (.tfvars)
   Variable Defination json file (.tfvars.json)
   Command Line -var or -var-file
@@ -65,3 +67,20 @@ Workspace
     terraform plan
   default workspace - can't be deleted. all projects starts with it.
   
+Providers Alias
+  provider "azurerm" {
+    alias            = "security"
+    subscription_id  = var.sec_sub_id
+  }
+  provider "azurerm" {
+    alias            = "peering"
+    subscription_id  = data.azurerm_subscription.current.subscription_id
+  }
+  resource "azurerm_resource_group" "sec" {
+    provider = azurerm.security
+  }
+  module "vnet" {
+    providers = {
+      azurerm = azurerm.security
+    }
+  }
