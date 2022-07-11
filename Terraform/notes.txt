@@ -84,3 +84,31 @@ Providers Alias
       azurerm = azurerm.security
     }
   }
+
+Terraform Remote State - Azure
+  Benefit
+    Safeguard state file
+    teams collaborate
+    Multiple supported backend
+    special features
+      - locking
+      - workspaces
+  Azure Blob storage
+    suppots features
+      - locking
+      - workspaces
+    4 auth method
+      - managed service identity - use_msi
+      - share access signature token - sas_token
+      - storage access key - access_key
+      - service principle - client_id
+  backend config
+    terraform {
+      backend "azurerm" {
+        storage_account_name = "xxx"
+        container_name = ""
+        key = ""
+      }
+    }    
+  migrate
+    run terraform init -backend-config=backend-config.txt
