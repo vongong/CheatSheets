@@ -17,3 +17,35 @@ Immutable Infrastucture
 
 creates images
 
+uses templates HCL - HashiCorp Config language 2
+  Similar to terraform
+
+# template file
+source "type" "name" {    
+}
+build {
+    name = "mybuild"
+    sources = [ "source.type.name" ]   
+    provisioner "type" {
+    }
+    post-processor "type" {
+    }
+}
+
+Provisioner run sequentially in order of file
+
+post-processor transform data
+  checksum
+  integrate to other processors
+
+Commandline
+  packer fmt template.pkr.hcl
+  packer validate template.pkr.hcl
+  packer build template.pkr.hcl         # main command
+  packer build -debug                   # pause after each commnd, ssh access into image
+  packer build -var 
+  packer build -only 
+  packer build -on-error 
+
+Function
+  uuidv4() - generates a unique identifier string
