@@ -32,7 +32,16 @@ build {
     }
 }
 
-Provisioner run sequentially in order of file
+Provisioner 
+  run sequentially in order of file
+  bridge generic server to specific server (web, sql, etc)
+  classes
+    config management
+    script
+    file = assets like images
+      can download
+      doesn't have root permissions - copy to temp dir, then use script
+
 
 post-processor transform data
   checksum
@@ -49,3 +58,19 @@ Commandline
 
 Function
   uuidv4() - generates a unique identifier string
+
+https://www.packer.io/plugins
+
+# convert json to hcl
+packer hcl2_upgrade -with-annotations docker-ubuntu.json
+
+provisioner shell
+  {{ .Vars }} = environmental variables
+  {{ .Path }} = path to script
+  scripts uploads, runs, and cleans up by itself
+
+vagrant post processor
+  used for distribution
+  convert to vagrant box
+  distribute with vagrant file
+  and remove to ova
