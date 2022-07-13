@@ -11,17 +11,16 @@ Setup via Azure MarketPlace
 https://docs.sendgrid.com/for-developers/sending-email/integrating-with-the-smtp-api
 
 Integrating with SendGrid
-To integrate with SendGrid's SMTP API:
+https://docs.sendgrid.com/for-developers/sending-email/integrating-with-the-smtp-api
 
 Create an API Key with at least "Mail" permissions.
-Set the server host in your email client or application to smtp.sendgrid.net. This setting is sometimes referred to as the external SMTP server or the SMTP relay.
-Set your username to the string apikey. This setting is the exact string "apikey" and not the API key itself.
-Set your password to the API key generated in step one.
+smtp.sendgrid.net
+username: apikey
+password: API key generated
 Set the port to 587 (or as specified below).
-
-SMTP ports
-For an unencrypted or a TLS connection, use port 25, 2525, or 587.
-For a SSL connection, use port 465.
+    SMTP ports
+    For an unencrypted or a TLS connection, use port 25, 2525, or 587.
+    For a SSL connection, use port 465.
 
 ----https://docs.sendgrid.com/for-developers/sending-email/curl-examples
 curl --request POST \

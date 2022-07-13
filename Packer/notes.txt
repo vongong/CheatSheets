@@ -1,0 +1,19 @@
+Packer is a free and open source tool for creating golden images for multiple platforms from a single source configuration.
+
+Immutable Infrastucture
+  Control Infrastucture State
+  Cats vs Cattle
+    Cat server
+      lots of attention, know on personal level
+      high cost
+      hard to replace
+    Cattle server
+      treated like a machine. like a cow in cattle range.
+      expendable
+      easy to replace
+      This is immutable
+  testable
+  reproducable
+
+creates images
+
