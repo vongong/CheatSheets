@@ -1,0 +1,55 @@
+
+https://support.atlassian.com/jira-service-management-cloud/docs/add-an-approval-to-a-workflow/
+
+* needed to change Applicable context is set to Global
+
+Approval Group
+    Linked to CM Approver-MU
+    exclude Assignee & Reporter
+
+Form
+    Change Requester -> Reporter
+    Change Agent -> Assignee
+
+workflow - Transistionf
+    Only allow xxx to perfrom Transistion
+        Add Conditions - User is in Role/Group/Custom
+        Can build complex query w/ group Conditions
+            can be confusing on getting the correct order 
+        
+Group
+    https://support.atlassian.com/user-management/docs/create-and-update-groups/ 
+    Go to admin.atlassian.com. Select your organization if you have more than one.
+    Select Directory > Groups.
+
+Project Role (system level)
+    Choose [gear] > System.
+    Under SECURITY, select Project roles
+    Click Edit under Default Users or Default Groups.
+    Enter group names in the Add user(s) to project role field. Or, select the user picker icon  to add individual users.
+    Click the Add button.
+
+Assign Project Role
+    Projects | Select the project
+    Project Setting | People
+    Find User name
+        Role | Select drop down and choose project role
+
+Custom Event 
+    Choose [gear] > System.
+    Advanced | Events
+    New: Ready for CAB
+
+Notification Scheme    
+    Choose [gear] > Issues.
+    Issues | Notification
+    Add: Ready for CAB -> Email Group (Change Approvers)
+
+Workflow    
+    Transistion - Post Function
+    Select Review?
+    Update "Fire a Generic Event" to "Ready for CAB" Event
+
+Automation - https://support.atlassian.com/cloud-automation/docs/create-and-edit-jira-automation-rules/
+    Project settings > Automation. 
+    Create rules
