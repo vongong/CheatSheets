@@ -1,0 +1,13 @@
+{
+    "Parameters": {
+        "sites_Endpoint_name": {
+            "value": "CustomerAPI-Dev-North-app"
+        },
+        "app_resource_group": {
+            "value": "customerapi-dev-rg"
+        },
+        "environment_name": {
+            "value": "dev"
+        }
+    }
+}
