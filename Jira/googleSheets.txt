@@ -1,3 +1,9 @@
 
 apps|find new apps
 search google sheet
+Add app.
+
+There are multiple Google sheet apps. I believe the Atlassian is the offical.
+
+
+
