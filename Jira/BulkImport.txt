@@ -1,0 +1,18 @@
+CSV import
+Summary,Description,Labels
+
+Note: in excel alt-enter add linebreak
+Save as CSV UTF-8
+
+GoTo Jira Cloud
+Select Create Button
+Select Import Issues Button 
+Browese to File
+Select File
+Select Next
+Select Project
+Map field
+  Header Column --> Jira Field
+  Map Field value checkbox - May treat line breaks as different row. Make sure to test
+Make sure to validate
+Can save configuriation file.
