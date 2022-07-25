@@ -32,6 +32,9 @@ Inventory
     list of hosts or IP address
     organized by groups
     host can be in multiple groups
+  example
+    134.122.92.122 ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_user=root
+    ssh -i ~/.ssh/id_rsa root@134.122.92.122
   Group pre-defined
     all - every host
     ungrouped - hosts in all, not in another group
@@ -82,6 +85,28 @@ adhoc commands
 playbook
   yaml must start with ---
   ansible-playbook filename.yml
-    --limit limits hosts
-    --syntax-check verify that it can ingested
-    -C DryRun
+    --limit: limits hosts or host pattern
+    --syntax-check: verify that it can ingested
+    -C: DryRun
+  variables
+    rules
+      starts with letter
+      allow: letters, numbers, underscore
+      Space, Periods, and Dashes not allowed
+    scope
+      global: all
+      host: set for host or groups
+      play: for current play. def in vars or include_vars task
+    precendence:
+      level with highest precendence wins
+      narrow over wide
+      override with -e option
+    vars block
+      vars:
+        user_name: jane
+        user_state: present
+    vars file
+      vars_files:
+        - vars/users.yaml
+    Reference with double braces: {{ user_name }}
+    may need to use double quote: "{{ user_name }}"
