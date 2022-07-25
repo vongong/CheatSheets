@@ -1,5 +1,24 @@
 agentless architecture
-linux will use ssh to access.
+  SSH enabled
+  Python needs to be installed on linux server.
+    ls /usr/bin/python3
+  Powershell needs to be installed on windows server.
+
+Ansible Tower
+  UI Dashboard
+  Centrally store automated Tasks
+  config Permissions
+  get health status
+
+Other Tools
+  puppet & chef
+    use ruby - more difficult to learn
+    need to install agent & manage updates
+
+Install
+  Locally or Remote Server
+  Ansible is written in Python. Need Python to run
+  can install via PIP (python package manager)
 
 Inventory
   Static
