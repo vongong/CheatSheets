@@ -110,3 +110,39 @@ playbook
         - vars/users.yaml
     Reference with double braces: {{ user_name }}
     may need to use double quote: "{{ user_name }}"
+
+Secure Sensitive data with Ansible Vault
+  ansible-vault create filename
+  ansible-vault view filename
+  ansible-vault edit filename
+  ansible-vault encrypt filename #encrypt existing file
+  ansible-vault encrypt filename --output=new_filename #encrypt as new file
+  ansible-vault decrypt filename
+  --vault-id password for vault when calling from playbook
+  @promtp = prompt for value
+  ansible-vault rekey filename #change password for file
+  suppress output
+    task: no_log: true
+
+iteration
+  Loop Variable item hold values of each iteration
+  May need to use double quote: "{{ item }}"
+  Task Keyword: Loop
+    vars:
+      myusers:
+        - aditay
+        - boris
+        - carl
+    loop: {{ myusers }}
+    or
+    loop:
+      - flintstone
+      - rubble
+  Loop dictionary: with_dict
+    with_dict:
+    - { name: 'fred', group: 'flintstone'}
+    - { name: 'barney', group: 'rubbles'}
+
+Conditional
+
+trigger
