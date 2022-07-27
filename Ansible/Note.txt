@@ -144,5 +144,38 @@ iteration
     - { name: 'barney', group: 'rubbles'}
 
 Conditional
+  task Keyword: when
+  ==, <, >, <=, >=, !=, is defined, is not defined, not, in 
+  ie:
+    vars:
+      run_tests: true
+      my_service: httpd
+    tasks:
+      - name: 1
+        when: run_tests
+      - name: 2
+        when: my_service is defined
+  ansible_facts
+    vars:
+      supported_os:
+        - RedHat
+        - Fedora
+    when ansible_facts['distribution'] in supported_os
 
-trigger
+trigger task w handler
+  task that respond to notification (notify)
+  like reboots and service restarts
+  typically authored at the bottom of the script
+  can call multiple handlers
+  handlers run in order they are defined
+  if more then one task notifies a handler, the handler only runs once.
+  if a task doesn't report change, the handler is not called. 
+
+recover from errors w blocks
+  blocks: are logically unit
+    like install and configure yum
+    Things you want to attempt
+  Rescue: recover from failure
+    things you want to mitigate failure
+  always: define task to always run
+    things you want run no matter the situation/cleanup
