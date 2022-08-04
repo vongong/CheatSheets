@@ -179,3 +179,34 @@ recover from errors w blocks
     things you want to mitigate failure
   always: define task to always run
     things you want run no matter the situation/cleanup
+
+ansible facts
+  auto runs as "Gathering Facts" in playbook
+  Can be gather at anytime by running setup module
+  stored in variable: ansible_facts type: dictionary
+  includes: network address, hostnames, os, and the like
+  ie
+    var: ansible_facts['fqdn'] #fully qualified dns name
+    var: ansible_facts['default_ipv4']['address'] 
+
+jinja2 template
+  Use template module to deploy jinja2 template
+  extention j2
+  similiar to copy arguements
+  {# COMMENT #}
+  loop over set of items
+    for & endfor
+  Conditional
+    if & endif
+  filters = used to modify or process the value from the variable
+    just transform data; data not changed
+    ie
+      capitalize first letter - {{ myname | capitalize }}
+      multi filter - {{ mylist | unique | sort }}
+  lookup plugin
+    list plugins: ansible-doc -t lookup -l
+    display doc: ansible-doc -t lookup plugin-name
+    ie
+      vars:
+        aws_ip_ranges : "{{ lookup('url','https://ip-ranges.amazonaws.com/ip.json',split_lines=false) }}"
+        
