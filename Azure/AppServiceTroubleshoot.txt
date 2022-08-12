@@ -1,0 +1,29 @@
+
+App Service
+  Availablity  
+    Select Diagnose & Solve Problem    
+    Select Availablity and Performance
+  Metric
+    Apply Splitting - By Instance
+    See misbehaving instances
+  Create Profiler Trace 
+    Select Diagnose & Solve Problem    
+    Select Diagnostic Tools
+    Select Collect .NET Profiler Trace
+  Kill instance of App
+    Select Diagnose & Solve Problem    
+    Search Advanced Application restart
+    Select instance
+    Click Apply
+  Restart App
+    Select App Service
+    Select Overview
+    Select Stop & Wait
+    Select Start
+  Move app to diff Server
+    Select App Service
+    Select Scale Up
+    Choose different pricing tier
+    Select Apply
+    Watch and wait for 5 mins
+

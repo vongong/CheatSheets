@@ -1,0 +1,18 @@
+
+https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites?pivots=deployment-language-arm-template
+
+https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites?pivots=deployment-language-arm-template#autohealactions-1
+
+Define condition
+    Request Duration
+    Memory Limit
+    Request Count
+    Status Code
+
+Actions
+    Recycle, Log Event, Custom
+
+Custom Actions
+    CollectKillAnalyze
+    CollectLog
+    Troubleshoot - doesn't recycle, may run multiple times.
