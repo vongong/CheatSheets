@@ -1,9 +1,6 @@
 variables:
-   - name: isRunningUsingAzureDevOpsCloud
-    ${{ if startsWith(variables['System.CollectionUri'], 'https://dev.azure.com') }}:
-      value: true
-    ${{ if not(startsWith(variables['System.CollectionUri'], 'https://dev.azure.com')) }}:
-      value: false 
+  - name: isRunningUsingAzureDevOpsCloud
+    value: false 
 
 stages:
 - stage: deploy_to_test
