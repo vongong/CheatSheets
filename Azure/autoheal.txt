@@ -16,3 +16,27 @@ Custom Actions
     CollectKillAnalyze
     CollectLog
     Troubleshoot - doesn't recycle, may run multiple times.
+
+"autoHealEnabled": true,
+"autoHealRules": {
+    "triggers": {
+        "privateBytesInKB": 0,
+        "statusCodes": [],
+        "slowRequestsWithPath": [],
+        "statusCodesRange": [
+            {
+                "statusCodes": "500-530",
+                "count": 75,
+                "timeInterval": "00:01:00"
+            }
+        ]
+    },
+    "actions": {
+        "actionType": "CustomAction",
+        "customAction": {
+            "exe": "D:\\home\\data\\DaaS\\bin\\DaasConsole.exe",
+            "parameters": "-CollectKillAnalyze \"CLR Profiler with Thread Stacks\""
+        },
+        "minProcessExecutionTime": "00:00:00"
+    }
+},
