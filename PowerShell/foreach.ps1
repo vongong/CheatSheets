@@ -8,7 +8,10 @@ $urls | Foreach-Object -ThrottleLimit 5 -Parallel {
 }
 
 $s = '111','222','aaa','bbb','ccc'
+
 # error
 # 0..4 | ForEach-Object -Parallel { $s[$_] }
 
-0..4 | ForEach-Object -Parallel {$($using:s)[$_] }
+0..4 | ForEach-Object -Parallel {
+    $($using:s)[$_] 
+}
