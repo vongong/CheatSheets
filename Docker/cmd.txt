@@ -71,6 +71,7 @@ docker rmi [Image Id]
 # tag
 docker tag my-app:latest docker-id/my-app:latest
 docker tag my-app:latest private-repo.com/my-app:latest
+docker tag 0e5574283393 myapp:version1.0
 
 # push image
 # must login = docker login
