@@ -37,6 +37,6 @@ Custom Actions
             "exe": "D:\\home\\data\\DaaS\\bin\\DaasConsole.exe",
             "parameters": "-CollectKillAnalyze \"CLR Profiler with Thread Stacks\""
         },
-        "minProcessExecutionTime": "00:00:00"
+        "minProcessExecutionTime": "00:10:00"
     }
 },
