@@ -23,3 +23,8 @@ git stash apply 0   //Apply from list, left in stash
 git stash pop       //Apply from list, remove from stash
 git stash drop 0    //Remove from stash
 git stash clear    //Remove all stashes
+
+## Pull master into branch
+git checkout dmgr2      # gets you "on branch dmgr2"
+git fetch origin        # gets you up to date with origin
+git merge origin/master
