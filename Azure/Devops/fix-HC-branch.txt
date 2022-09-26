@@ -1,0 +1,13 @@
+https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+$sourceBranch="$(Build.SourceBranch)"
+$sourceBranch=$sourceBranch -replace 'refs/heads/', ''
+echo $sourceBranch
+
+https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/git-commands?view=azure-devops&tabs=yaml
+REM SET BUILD_SOURCEBRANCH=refs/heads/feature/test-01
+REM SET BUILD_SOURCEBRANCH=$(Build.SourceBranch)
+echo BUILD_SOURCEBRANCH is %BUILD_SOURCEBRANCH%
+SET sourceBranch=%BUILD_SOURCEBRANCH:refs/heads/=%
+echo sourceBranch is %sourceBranch%
+
+git checkout master -> git checkout %sourceBranch%
