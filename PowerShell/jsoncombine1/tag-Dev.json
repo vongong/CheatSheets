@@ -1,0 +1,10 @@
+{
+    "parameters": {
+        "tags": {
+            "value": {
+                "Environment": "dev",
+                "Team": "Undefined"
+            }
+        }
+    }
+}
