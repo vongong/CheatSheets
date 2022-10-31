@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environment": {
+            "type": "String"
+        }
+    },
+    "variables": {
+        "sampleObject": {
+            "sbx": {
+                "value1": true,
+                "value2": true
+            },
+            "dev": {
+                "value1": true,
+                "value2": true
+            },
+            "prd": {
+                "value1": false,
+                "value2": true
+            }
+        },
+        "value": "[variables('sampleObject')[parameters('environment')]]",
+        "othervar": "[variables('value').value1]"
+    },
+    "resources": [ ],
+    "outputs": {
+        "we": {
+            "type": "Bool",
+            "value": "[variables('value').value1]"
+        }
+    }
+}
