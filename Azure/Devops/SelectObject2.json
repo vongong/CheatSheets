@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {        
+        "location": {
+            "type": "string",
+            "allowedValues": [
+                "NorthCentralUS",
+                "SouthCentralUS"
+            ]
+        },
+        "env": {
+            "type": "string",
+            "allowedValues": [
+                "dev",
+                "test"
+            ]
+        }
+    },
+    "variables": {
+        "envLoc": "[toLower(concat(parameters('env'),substring(parameters('location'),0,5)))]",
+        "map": {
+            "devnorth": {
+                "fruit": "apple"
+            },
+            "devsouth": {
+                "fruit": "orange"
+            },
+            "testnorth": {
+                "fruit": "tomato"
+            },
+            "testsouth": {
+                "fruit": "watermelon"
+            }
+        },
+        "fruit": "[variables('map')[variables('envLoc')].fruit]"
+    },
+    "resources": [],
+    "outputs": {
+        "we": {
+            "type": "string",
+            "value": "[variables('fruit')]"
+        }
+    }
+}
