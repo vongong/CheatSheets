@@ -74,7 +74,6 @@ Inline `code` has `back-ticks around` it.
 ```
 
 #### Blocks of Code
-<pre>
 ```javascript
 var s = "JavaScript syntax highlighting";
 alert(s);
@@ -89,19 +88,16 @@ print s
 No language indicated, so no syntax highlighting. 
 But let's throw in a <b>tag</b>.
 ```
-</pre>
 
 ### Tables
 
 There must be at least 3 dashes separating each header cell.
 The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily.
 
-```markdown
 | Heading 1 | Heading 2 | Heading 3 |
 |---|---|---|
 | col1 | col2 | col3 |
 | col1 | col2 | col3 |
-```
 
 ### Task list
 
