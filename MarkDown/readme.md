@@ -18,8 +18,14 @@ GitHub Documentation: [Writing Markdown on GitHub](https://docs.github.com/en/ge
 ##### Heading 5
 ###### Heading 6
 ```
-
 Here is a heading: `# Heading`, **don't do this:** `#Heading` 
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
 
 ### Emphasis
 ```markdown
@@ -31,6 +37,12 @@ Combined emphasis with **asterisks and _underscores_**.
 
 Strikethrough uses two tildes. ~~Scratch this.~~
 ```
+
+### Text Highlight
+```markdown
+<mark>Highlighted text</mark>  
+```
+<mark>Highlighted text</mark>  
 
 ### Line Breaks
 ```markdown
@@ -46,6 +58,9 @@ And the next line.
 2. Second item
 3. Third item
 ```
+1. First item
+2. Second item
+3. Third item
 
 #### Unordered Lists
 ```markdown
@@ -53,18 +68,69 @@ And the next line.
 - Second item
 - Third item
 ```
+- First item
+- Second item
+- Third item
+
+### Horizontal Rule
+```markdown
+> Blockquotes are very handy in email to emulate reply text.
+> This line is part of the same quote.
+```
+> Blockquotes are very handy in email to emulate reply text.  
+> This line is part of the same quote.
+
+
+### Blockquotes
+```markdown
+Three or more Hyphens/Asterisks/Underscores
+
+---
+***
+___
+
+```
+Three or more Hyphens/Asterisks/Underscores
+
+---
+***
+___
+
+### SuperScript SubScript
+```markdown
+E=mc<sup>2</sup>
+co<sub>2</sub>
+```
+E=mc<sup>2</sup>  
+co<sub>2</sub>
+
+### Comments
+```markdown
+<!---
+comments syntax
+--->
+```
+<!---
+comments syntax
+--->
 
 ### Links
 ```markdown
-Link with text: [link-text](https://www.google.com)
+Link: (https://www.google.com)  
+Link with text: [link-text](https://www.google.com)  
 ```
+Link: (https://www.google.com)  
+Link with text: [link-text](https://www.google.com)  
 
 ### Images
 ```markdown
-Image with alt text: ![alt-text](https://camo.githubusercontent.com/4d89cd791580bfb19080f8b0844ba7e1235aa4becc3f43dfd708a769e257d8de/68747470733a2f2f636e642d70726f642d312e73332e75732d776573742d3030342e6261636b626c617a6562322e636f6d2f6e65772d62616e6e6572342d7363616c65642d666f722d6769746875622e6a7067)
+Image with alt text: ![alt-text](https://st.depositphotos.com/2935381/4189/i/450/depositphotos_41897159-stock-photo-example-concept.jpg)
 
-Image without alt text: ![](https://camo.githubusercontent.com/4d89cd791580bfb19080f8b0844ba7e1235aa4becc3f43dfd708a769e257d8de/68747470733a2f2f636e642d70726f642d312e73332e75732d776573742d3030342e6261636b626c617a6562322e636f6d2f6e65772d62616e6e6572342d7363616c65642d666f722d6769746875622e6a7067)
+Image without alt text: ![](https://st.depositphotos.com/2935381/4189/i/450/depositphotos_41897159-stock-photo-example-concept.jpg)
 ```
+Image with alt text: ![alt-text](https://st.depositphotos.com/2935381/4189/i/450/depositphotos_41897159-stock-photo-example-concept.jpg)
+
+Image without alt text: ![](https://st.depositphotos.com/2935381/4189/i/450/depositphotos_41897159-stock-photo-example-concept.jpg)
 
 ### Code Blocks
 
@@ -72,11 +138,14 @@ Image without alt text: ![](https://camo.githubusercontent.com/4d89cd791580bfb19
 ```markdown
 Inline `code` has `back-ticks around` it.
 ```
+Inline `code` has `back-ticks around` it.
+
 
 #### Blocks of Code
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+```markdown
+```python
+s = "Python syntax highlighting"
+print s
 ```
  
 ```python
@@ -84,20 +153,33 @@ s = "Python syntax highlighting"
 print s
 ```
  
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a <b>tag</b>.
-```
-
 ### Tables
 
 There must be at least 3 dashes separating each header cell.
 The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily.
-
+```markdown
 | Heading 1 | Heading 2 | Heading 3 |
 |---|---|---|
 | col1 | col2 | col3 |
 | col1 | col2 | col3 |
+
+```
+| Heading 1 | Heading 2 | Heading 3 |
+|---|---|---|
+| col1 | col2 | col3 |
+| col1 | col2 | col3 |
+
+### table Alignment
+```markdown
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
+```
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
 
 ### Task list
 
@@ -106,11 +188,39 @@ Ex: [ <space> ] and add text for task.
 To check the task replace the space between the bracket with "x".
 
 ```markdown
-[x] Write the post
-[ ] Update the website
-[ ] Contact the user
+- [x] Write the post
+- [ ] Update the website
+- [ ] Contact the user
 ```
+- [x] Write the post
+- [ ] Update the website
+- [ ] Contact the user
 
+### Footnotes
+```markdown
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
+```
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
 ## Reference
 
 Link: [markdown guide](https://www.markdownguide.org/cheat-sheet)

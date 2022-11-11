@@ -4,11 +4,13 @@
 ## Array
 ### parameter declaration:
 ```json
-"customEmails": {
-      "type": "array",
-      "metadata": {
+{
+    "customEmails": {
+        "type": "array",
+    "metadata": {
         "description": "alert email addressess"
-      }
+        }
+    }
 }
 ```
 ###  in the parameters file:
@@ -22,7 +24,7 @@
 ```
 ### usage:
 ```json
-"customEmails": "[parameters('customEmails')]"
+{ "customEmails": "[parameters('customEmails')]" }
 ```
 
 # Functions
@@ -35,9 +37,12 @@ Arm functions (https://learn.microsoft.com/en-us/azure/azure-resource-manager/te
 
 ### String Formatting
 ```json
-"Example1": "concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name,'/providers/Microsoft.Web/serverFarms/',parameters('asp_name'))"
-"Example2": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Web/serverFarms/{2}', subscription().subscriptionId, resourceGroup().name,parameters('asp_name'))]"
-"Example3": "[esourceId('Microsoft.Web/serverfarms', parameters('asp_name'))]"
+{
+
+    "Example1": "concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name,'/providers/Microsoft.Web/serverFarms/',parameters('asp_name'))",
+    "Example2": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Web/serverFarms/{2}', subscription().subscriptionId, resourceGroup().name,parameters('asp_name'))]",
+    "Example3": "[esourceId('Microsoft.Web/serverfarms', parameters('asp_name'))]"
+}
 ```
 
 # Select from Map
