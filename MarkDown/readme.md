@@ -186,6 +186,23 @@ pie
 "TV shows" : 20
 ```
 
+### Code Diff
+````markdown
+```diff
+function compare (num1, num2) {
+-  return ALL_SAME;
++  return NOT_SAME;
+}
+```
+````
+
+```diff
+function compare (num1, num2) {
+-  return ALL_SAME;
++  return NOT_SAME;
+}
+```
+
 ## Links
 ```markdown
 Link: (https://www.google.com)  

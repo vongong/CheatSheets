@@ -24,6 +24,51 @@ graph TD;
     C-->D;
 ```
 
+## Change Colors
+mermaid-theme: default, base, dark, forest, neutral, night
+
+```
+%%{init: {'theme': 'forest' } }%%
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+```
+<table>
+<tr><th> Theme </th> <th> demo </th> </tr>
+<tr><td> default </td> <td>  
+
+```mermaid
+%%{init: {'theme': 'default' } }%%
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+```
+</td> </tr>
+<tr><td> forest </td> <td>  
+
+```mermaid
+%%{init: {'theme': 'forest' } }%%
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+```
+</td> </tr>
+<tr><td> neutral </td> <td>  
+
+```mermaid
+%%{init: {'theme': 'neutral' } }%%
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+```
+</td> </tr>
+</table>
+
+
 ## Sequence diagram
 ```
 sequenceDiagram
