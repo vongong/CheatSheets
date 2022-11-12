@@ -51,7 +51,7 @@ Strikethrough uses two tildes. ~~Scratch this~~.
 Emphasis, aka italics, with *asterisks* or _underscores_.  
 Strong emphasis, aka bold, with **asterisks** or __underscores__.  
 Combined emphasis with **asterisks and _underscores_**.  
-Strikethrough uses two tildes. ~~Scratch this~~.  
+Strikethrough uses two tildes. ~~Scratch this~~. 
 
 ## Text Highlight
 ```markdown
@@ -112,7 +112,7 @@ Second Term
 > This line is part of the same quote.
 
 
-## Blockquotes
+## Break
 ```markdown
 Three or more Hyphens/Asterisks/Underscores
 
@@ -126,6 +126,13 @@ Three or more Hyphens/Asterisks/Underscores
 ---
 ***
 ___
+
+## Blockquotes
+```markdown
+> To create a blockquote, start a line with greater than > followed by an optional space.
+```
+
+> To create a blockquote, start a line with greater than > followed by an optional space.
 
 ## SuperScript SubScript
 ```markdown
