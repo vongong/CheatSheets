@@ -8,22 +8,6 @@ https://mermaid-js.github.io/mermaid/#/
 ```
 ````
 
-## Flow Chart
-```
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
 ## Change Colors
 mermaid-theme: default, base, dark, forest, neutral, night
 
@@ -68,6 +52,21 @@ graph LR;
 </td> </tr>
 </table>
 
+## Flow Chart
+```
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
 ## Sequence diagram
 ```
