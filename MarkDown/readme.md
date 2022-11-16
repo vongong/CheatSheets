@@ -64,8 +64,16 @@ Strikethrough uses two tildes. ~~Scratch this~~.
 ```markdown
 First line with two spaces after.  
 And the next line.
+
+Or No space after.
+next line.
 ```
----
+First line with two spaces after.  
+And the next line.
+
+Or No space after.
+next line.
+
 ## Lists
 
 ### Ordered Lists
