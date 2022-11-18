@@ -10,6 +10,8 @@ $AppObj | Add-Member -Name 'North' -MemberType NoteProperty -Value 'NValue2'
 $AppObj | Add-Member -Name 'South' -MemberType NoteProperty -Value 'SValue2'
 $hadrMap['t07'] = $AppObj
 
+$hadrMap
+
 Write-Host 'hadrMap[d07].North='$hadrMap['d07'].North
 Write-Host 'hadrMap[d07].South='$hadrMap['d07'].South
 
