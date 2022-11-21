@@ -1,6 +1,5 @@
-$AppList = Import-CSV -path "appslist.csv"
+$AppList = Import-CSV -path "applist.csv"
+
 Foreach ($app in $AppList) {
-    Write-Host "AppListRow=$app"
-	$a = $app.App
-    Write-Host "App=$a"
+    Write-Host "App=$($app.App) RG=$($app.RG)"
 }
