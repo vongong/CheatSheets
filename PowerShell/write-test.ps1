@@ -1,16 +1,16 @@
-Write-Host 'Write Test'
 <#
 .\write-test.ps1
 .\write-test.ps1 -verbose
 .\write-test.ps1 -debug
 .\write-test.ps1 -verbose -debug
-
 #>
-param(
+
+param (
     [switch]$Verbose,
     [switch]$Debug
 )
 
+Write-Host 'This is Write Host'
 
 # save the current preferences to restore later
 $CurrentVerbosePreference = $VerbosePreference
