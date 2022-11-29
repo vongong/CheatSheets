@@ -4,7 +4,6 @@
 .\write-test.ps1 -debug
 .\write-test.ps1 -verbose -debug
 #>
-
 param (
     [switch]$Verbose,
     [switch]$Debug
@@ -20,9 +19,6 @@ function Write-DebugFmt{
     Write-Output "$CurrDate $Message"
 }
 
-# save the current preferences to restore later
-$CurrentVerbosePreference = $VerbosePreference
-$CurrentDebugPreference = $DebugPreference
 if ($Verbose){
     $VerbosePreference = 'Continue'
 }
@@ -34,7 +30,8 @@ Write-Verbose 'This is verbose'
 Write-Debug 'This is debug'
 Write-DebugFmt 'This is debugFmt' 
 Write-Warning 'This is a warning'
-Write-Error 'This is an error'
+Write-Error 'This is an error' -Category NotSpecified
+Throw 'This is a throw'
 
-$VerbosePreference = $CurrentVerbosePreference
-$DebugPreference = $CurrentDebugPreference
+
+Write-Host 'Write Host End'
