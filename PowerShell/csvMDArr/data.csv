@@ -1,0 +1,13 @@
+Environment,Location,Instance,NamePrefix,Sku,SlotEnabled,InstanceMax
+Dev,North,01,gen,P1v3,false,1
+Dev,North,02,gen,P1v3,false,1
+Dev,South,01,gen,P1v3,false,1
+Dev,South,02,gen,P1v3,false,1
+Test,North,01,gen,P1v3,false,1
+Test,North,02,gen,P1v3,false,1
+Test,South,01,gen,P1v3,false,1
+Test,South,02,gen,P1v3,false,1
+Prod,North,01,gen,P1v3,true,8
+Prod,North,02,gen,P1v3,true,8
+Prod,South,01,gen,P1v3,true,8
+Prod,South,02,gen,P1v3,true,8
