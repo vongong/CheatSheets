@@ -1,11 +1,3 @@
-$foods = @{
-    'Corn' = $True
-    'Beef' = $false
-    'GreenBeans' = $false
-    'Carrots' = $True
-    'BrusselSprouts' = $false
-}
-
 function Write-Hash {
     param(
         [hashtable] $MsgMap
@@ -20,4 +12,14 @@ function Write-Hash {
     $MsgArr -join ","
 }
 
+$foods = @{
+    'Corn' = $True
+    'Beef' = $false
+    'GreenBeans' = $false
+    'Carrots' = $True
+    'BrusselSprouts' = $false
+}
+
 Write-Hash $foods
+
+Write-Hash @{'Corn' = $True;'Beef' = $false;'GreenBeans' = $false;'Carrots' = $false;'BrusselSprouts' = $true;}
