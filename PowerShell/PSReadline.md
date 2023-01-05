@@ -9,7 +9,8 @@ Get-PSReadlineOption | select HistoryNoDuplicates, MaximumHistoryCount, HistoryS
 # Get Options
 ```powershell
 Set-PSReadlineOption -MaximumHistoryCount 200
-Set-PSReadlineOption -HistorySaveStyle SaveAtExit 
+Set-PSReadlineOption -HistorySaveStyle SaveAtExit
+Set-PSReadLineOption -PredictionViewStyle ListView 
 ```
 
 # History
