@@ -52,7 +52,9 @@ Automate IT tasks
 ## Install
 - control node - Machine running Ansible that manages target servers
 - windows not supported as control node
-- written in python. **needs python to run**
+- written in python. 
+  - **needs python to run**
+  - v3 is **required** some functionality
 - python to do custom functionality
 - locally or remote
 - mac: brew install ansible
@@ -94,6 +96,29 @@ cleaner host file *hosts example +groups +vars*
 10.20.0.8 
 
 [droplet:vars]
-ansible_ssh_private_key_file=~/.ssh/id_rsa 
+ansible_ssh_private_key_file=~/.ssh/id_rsa
 ansible_user=root
+
+[ec2]
+ec2-11-111-123.eu-west-3.compute.amazonaws.com
+ec2-22-222-456.eu-west-3.compute.amazonaws.com
+
+[ec2:vars]
+ansible_ssh_private_key_file=~/Dowloads/ansible.pem
+ansible_user=ec2-user
+ansible_python_interpreter=/usr/bin/python3
 ```
+
+test ssh connection
+```bash
+ssh -i ~/Dowloads/ansible.pem ec2-user@ec2-11-111-123.eu-west-3.compute.amazonaws.com
+```
+
+If private key is too open.
+```bash
+~/Dowloads/ansible.pem
+chmod 400 ~/Dowloads/ansible.pem
+```
+@lesson199 start
+
+
