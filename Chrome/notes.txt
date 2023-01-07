@@ -1,3 +1,0 @@
-open -a /Applications/Google\ Chrome.app --args --no-proxy-server
-
-Chrome.exe --args --no-proxy-server
