@@ -119,6 +119,32 @@ If private key is too open.
 ~/Dowloads/ansible.pem
 chmod 400 ~/Dowloads/ansible.pem
 ```
-@lesson199 start
+
+## Host Key Check
+
+### Long Term
+Known Host File = ~/.ssh/known_hosts
+`ssh-keyscan -H 10.10.10.123 ~/.ssh/known_hosts`
+
+Connecting machine needs control ssh public key = ~/.ssh/id_rsa.pub
+Remote folder = /root/.ssh/authorized_keys
+
+Command to copy public key to remote server
+`ssh-copy-id root@10.10.10.222`
+
+### Short Term - temporary / ephemeral
+Disable Key Check - less secure
+- default Config dir may not be created
+- default Config 
+  - /etc/ansible.ansible.cfg
+  - ~/. ansible.cfg
+- can create config file in project folder. called ansible.cfg
+```ini
+[default]
+host_key_checking = False
+```
+
+
+@lesson200 start
 
 
