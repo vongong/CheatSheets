@@ -312,7 +312,139 @@ may need to add repo before adding adding package manager
 - create your own collection 
   - predefined structure - required galaxy.yml
 
----
-left off @lesson230
+## Playbook Examples
+- Pay attention on if the modules runs on control or remote host
 
+Install node and npm
+```yaml
+---
+- name: Install node and npm
+  hosts: 123.123.123.12
+  tasks:
+    - name: Update Apt
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Install nodejs and npm
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  tasks:
+    - name: copy nodejs folder to svr
+      copy: 
+        src: /user/von/project1/nodejs-app-1.0.0.tgz
+        dest: /root/app-1.0.0.tar
+    - name: unpack tar
+      unarchive:
+        src: /root/app-1.0.0.tar
+        dest: /root/
+        remote_src: yes
+    - name: install dependancies  
+      npm: 
+        path: /root/package
+    - name: start app
+      command: node /root/package/app/server
+      async: 1000     # general attrib
+      poll: 0         # general attrib
+    - name: check app is running
+      shell: ps aux | grep node
+      register: app_status
+    - name: Print results
+      debug: msg={{app_status.stdout_lines}}
+```
+
+note:
+- Async and Poll are general attrib
+- Shell module same as command, but access to shell. ie Env, Pipe, and redirect
+- command is more secure
+- command and shell are not stateful, consider using conditional
+- register creates variable and assign results to task execution
+
+Apt update - alt
+```yaml
+- name: Install node and npm
+  hosts: 123.123.123.12
+  tasks:
+    - name: Update Apt
+      apt: 
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+```
+
+Deploy nodejs app - combine
+```yaml
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  tasks:    
+    - name: unpack tar
+      unarchive:
+        src: /user/von/project1/nodejs-app-1.0.0.tgz
+        dest: /root/
+```
+Start App alt
+```yaml
+- name: start app
+  command: 
+    chdir: /root/package/app
+    cmd: node server
+```
+
+Install node and npm - non-root
+```yaml
+---
+- name: Install node and npm
+  hosts: 123.123.123.12
+  tasks:
+    - name: Update Apt
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Install nodejs and npm
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name: Create new user for app
+  hosts: 123.123.123.12
+  tasks:
+    - name: create user
+      user: 
+        name: nodeuser
+        comment: description
+        group: admin
+
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  become: True
+  become_user: nodeuser
+  tasks:
+    - name: copy nodejs folder to svr
+      copy: 
+        src: /user/von/project1/nodejs-app-1.0.0.tgz
+        dest: /home/nodeuser/app-1.0.0.tar
+    - name: unpack tar
+      unarchive:
+        src: /home/nodeuser/app-1.0.0.tar
+        dest: /home/nodeuser
+        remote_src: yes
+    - name: install dependancies  
+      npm: 
+        path: /home/nodeuser/package
+    - name: start app
+      command: node /home/nodeuser/package/app/server
+      async: 1000     # general attrib
+      poll: 0         # general attrib
+    - name: check app is running
+      shell: ps aux | grep node
+      register: app_status
+    - name: Print results
+      debug: msg={{app_status.stdout_lines}}
+```
+---
+left off @lesson233
+
+```yaml
+```
 
