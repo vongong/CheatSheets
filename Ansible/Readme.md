@@ -59,8 +59,51 @@ Idempotency - Write plays for desired state
 - python to do custom functionality
 - locally or remote
 - mac: brew install ansible
+- linux: 
+```sh
+apt-get install software-properties-common -y
+apt-add-repository ppa:ansible/ansible
+apt-get install ansible -y
+```
 - python: pip install ansible
 - check version: ansible --version
+
+### Install on Windows via wsl
+Connects to windows server via winRM
+Windows Server 2008 and newer
+Required:
+- powershell >= 3.0
+- .Net Framework >= 4.0
+
+wsl install
+```
+sudo apt install python3-pip -y
+sudo pip3 install ansible
+sudo pip3 install pywinrm 
+sudo pip3 install pywinrm[credssp]
+```
+
+user setup
+- can be active directory or without
+
+WinRM setup
+- https - port 5986
+- Auth - CredSSP
+```powershell
+winrm enumerate winrm/config/listener
+winrm get winrm/config/Service
+
+wget https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -OutFile ConfigureRemotingForAnsible.ps1
+
+ConfigureRemotingForAnsible.ps1 -EnableCredSSP -DisableBasicAuth -Verbose
+
+Get-ChildItem -path WSMan:\localhost\Listener | Where-Object { $_.Keys -eq "Transport=HTTP"} | Remove-Item -Recurse -Force
+
+Restart-Service WinRM
+
+# Add Ansible Service User to Admins
+```
+
 
 ## Inventory
 - manage server with files called hosts. ip or hostname
@@ -120,6 +163,20 @@ If private key is too open.
 ~/Dowloads/ansible.pem
 chmod 400 ~/Dowloads/ansible.pem
 ```
+
+### windows
+```ini
+[web]
+webserver01
+
+[web:vars]
+ansible_user="svc-ansible@localgroup.local"
+ansible_password=P@ssword1
+ansible_connection=winrm
+ansible_winrm_transport=credssp
+ansible_winrm_server_cert_validation=ignore
+```
+adhoc command: `ansible web -m win_ping`
 
 ## Host Key Check
 
@@ -214,13 +271,48 @@ syntax: ansible-playbook -i [hosts-file] [playbook-file.yaml]
 ansible-playbook -i hosts my-playbook.yaml
 ```
 
-Gather Facts Modules
+## Modules
+reusable code that can be used in playbooks
+may by ref as plugins
+
+### Where to get info
+https://docs.ansible.com/ansible/latest/
+choose correct version
+look for module index or Indexes of all modules and plugins
+may need to add repo before adding adding package manager
+
+**Check if module is installed**: `ansible-galaxy collection list`
+
+### Gather Facts Modules
 - automatically called at the begining of task for every play
 - gathers is server avail, status, Os, and other that can be used in playbook
 
+### Collection
+- Ansible 2.9 and earlier. 
+  - All modules were included. 
+  - single repo
+  - all packed into install
+- Ansible 2.9 and later. 
+  - when modules reached into 1000, 
+  - code base separe code from modules
+  - Modules and Plugin moved into "collection"
+  - ansible-base-package = ansible code
+  - ansible package = ansible modules and plugins
+- what is collection
+  - collection is a packaging format and distribution
+  - collection can be playbooks, modules, plugins
+  - all modules are part of collection
+- what is plugin
+  - code that add functionality to ansible or modules
+  - ie. module may terminate vm, plugin may filter list to terminate vm
+- Collections lives in galaxy
+  - https://galaxy.ansible.com/
+  - ansible-galaxy is cli tool install and update collections. same command
+  - `ansible-galaxy collection install [collection]`
+- create your own collection 
+  - predefined structure - required galaxy.yml
 
-## Modules
 ---
-@lesson228 start
+left off @lesson230
 
 
