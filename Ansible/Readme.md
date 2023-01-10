@@ -76,7 +76,7 @@ Required:
 - .Net Framework >= 4.0
 
 wsl install
-```
+```bash
 sudo apt install python3-pip -y
 sudo pip3 install ansible
 sudo pip3 install pywinrm 
@@ -287,6 +287,18 @@ may need to add repo before adding adding package manager
 - automatically called at the begining of task for every play
 - gathers is server avail, status, Os, and other that can be used in playbook
 
+### General Attributes
+Some attributes are availabe to all modules.
+- Async = Async command
+- Poll = Polling
+- noLog = doesn't log. Used for Sensitive data
+- Register = creates variable and assign results to task execution
+
+### Other
+- Shell module same as command, but access to shell. ie Env, Pipe, and redirect
+- command is more secure
+- command and shell are not stateful, consider using conditional
+
 ### Collection
 - Ansible 2.9 and earlier. 
   - All modules were included. 
@@ -315,54 +327,7 @@ may need to add repo before adding adding package manager
 ## Playbook Examples
 - Pay attention on if the modules runs on control or remote host
 
-Install node and npm
-```yaml
----
-- name: Install node and npm
-  hosts: 123.123.123.12
-  tasks:
-    - name: Update Apt
-      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-    - name: Install nodejs and npm
-      apt:
-        pkg:
-          - nodejs
-          - npm
-
-- name: Deploy nodejs app
-  hosts: 123.123.123.12
-  tasks:
-    - name: copy nodejs folder to svr
-      copy: 
-        src: /user/von/project1/nodejs-app-1.0.0.tgz
-        dest: /root/app-1.0.0.tar
-    - name: unpack tar
-      unarchive:
-        src: /root/app-1.0.0.tar
-        dest: /root/
-        remote_src: yes
-    - name: install dependancies  
-      npm: 
-        path: /root/package
-    - name: start app
-      command: node /root/package/app/server
-      async: 1000     # general attrib
-      poll: 0         # general attrib
-    - name: check app is running
-      shell: ps aux | grep node
-      register: app_status
-    - name: Print results
-      debug: msg={{app_status.stdout_lines}}
-```
-
-note:
-- Async and Poll are general attrib
-- Shell module same as command, but access to shell. ie Env, Pipe, and redirect
-- command is more secure
-- command and shell are not stateful, consider using conditional
-- register creates variable and assign results to task execution
-
-Apt update - alt
+ex1: Apt update - alt
 ```yaml
 - name: Install node and npm
   hosts: 123.123.123.12
@@ -374,7 +339,7 @@ Apt update - alt
         cache_valid_time: 3600
 ```
 
-Deploy nodejs app - combine
+ex1: Deploy nodejs app - combine
 ```yaml
 - name: Deploy nodejs app
   hosts: 123.123.123.12
@@ -384,7 +349,8 @@ Deploy nodejs app - combine
         src: /user/von/project1/nodejs-app-1.0.0.tgz
         dest: /root/
 ```
-Start App alt
+
+ex1: Start App alt
 ```yaml
 - name: start app
   command: 
@@ -392,56 +358,92 @@ Start App alt
     cmd: node server
 ```
 
-Install node and npm - non-root
+## Variables
+- Avoid using reserve names as Variable Name
+- Valid: Letters, Numbers, and Underscore.
+  - don't use: user-name, user name, user.name
+  - good: user_name
+- Registering Variables - General Parameter - Register
+  - Variable is different based on the play
+- Reference Variable with `{{ VariableName }}`
+- Reference Variable may need quote if folloing comma. `src: "{{ VariableName }}"`
+  - colen and curly bracket look like yaml dictionary 
+
+inline variable 
 ```yaml
----
-- name: Install node and npm
-  hosts: 123.123.123.12
-  tasks:
-    - name: Update Apt
-      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-    - name: Install nodejs and npm
-      apt:
-        pkg:
-          - nodejs
-          - npm
-
-- name: Create new user for app
-  hosts: 123.123.123.12
-  tasks:
-    - name: create user
-      user: 
-        name: nodeuser
-        comment: description
-        group: admin
-
 - name: Deploy nodejs app
   hosts: 123.123.123.12
-  become: True
-  become_user: nodeuser
+  vars:
+    - verion: 1.0.0
   tasks:
-    - name: copy nodejs folder to svr
-      copy: 
-        src: /user/von/project1/nodejs-app-1.0.0.tgz
-        dest: /home/nodeuser/app-1.0.0.tar
     - name: unpack tar
       unarchive:
-        src: /home/nodeuser/app-1.0.0.tar
-        dest: /home/nodeuser
-        remote_src: yes
-    - name: install dependancies  
-      npm: 
-        path: /home/nodeuser/package
-    - name: start app
-      command: node /home/nodeuser/package/app/server
-      async: 1000     # general attrib
-      poll: 0         # general attrib
-    - name: check app is running
-      shell: ps aux | grep node
-      register: app_status
-    - name: Print results
-      debug: msg={{app_status.stdout_lines}}
+        src: /user/von/project1/nodejs-app-{{version}}.tgz
+        dest: /root/
+        remote_src: no
 ```
+
+parameter variable  
+```yaml
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  vars:
+    - location: /user/von/project1/nodejs-app-1.0.0.tgz
+  tasks:
+    - name: unpack tar
+      unarchive:
+        src: "{{location}}"
+        dest: /root/
+        remote_src: no
+```
+
+### Configure from outside of playbook
+deploy-node.yaml
+```yaml
+- name: Deploy nodejs app
+  hosts: 123.123.123.12  
+  tasks:
+    - name: unpack tar
+      unarchive:
+        src: /user/von/project1/nodejs-app-{{app-version}}.tgz
+        dest: /root/
+        remote_src: no
+```
+
+pass variable from command
+```bash
+ansible-playbook -i hosts deploy-node.yaml -e "app-version=1.0.0"
+```
+
+### variable from external file
+project-vars
+```yaml
+app-version: 1.0.0
+user_name: nodeuser
+user_home_dir: /home/{{user_name}}
+location: /user/von/project1
+```
+
+deploy-node.yaml
+```yaml
+- name: Deploy nodejs app
+  hosts: 123.123.123.12  
+  vars_file:
+    - project-vars
+  tasks:
+    - name: unpack tar
+      unarchive:
+        src: "{{location}}/nodejs-app-{{app-version}}.tgz"
+        dest: "{{user_home_dir}}"
+        remote_src: no
+```
+
+```bash
+ansible-playbook -i hosts deploy-node.yaml
+```
+
+
+
 ---
 left off @lesson233
 

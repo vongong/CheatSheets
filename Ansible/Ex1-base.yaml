@@ -1,0 +1,36 @@
+---
+- name: Install node and npm
+  hosts: 123.123.123.12
+  tasks:
+    - name: Update Apt
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Install nodejs and npm
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  tasks:
+    - name: copy nodejs folder to svr
+      copy:
+        src: /user/von/project1/nodejs-app-1.0.0.tgz
+        dest: /root/app-1.0.0.tgz
+    - name: unpack tar  # Could combine Copy and Unpack
+      unarchive:
+        src: /root/app-1.0.0.tgz
+        dest: /root/
+        remote_src: yes
+    - name: install dependancies
+      npm:
+        path: /root/package
+    - name: start app
+      command: node /root/package/app/server
+      async: 1000
+      poll: 0
+    - name: check app is running
+      shell: ps aux | grep node
+      register: app_status
+    - name: Print results
+      debug: msg={{app_status.stdout_lines}}

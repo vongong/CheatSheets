@@ -1,0 +1,47 @@
+---
+- name: Install node and npm
+  hosts: 123.123.123.12
+  tasks:
+    - name: Update Apt
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Install nodejs and npm
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name: Create new user for app
+  hosts: 123.123.123.12
+  vars_file:
+    - project-vars
+  tasks:
+    - name: create user
+      user:
+        name: "{{user_name}}"
+        comment: description
+        group: admin
+
+- name: Deploy nodejs app
+  hosts: 123.123.123.12
+  become: True
+  become_user: "{{user_name}}"
+  vars_file:
+    - project-vars
+  tasks:    
+    - name: unpack tar
+      unarchive:
+        src: "{{location}}/nodejs-app-{{version}}.tgz"
+        dest: "{{user_home_dir}}"
+        remote_src: no
+    - name: install dependancies
+      npm:
+        path: "{{user_home_dir}}/package"
+    - name: start app      
+      command:
+        chdir: "{{user_home_dir}}/package/app"
+        cmd: node server
+    - name: check app is running
+      shell: ps aux | grep node
+      register: app_status
+    - name: Print results
+      debug: msg={{app_status.stdout_lines}}
