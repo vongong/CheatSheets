@@ -71,6 +71,7 @@ Some attributes are availabe to all modules.
 - Poll = Polling
 - noLog = doesn't log. Used for Sensitive data
 - Register = creates variable and assign results to task execution
+- Become = Switch user. Default is root
 
 ### Other
 - Shell module same as command, but access to shell. ie Env, Pipe, and redirect
@@ -110,3 +111,14 @@ ex1: Start App alt
     chdir: /root/package/app
     cmd: node server
 ```
+
+
+## set interpreter
+ansible.cfg
+```ini
+[default]
+interpreter_python = /usr/bin/python3
+```
+
+Note: yum package manager doens't support python3
+

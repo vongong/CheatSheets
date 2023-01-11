@@ -66,3 +66,19 @@ syntax: ansible-playbook -i [hosts-file] [playbook-file.yaml]
 ```bash
 ansible-playbook -i hosts my-playbook.yaml
 ```
+
+## convert sh to play
+```bash
+sudo curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+```yaml
+    - name: Install Docker-compose
+      ansible.builtin.get_url: 
+        url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-{{lookup('pipe', 'uname -m')}}
+        dest: /usr/local/bin/docker-compose
+        mode: +x
+```
+
+Lookup is jinga template. built in function

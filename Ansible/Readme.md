@@ -110,10 +110,8 @@ Keep Project separate directory.
 - hosts: inventory file aka hosts file
 - project-vars: Variable file
 
-
-
 ---
-left off lesson237
+left off lesson238
 
 CyberArk Module
 Ansible Vault
