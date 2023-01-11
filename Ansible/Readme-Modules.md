@@ -16,6 +16,10 @@ windows (https://docs.ansible.com/ansible/latest/collections/ansible/windows/ind
 - ansible.builtin.file - manges linux file and file properies
 - ansible.windows.win_file - manges windows file and file properies
 - ansible.builtin.debug - debugging
+- ansible.builtin.blockinfile - Ins/Upd/Rem multi-line text
+- ansible.builtin.lineinfile - Replace line with regex
+- ansible.builtin.pause - wait for n time
+- ansible.builtin.wait_for - wait something to happen
 - ansible.builtin.find - find folders or file with regex
 - ansible.builtin.stat - retries file or file system stats
 Ex. Find nexus folder: in opt folder, starts with "nexus-", save in find_results
