@@ -93,3 +93,12 @@ Disable Key Check - less secure
 ```ini
 [default]
 host_key_checking = False
+```
+
+## default host file
+ansible.cfg
+```ini
+[default]
+inventory = hosts
+```
+

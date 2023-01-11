@@ -58,10 +58,14 @@ Idempotency - Write plays for desired state
   - ansible_user = users to login as
 
 ## Playbook
-Create Project - folder
-Create Host file - use from above
-Create config file - optional. See above
-Playbooks are yaml, ran in order list
+- Create Project - folder
+- Create Host file - use from above
+- Create config file - optional. See above
+- Playbooks are yaml, ran in order list
+- Run playbook for one server - use --limit parameter
+```sh
+ansible-playbook PLAYBOOK.yaml --limit HOSTNAME
+```
 
 ## Collection
 - Ansible 2.9 and earlier. 
@@ -99,9 +103,17 @@ Playbooks are yaml, ran in order list
 - Reference Variable may need quote if folloing comma. `src: "{{ VariableName }}"`
   - colen and curly bracket look like yaml dictionary 
 
+## Project
+Keep Project separate directory. 
+- ansible.cfg: Ansible Config
+- deploy-something.yaml: Playbook
+- hosts: inventory file aka hosts file
+- project-vars: Variable file
+
+
 
 ---
-left off lesson235
+left off lesson237
 
 CyberArk Module
 Ansible Vault
