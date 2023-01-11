@@ -23,3 +23,8 @@ alias ~="cd ~"
 alias ls="ls -Fa"
 alias ll="ls -Fal"
 ```
+
+## Reload settings
+```sh
+source ~/.bash_profile
+```
