@@ -84,6 +84,18 @@
 **Delete Environment Variables:**
 - `unset DB_NAME` = Delete variable with name 'DB_NAME'
 
+**Useful Networking Commands:**
+- `ip`= one of the basic commands. For setting up new systems and assigning IPs to troubleshooting existing systems. Can show address information, manipulate routing, plus display network various devices, interfaces, and tunnels.
+- `ifconfig`= for configuring and troubleshooting networks. It has since been replaced by the `ip` command
+- `netstat`= tool for printing network connections, routing tables, interface statistics, masquerade connections, and multicast memberships
+- `ps aux` =
+  - ps = displays information about a selection of the active processes
+  - a = show processes for all users
+  - u = display the process's user/owner
+  - x = also show processes not attached to a terminal
+- `nslookup` = Find DNS related query
+- `ping` = To check connectivity between two nodes
+
 ## Sed 
 ```sh
 sed -i 's/old-text/new-text/g' input.txt
