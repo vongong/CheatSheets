@@ -4,6 +4,7 @@ Idempotency - Write plays for desired state
 
 ## Links
 [Ansible Documentation](https://docs.ansible.com/ansible/latest/getting_started/index.html)
+[Index of Modules](https://docs.ansible.com/ansible/latest/collections/all_plugins.html)
 [nana git lab](https://gitlab.com/nanuchi/ansible-learn)
 
 ## Core Concepts
@@ -88,10 +89,16 @@ ansible-playbook PLAYBOOK.yaml --limit HOSTNAME
 - Collections lives in galaxy
   - https://galaxy.ansible.com/
   - ansible-galaxy is cli tool install and update collections. same command
-  - `ansible-galaxy collection install [collection]`
+  - ie. `ansible-galaxy collection install [collection]`
 - create your own collection 
   - predefined structure - required galaxy.yml
-
+- Fully Qualified Collection Name (FQCN) - starting 2.10
+  - naming convention: [Namespace].[Collection].[Modules]
+  - ie. community.docker.docker_image
+  - ansible.builtin - default collection
+  - Use FQCN is best practice.
+  - modules can have same name in different collections 
+  - `-vv` parameter in `ansible_playbook` to see how it resolves if not fqcn
 ## Variables
 - Avoid using reserve names as Variable Name
 - Valid: Letters, Numbers, and Underscore.
@@ -111,7 +118,7 @@ Keep Project separate directory.
 - project-vars: Variable file
 
 ---
-left off lesson238
+left off lesson239
 
 CyberArk Module
 Ansible Vault

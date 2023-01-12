@@ -81,3 +81,13 @@ deploy-node.yaml
 ```bash
 ansible-playbook -i hosts deploy-node.yaml
 ```
+
+## special variables
+https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+
+These variables cannot be set directly by the user; Ansible will always override them to reflect internal state.
+
+**Magic variables**
+| Variable Name | Desc |
+| --- | --- |
+| inventory_hostname | The inventory name for the ‘current’ host being iterated over in the play |

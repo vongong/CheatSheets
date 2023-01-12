@@ -81,4 +81,23 @@ sudo chmod +x /usr/local/bin/docker-compose
         mode: +x
 ```
 
+## Variable Prompt
+ie passwords
+```yaml
+- name: Start docker containers
+  hosts: all
+  vars_prompt:
+    - name: docker_password
+      prompt: Enter password for docker login
+  vars_files:
+    - project-vars
+  tasks:
+    - name: Docker login
+      community.docker.docker_login: 
+        registry_url: https://index.docker.io/v1/
+        username: "{{docker_user}}"
+        password: "{{docker_password}}"
+
+```
+
 Lookup is jinga template. built in function

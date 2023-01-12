@@ -112,7 +112,6 @@ ex1: Start App alt
     cmd: node server
 ```
 
-
 ## set interpreter
 ansible.cfg
 ```ini
@@ -120,5 +119,16 @@ ansible.cfg
 interpreter_python = /usr/bin/python3
 ```
 
-Note: yum package manager doens't support python3
+## docker modules
+Need to install python docker module
+```yaml
+    - name: Install docker python module
+      ansible.builtin.pip:
+        name: 
+          - docker
+          - docker-compose
+```
 
+## Other notes
+- yum package manager doens't support python3
+- Gathering facts is run first. May need to bypass gathering facts if setting interpreter to python3 in config and setting to python2 in playbook vars. `gathering_facts: False`
