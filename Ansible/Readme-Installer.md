@@ -17,24 +17,29 @@ apt-get install ansible -y
 - check version: ansible --version
 
 ### Install on Windows via wsl
+wsl install
+```bash
+sudo apt install python3-pip -y
+sudo pip3 install ansible
+```
+
+### Install package to connect to Windows Server
 Connects to windows server via winRM
 Windows Server 2008 and newer
 Required:
 - powershell >= 3.0
 - .Net Framework >= 4.0
 
-wsl install
+**wsl command**
 ```bash
-sudo apt install python3-pip -y
-sudo pip3 install ansible
 sudo pip3 install pywinrm 
 sudo pip3 install pywinrm[credssp]
 ```
 
-user setup
+**user setup**
 - can be active directory or without
 
-WinRM setup
+**WinRM setup**
 - https - port 5986
 - Auth - CredSSP
 ```powershell
