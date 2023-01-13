@@ -1,7 +1,9 @@
 
 # kubectl commands
 ```sh
+kubectl get ns
 kubectl get nodes
+kubectl get nodes -n my-ns
 kubectl get pod
 kubectl get services
 kubectl create deployment nginx-depl --image=nginx

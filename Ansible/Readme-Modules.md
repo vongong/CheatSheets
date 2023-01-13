@@ -129,6 +129,13 @@ Need to install python docker module
           - docker-compose
 ```
 
+## Check if have required module 
+- `python3 -c "import openshift"` = Check if have openshift python module
+- `pip3 install openshift --user` = Install openshift python module
+  - pip default required root access
+  - `--user` installed to home directory. no special priv
+
 ## Other notes
 - yum package manager doens't support python3
 - Gathering facts is run first. May need to bypass gathering facts if setting interpreter to python3 in config and setting to python2 in playbook vars. `gathering_facts: False`
+- some modules can read configs from environment vars.
