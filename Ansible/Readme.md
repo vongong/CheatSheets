@@ -119,14 +119,98 @@ Keep Project separate directory.
 
 ## Dynamic Inventory
 
+**2 ways to connect external inventory system:**
+- Inventory Plugins
+  - Ansible recommends: can use builtin features
+  - written in yaml
+  - `ansible-doc -t inventory -l ` = list of inventory plugin
+- Inventory Scripts
+  - written in python
+
+### ex: aws_ec2 plugin**
+Connect to aws and get info
+
+**ansible.cfg add plugin**
+```ini
+[defaults]
+enable_plugins = aws_ec2
+```
+
+**inventory_aws_ec2.yml** = file needs have aws_ec2 in name so plugin can find it.
+```yaml
+---
+plugin: aws_ec2
+regions: 
+  - eu-west-3
+```
+
+**inventory command**
+- `ansible-inventory -i inventory_aws_ec2.yml --list` = Display data in json format
+- `ansible-inventory -i inventory_aws_ec2.yml --graph` = Display data in tree format
+- only shows private dns name
+  - change so vpc has public dns name
+
+**Playbook**
+- set host to `All` or aws name (`awe_ec2`)
+- need ssh key, can be set in ansible.cfg
+
+**ansible.cfg add ssh**
+```ini
+[defaults]
+enable_plugins = aws_ec2
+remote_user = ec2-user
+private_key_file = ~/.ssh/id_rsa
+```
+
+**playbook command**
+`ansible-playbook -i inventory_aws_ec2.yaml deploy-docker-new-user.yaml`
+
+**add invintory file to ansible.cfg**
+```ini
+[defaults]
+enable_plugins = aws_ec2
+remote_user = ec2-user
+private_key_file = ~/.ssh/id_rsa
+inventory = inventory_aws_ec2.yaml
+```
+
+command: `ansible-playbook deploy-docker-new-user.yaml`
+
+**target some servers**
+`inventory_aws_ec2.yml` = add filters
+```yaml
+---
+plugin: aws_ec2
+regions: 
+  - eu-west-3
+filter:
+  tag:Name: dev*
+  instance-state-name: running
+```
+`ansible-inventory -i inventory_aws_ec2.yml --graph` = check
+
+**separate groups**
+`inventory_aws_ec2.yml`
+```yaml
+---
+plugin: aws_ec2
+regions: 
+  - eu-west-3
+keyed_groups:
+  - key: tags
+    prefix: tag
+  - key: instance_type
+    prefix: instance_type
+```
+
+`ansible-inventory -i inventory_aws_ec2.yml --graph` = check
+
+This will change the host group for the playbook
 
 
 
 ---
-left off lesson240
-
-CyberArk Module
-Ansible Vault
+left off lesson241
 
 ```yaml
 ```

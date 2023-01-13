@@ -1,4 +1,5 @@
 # CyberArk Module
+All examples use ansible tower
 
 ## Link
 [Cyberark.pas](https://docs.ansible.com/ansible/latest/collections/cyberark/pas/index.html#plugins-in-cyberark-pas)
