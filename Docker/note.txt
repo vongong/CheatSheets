@@ -1,9 +1,0 @@
-aws Private repo
-  each repo only has one image. different tags for version
-
-docker volumes
-  windows: c:\ProgramData\docker\volumes
-  linux: /var/lib/docker/volumes
-  macos: /var/lib/docker/volumes
-    * actually creates linux vm to store docker data
-
