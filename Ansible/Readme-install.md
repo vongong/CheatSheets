@@ -1,4 +1,4 @@
-## Install
+## Install basic
 - control node - Machine running Ansible that manages target servers
 - windows not supported as control node
 - written in python. 
