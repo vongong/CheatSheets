@@ -8,6 +8,8 @@ Connecting via SSH: `ssh username@SSHserver`
   - `id_rsa` = Private Key
   - `id_rsa.pub` = Public Key
 - `ssh -i .ssh/id_rsa root@159.89.14.94` = Connect with root user to 159.89.14.94 server address with specified private key file location (.ssh/id_rsa = default, but you can specify a different one like this)
+- `ssh-copy-id root@10.10.10.222` = Command to copy public key to remote server
+
 
 **Two Files used by SSH:**
 - `~/.ssh/known_hosts` = lets the client authenticate the server to check that it isn't connecting to an impersonator

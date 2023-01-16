@@ -101,3 +101,107 @@ ie passwords
 ```
 
 Lookup is jinga template. built in function
+
+## loop over task
+keyword **loop**; loop variable **item** hold values
+
+Simple Example
+```yaml
+- name: create users
+  hosts: all
+  vars:
+    myusers:
+      - user1
+      - user2
+      - user3
+      - user4
+  tasks:
+    - name: create users
+      user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ myusers }}"
+```
+
+Example with dict (dictionary)
+```yaml
+- name: create Groups and assign users
+  hosts: all
+  tasks:
+    - name: create groups
+      group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - group1
+        - group2
+    - name: Set users to group
+      user:
+        name: "{{ item.name }}"
+        group: "{{ item.groups }}"
+      with_dict:
+        - { name: 'user1', groups: 'group1' }
+        - { name: 'user2', groups: 'group1' }
+        - { name: 'user3', groups: 'group2' }
+        - { name: 'user4', groups: 'group2' }
+```
+
+## Conditional
+- Task Keyword: **when**
+- Task will run **when** condition is met
+
+```yaml
+- name: demo
+  hosts: all
+  vars:
+    my_service: httpd
+  tasks:
+    - name: install {{ my_service }} package
+      yum:
+        name: "{{ my_service }}"
+      when: my_service is defined
+```
+
+- Conditons: ==, <, >, <=, >=, !=, is defined, is not defined, not, in 
+- example conditions:
+  - ansible_machine == "x86_65"
+  - min_memory >= 256
+
+When multiple condition, treated as "And"
+```yaml
+- name: demo in condition
+  hosts: all
+  gather_facts: yes
+  vars:
+    my_service: httpd
+    supported_os:
+      - RedHad
+      - Fedora
+  tasks:
+    - name: install {{ my_service }} package
+      yum:
+        name: "{{ my_service }}"
+      when: 
+        - ansible_facts['distribution'] in supported_os
+        - ansible_kernal == '3.10'
+```
+
+When multiple condition, treated as "or"
+```yaml
+when: >
+    ( ansible_distribution == "RedHat" and
+      ansible_distribution_major_version == "7")
+    or
+    ( ansible_distribution == "Fedora" and
+      ansible_distribution_major_version == "28")  
+```
+
+**ansible_mount** fact is a list of distionaries, each one representing facts about one mounted file system.
+```yaml
+- name: install maria-db if enough space on root
+  yum:
+    name: mariadb-server
+    state: latest
+  loop: "{{ ansible_mount }}"
+  when: item.mount == "/" and item.size_available > 300000000
+```

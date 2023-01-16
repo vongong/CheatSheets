@@ -256,8 +256,38 @@ ex. same as above, but allows to mix tasks between roles
         ftp_config_src: someothervalue.conf.js.
 ```
 
---- 
+## Handlers
+- Run tasks when another task runs. 
+  - ie reboot server or restart task
+  - If made multiple config changes, may only want to reboot once. Ansible will keep track if a trigger is needed
+- Ansible verify status before running task.
+- Triggered at the end of the block of task in a playbook
+- Needs task to notify handler. If multiple tasks notify handler, handler only runs once.
+- notify must match handler name - *case sensitive*
+- Normally defined at the playbook
+- run in order defined in handlers, not notify
+- run handler when all tasks are complete
+- if 2 handlers have same name, runs the first one defined. *don't do that.*
+- notify only if task is **changed** status.
 
 ```yaml
+tasks: 
+  - name: copy config
+    template: 
+      src: /var/lib/templates/demo.example.config/template
+      dest: /etc/httpd/conf.d/demo.example.config
+    notify:
+      - restart apache
+      - restart mysql
+
+handlers:
+  - name: restart mysql
+    service:
+      name: testdb
+      state: restarted
+  - name: restart apache
+    service:
+      name: httpd
+      state: restarted
 ```
 
