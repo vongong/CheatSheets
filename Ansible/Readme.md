@@ -211,25 +211,52 @@ This will change the host group for the playbook
 
 ## Roles
 If used for many different tasks, have complex and hard to maintain all the playbooks. Structure playbooks in a more managable way. Like a package for your tasks. If multiple plays use same plays, can extact to a role. 
-- Parameterize Role
 - Dev and test Roles separately
 - Existing Roles from community
   - Ansible Galaxy
   - Git Repo
-- playbook - replace tasks with roles
+- Write Role as playbook and refactor as role.
+- Parameterize Role
+- if playbook has tasks and roles, roles will run first
 - Predefined structure
+  - create skeleton structure `ansible-galaxy init rolename`
   - roles folder
     - role_name
       - task folder: main.yaml (Required)
-      - vars folder: main.yaml 
+      - vars folder: main.yaml - vars not intended to be changed
       - files folder: static files
       - defaults folder: main.yaml - if not defined, use these variables. Lowers on precedence
+      - meta folder - for documentation
 Note: There is a variable precedence least to greater.
 
 
+ex. Runs role twice. First with defaults. Sec override value
+```yaml
+- name: runs ftps
+  hosts: ftpservers
+  roles: 
+    - vsftpd_server
+    - role: vsftpd_server
+      vars:
+        ftp_config_src: someothervalue.conf.js.
+```
 
----
-left off lesson245
+ex. same as above, but allows to mix tasks between roles
+```yaml
+- name: runs ftps
+  hosts: ftpservers
+  tasks: 
+    - name: Exec Role
+      include_role:
+        name: vsftpd_server
+    - name: override paraa
+      include_role: 
+        name: vsftpd_server
+      vars:
+        ftp_config_src: someothervalue.conf.js.
+```
+
+--- 
 
 ```yaml
 ```
