@@ -1,5 +1,8 @@
 ## Inventory
 - manage server with files called hosts. ip or hostname
+- format: INI or Json
+- Inventory can be at directory; not just file
+  - Ansible will automaticallly combine them all together
 - hosts file attrib
   - ansible_ssh_private_key_file = file loc of private keys
   - ansible_user = users to login as
@@ -24,7 +27,7 @@
 - ad-hoc command target droplet group
   - `ansible droplet -i hosts -m ping`
 - ad-hoc command target server
-  - `ansible 10.20.0.7  -i hosts -m ping`
+  - `ansible 10.20.0.7 -i hosts -m ping`
 
 cleaner host file *hosts example +groups +vars*
 ```ini
@@ -102,3 +105,49 @@ ansible.cfg
 inventory = hosts
 ```
 
+## host can be in multiple groups
+**ex: hosts**
+```ini
+[databases]
+db-prod.example.com
+db-test.example.com
+
+[webserver]
+web-prod.example.com
+web-test.example.com
+
+[test]
+db-test.example.com
+web-test.example.com
+
+[prod]
+db-prod.example.com
+web-prod.example.com
+```
+
+## groups can have child group
+```ini
+[atlanta]
+host1
+host2
+
+[raleigh]
+host2
+host3
+
+[southeast:children]
+atlanta
+raleigh
+
+[southeast:vars]
+some_server=foo.southeast.example.com
+halon_system_timeout=30
+self_destruct_countdown=60
+escape_pods=2
+
+[usa:children]
+southeast
+northeast
+southwest
+northwest
+```
