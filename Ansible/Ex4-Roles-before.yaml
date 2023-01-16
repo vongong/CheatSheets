@@ -1,0 +1,63 @@
+---
+- name: Install python3, docker, docker-compose
+  hosts: all
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: Install python3 and docker
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+      ansible.builtin.yum:
+        name:
+          - python3
+          - docker
+        update_cache: yes
+        state: present
+    - name: Install Docker-compose
+      ansible.builtin.get_url: 
+        # If the url isn't found, use 'url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64'
+        # See available release tags per version here: https://github.com/docker/compose/releases
+        url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-{{lookup('pipe', 'uname -m')}}
+        dest: /usr/local/bin/docker-compose
+        mode: +x
+    - name: Start docker daemon
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+    - name: Install docker python module
+      ansible.builtin.pip:
+        name: 
+          - docker
+          - docker-compose
+    
+
+- name: Create new linux user
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Create new linux user
+      ansible.builtin.user:
+        name: dkrt
+        groups: adm,docker
+
+
+- name: Start docker containers
+  hosts: all
+  become: yes
+  become_user: dkrt
+  vars_files:
+    - project-vars
+  tasks:
+    - name: Copy docker compose
+      ansible.builtin.copy:
+        src: /Users/dkrt/Demo-projects/Bootcamp/Exercises/bootcamp-java-mysql-project/docker-compose-full.yaml
+        dest: /home/dkrt/docker-compose.yaml
+    - name: Docker login
+      community.docker.docker_login: 
+        registry_url: https://index.docker.io/v1/
+        username: username
+        password: "{{docker_password}}"
+    - name: Start container from compose
+      community.docker.docker_compose: 
+        project_src: /home/dkrt
+

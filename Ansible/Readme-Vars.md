@@ -91,3 +91,33 @@ These variables cannot be set directly by the user; Ansible will always override
 | Variable Name | Desc |
 | --- | --- |
 | inventory_hostname | The inventory name for the ‘current’ host being iterated over in the play |
+
+
+## variable precedence
+There is a variable precedence least to greater.
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#ansible-variable-precedence
+
+Ansible does apply variable precedence, and you might have a use for it. Here is the order of precedence from least to greatest (the last listed variables override all other variables):
+
+1. command line values (for example, -u my_user, these are not variables)
+1. role defaults (defined in role/defaults/main.yml) 
+1. inventory file or script group vars 
+1. inventory group_vars/all
+1. playbook group_vars/all 
+1. inventory group_vars/* 
+1. playbook group_vars/* 
+1. inventory file or script host vars 
+1. inventory host_vars/* 
+1. playbook host_vars/* 
+1. host facts / cached set_facts 
+1. play vars
+1. play vars_prompt
+1. play vars_files
+1. role vars (defined in role/vars/main.yml)
+1. block vars (only for tasks in block)
+1. task vars (only for the task)
+1. include_vars
+1. set_facts / registered vars
+1. role (and include_role) params
+1. include params
+1. extra vars (for example, -e "user=my_user")(always win precedence)

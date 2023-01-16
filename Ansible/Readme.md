@@ -4,7 +4,9 @@ Idempotency - Write plays for desired state
 
 ## Links
 [Ansible Documentation](https://docs.ansible.com/ansible/latest/getting_started/index.html)
+
 [Index of Modules](https://docs.ansible.com/ansible/latest/collections/all_plugins.html)
+
 [nana git lab](https://gitlab.com/nanuchi/ansible-learn)
 
 ## Core Concepts
@@ -207,10 +209,27 @@ keyed_groups:
 
 This will change the host group for the playbook
 
+## Roles
+If used for many different tasks, have complex and hard to maintain all the playbooks. Structure playbooks in a more managable way. Like a package for your tasks. If multiple plays use same plays, can extact to a role. 
+- Parameterize Role
+- Dev and test Roles separately
+- Existing Roles from community
+  - Ansible Galaxy
+  - Git Repo
+- playbook - replace tasks with roles
+- Predefined structure
+  - roles folder
+    - role_name
+      - task folder: main.yaml (Required)
+      - vars folder: main.yaml 
+      - files folder: static files
+      - defaults folder: main.yaml - if not defined, use these variables. Lowers on precedence
+Note: There is a variable precedence least to greater.
+
 
 
 ---
-left off lesson241
+left off lesson245
 
 ```yaml
 ```
