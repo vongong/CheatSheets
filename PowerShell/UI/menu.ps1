@@ -20,7 +20,7 @@ $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Yel
 
 $title = 'Favorite color'
 $message = 'What is your favorite color?'
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
+$result = $host.ui.PromptForChoice($title, $message, $options, -1)
 
 switch ($result) {
     0 { $resultVal = 'Red' }
