@@ -2,19 +2,39 @@
 
 - `git config --global user.name "John Doe"` = Set Name
 - `git config --global user.email johndoe@example.com` = Set Email
+- `git config --list ` = View Config
 
+## different enviroment
+- `working` = dir
+- `staging` = git status
+- `commit` = git commit; git log;
 ## Common
+- `git help [command]` = Get Help on command
 - `git init ` = Initalize directory for git
 - `git log` = Display logs
-- `git status` = display status of git directory
-- `git add -A` = Add all changes in directory
-- `git commit -m "commit Message"` = Commits change
+  - `git log --oneline` = Display logs overview
+  - `git log -p` = Display logs details
+  - `git status` = display status of git directory
+- `git add filename` = Add file changes to Staging
+  - `git add -A` = Add all changes in project to Staging
+  - `git add .` = Add all changes in directory to Staging
+- `git commit -m "commit Message"` = Commits staged change
 - `git commit -am "commit Message"` = Commits change include changed files; not new
 - `git clone https://example.com/example/repo.git` = Clone git project.
-- `git checkout branch-name` = switch to branch
+- git checkout split into switch and restore 
+  - `git switch branch-name` = switch to branch
+  - `git restore filename` = restore filename
+- `git diff` = see changes
 - `git fetch` = get meta data changes from origin
 - `git pull` = get changes from origin
 - `git push` =  upload changes from working directory to origin
+  - `git push -- all` = push all branch
+
+## Branch
+- `git branch` = get branch names
+- `git branch new-branch-name` = create branch names
+- `git switch -c new-branch-name` = create new branch names and switch to it
+- `git branch -d branch-name` = delete branch names
 
 ## Remote
 - `git remote add origin https://github.com/example/repo.git` = adds origin remote
