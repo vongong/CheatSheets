@@ -36,6 +36,13 @@
 - `git switch -c new-branch-name` = create new branch names and switch to it
 - `git branch -d branch-name` = delete branch names
 
+## restore
+- `git restore --staged index.html` = unstage index.html
+- `git restore --staged *.css` = unstage multiple files
+- `git restore index.html` = discard umcommited change
+- `git restore --source 7173808e index.html` = restore file from specific commit
+- `git restore --source main~2 index.html` = restore file from 2 commits before HEAD of the main branch
+
 ## Remote
 - `git remote add origin https://github.com/example/repo.git` = adds origin remote
 - `git remote set-url origin https://github.com/example/repo.git` = updates origin remote
