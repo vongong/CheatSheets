@@ -8,6 +8,7 @@
 - `working` = dir
 - `staging` = git status
 - `commit` = git commit; git log;
+
 ## Common
 - `git help [command]` = Get Help on command
 - `git init ` = Initalize directory for git
