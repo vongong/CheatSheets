@@ -1,4 +1,6 @@
 
+## Description
+Built on top of ARM. Designed for Type safety, modular, code reuse, readability.
 
 ## Link
 [github](https://github.com/Azure/bicep)
@@ -41,3 +43,16 @@ New-AzResourceGroupDeployment `
   -ResourceGroupName ExampleGroup `
   -TemplateFile <path-to-bicep>
 ```
+
+## config map
+
+## loops
+
+
+## Best Practice - tips and tricks
+- Set target scope
+- use variable for naming standards
+- vscode: ctrl-left click, jump into ref filed.
+- param 
+  - add @description
+  - use camelCase
