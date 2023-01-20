@@ -1,13 +1,28 @@
-## Init
-
-- `git config --global user.name "John Doe"` = Set Name
-- `git config --global user.email johndoe@example.com` = Set Email
-- `git config --list ` = View Config
-
 ## different enviroment
 - `working` = dir
 - `staging` = git status
 - `commit` = git commit; git log;
+
+## .git folder
+this folder stores the repo.
+- HEAD = Link to point in history
+- Config = holds config data
+- log = created on the fly summary of history
+- object = past versions compressed into folder/subfolder
+  - use SHA1 for hash
+  - `git cat-file <parameter> <hash>` = get hash info
+    - `-t` = type
+    - `-p` = print info 
+    - parent = hash of parent of the hash
+    - tree = hash of files in object
+  - subfolder of first 2 char of hash
+
+
+## Init
+- `git config --global user.name "John Doe"` = Set Name
+- `git config --global user.email johndoe@example.com` = Set Email
+- `git config --list ` = View Config
+
 
 ## Common
 - `git help [command]` = Get Help on command
