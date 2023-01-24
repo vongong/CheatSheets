@@ -5,6 +5,7 @@ Built on top of ARM. Designed for Type safety, modular, code reuse, readability.
 ## Link
 [github](https://github.com/Azure/bicep)
 [ms-doc](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+[examples](https://github.com/Azure/azure-docs-bicep-samples)
 
 ## Install
 **VSCode Bicep Extension**
@@ -241,3 +242,22 @@ module sql '.\sql.bicep' = {
   }
 }
 ```
+
+## array
+<!-- ? Need to investigate -->
+```cs
+param dnsServers array
+
+var dnsServer_var = {
+  dnsServers: array(dnsServers)
+}
+```
+
+## Other
+- Check if has value, then use it else replace with blank
+  - ie: `delegation: contains(subnet, 'delegation') ? subnet.delegation : []`
+  - ie: `dhcpOptions: !empty(dnsServers) ? dnsServers_var : null`
+- output value
+  - ie. `output vnetId string = virtualNetwork.id`
+- Can't nest for loops
+- vscode bicep extension has visualizer
