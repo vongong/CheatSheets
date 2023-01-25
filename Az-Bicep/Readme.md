@@ -2,10 +2,15 @@
 ## Description
 Built on top of ARM. Designed for Type safety, modular, code reuse, readability.
 
+Bicep registry - Azure Container Registry Instance - call templates
+
 ## Link
 [github](https://github.com/Azure/bicep)
 [ms-doc](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 [examples](https://github.com/Azure/azure-docs-bicep-samples)
+[Bicep Advance Deployment yt p1](https://www.youtube.com/watch?v=wevlRsVxsUw)
+[Bicep Advance Deployment yt p2](https://www.youtube.com/watch?v=6QLkSRc7tgM)
+[Bicep Advance Deployment github](https://github.com/kevball2/bicepadvanceddeployments)
 
 ## Install
 **VSCode Bicep Extension**
@@ -133,6 +138,43 @@ resource aks 'Microsoft.ContainerService/managedCluster@2021-03-01' = {
 }
 ```
 
+Consider having resource property in parameter file. Have param as object
+```json
+{
+  "parameters": {
+    "keyvaultParameters": {
+      "value": {
+        "sku": "Standard",
+        "enableForDeployment": false,
+        "enableForDiskEncryption": false
+        ...
+      }
+    }
+  }
+}
+```
+
+```cs
+param kvProperties Object
+
+module keyvault 'modules/keyvault.bicep' = {
+  name: 'kv-${environmentName}-dp'
+  scope: resourceGroup
+  params: {
+    keyVault: keyVaultProperties
+    location: location
+    locationShortName: locationShortName
+    env: env
+    keyVaultName: keyVaultName
+    roleAssignments: roleAssignments
+    tenantId: tenantId
+    virtualNetworkId: virtualNetwork.outputs.virtualNetworkId
+    workspaceId: appInsights.outputs.workspaceId
+  }
+  
+}
+
+```
 ## conditional
 - **Parent - Child** - Property called `parent`. This property in the the child can reference the parent name
 
@@ -261,3 +303,7 @@ var dnsServer_var = {
   - ie. `output vnetId string = virtualNetwork.id`
 - Can't nest for loops
 - vscode bicep extension has visualizer
+
+## ??
+- [ ] How to deploy bicep in pipeline? az deployment group? jobs.task?
+- [ ] Organize? module folder? 
