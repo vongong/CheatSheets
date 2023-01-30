@@ -50,3 +50,9 @@ Part of Virtual Network.
   - std load balencer
   - nat gateway
 - don't enable rdp or ssh. use defender JIT or bastion (managed jump box)
+
+## connecting virtual networks
+- past: connect vnet via site-to-site (S2S) VPN or ExpressRoute - each have problems
+  - S2S - IPSEC - slow throughput
+  - ExpressRoute - Meet box in different site - Latency issue
+- vnet peering - connect to each other via backbone.
