@@ -21,4 +21,6 @@ Clear-History -count 1 -newest
 # Filepath
 ```powershell
 dir $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+
+code $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
