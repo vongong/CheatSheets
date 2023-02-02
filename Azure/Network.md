@@ -55,4 +55,13 @@ Part of Virtual Network.
 - past: connect vnet via site-to-site (S2S) VPN or ExpressRoute - each have problems
   - S2S - IPSEC - slow throughput
   - ExpressRoute - Meet box in different site - Latency issue
-- vnet peering - connect to each other via backbone.
+- vnet peering - connect to each other via backbone. on ms backbone
+  - no IP overlap
+  - connect multiple vnets
+  - not transitive; in hub and spoke
+  - or they can be? 
+    - add Azure Firewall/Virtual Applicance in hub. 
+    - spoke have Az Firewall as next hop - with route tables
+    - or virtual network manager
+  
+## onprem connectivity
