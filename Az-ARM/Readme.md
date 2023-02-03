@@ -83,3 +83,48 @@ Arm functions (https://learn.microsoft.com/en-us/azure/azure-resource-manager/te
     }
 }
 ```
+
+## Static Key Vault Secret
+Arm Template
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "var1" : {
+            "type": "string"
+        }
+    },
+
+    "resources": [],
+    "outputs": {
+        "outvar1": {
+            "type": "string",
+            "value": "[parameters('var1')]"
+        }
+    }
+}
+```
+
+Parameter
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "var1": {
+            "reference": {
+				"keyVault": {
+					"id": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.KeyVault/vaults/<vault-name>"
+				},
+				"secretName": "ExamplePassword"
+			  }
+        }
+    }
+}
+```
+
+Powershell 
+```powershell
+New-AzResourceGroupDeployment -ResourceGroupName <rg-name> -TemplateFile <template-name> -TemplateParameterFile <params-name>
+```
