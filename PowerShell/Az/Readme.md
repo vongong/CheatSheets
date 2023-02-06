@@ -38,4 +38,11 @@ $AzModules |
   }
 ```
 
+## Login
+```powershell
+Connect-AzAccount
 
+Get-AzContext -List
+
+Set-AzContext -Subscription "xxxx-xxxx-xxxx-xxxx"
+```
