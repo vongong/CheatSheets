@@ -93,3 +93,20 @@ git merge main
 Look at files that were identified. They will have sections with markers like `<<<<<<<`, `=======`, and `>>>>>>>`. Fix the section and completely removed those markers. You can run `git status` again to verify that all conflicts have been resolved. Once verified that everything that had conflicts has been staged, you can type `git commit` to finalize the merge commit.
 
 
+## Alias
+**get config:** git config --list --show-origin
+
+**Add to File:** ~/.gitconfig
+```ini
+[alias]
+st = status
+cm = commit -m
+```
+
+**Command:**
+git config --global alias.st status
+git config --global alias.ft fetch
+git config --global alias.cm "commit -m"
+git config --global alias.aa "add -A"
+git config --global alias.sw switch
+
