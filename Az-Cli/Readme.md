@@ -4,8 +4,9 @@ Install MSI - https://aka.ms/installazurecliwindows
 Winget - winget install -e --id Microsoft.AzureCLI
 
 ## Common
-az account list
 az config get core
+az account list
+az account set --subscription <name or id>
 
 ## Output formatting
 --Output [json | jsonc | yaml | yamlc | table| tsv]

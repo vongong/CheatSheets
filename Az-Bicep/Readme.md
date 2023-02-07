@@ -32,21 +32,39 @@ You must have Azure CLI version 2.20.0 or later installed. [az bicp doc](https:/
 - `winget install -e --id Microsoft.Bicep` = Winget
 - `choco install bicep` = Chocolatey
 
+## Deploy What if
+preview changes before deploying a Bicep file
+
+Powershell
+- rg: `New-AzResourceGroupDeployment -Whatif`
+- subscription: `New-AzSubscriptionDeployment -Whatif` and `New-AzDeployment -Whatif`
+
+Az Cli
+- `az deployment group what-if` for resource group deployments
+- `az deployment sub what-if` for subscription level deployments
+
+You can use the `--confirm-with-what-if` switch (or its short form -c) to preview the changes and get prompted to continue with the deployment. Add this switch to:
+- `az deployment group create`
+- `az deployment sub create`
+
+
 ## Deploy
 **Azure CLI**
 ```sh
 az deployment group create \
   --name ExampleDeployment \
   --resource-group ExampleGroup \
-  --template-file <path-to-bicep>
+  --template-file <path-to-bicep> \
+  --parameters @myparameters.json 
 ```
 
-**Powershell**
+**Powershell Rg**
 ```powershell
 New-AzResourceGroupDeployment `
   -Name ExampleDeployment `
   -ResourceGroupName ExampleGroup `
-  -TemplateFile <path-to-bicep>
+  -TemplateFile <path-to-bicep> `
+  -TemplateParameterFile <path-to-params>
 ```
 
 ## Best Practice - tips and tricks
