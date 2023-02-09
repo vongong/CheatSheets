@@ -98,19 +98,20 @@ Look at files that were identified. They will have sections with markers like `<
 
 
 ## Alias
+**Command:**
+git config --global alias.ft fetch
+git config --global alias.cm "commit -m"
+git config --global alias.aa "add -A"
+git config --global alias.sw switch
+
 **get config:** git config --list --show-origin
 
 **Add to File:** ~/.gitconfig
 ```ini
 [alias]
-st = status
-cm = commit -m
+  aa = !git add -A && git status
+	st = status
+	cm = commit -m
 ```
 
-**Command:**
-git config --global alias.st status
-git config --global alias.ft fetch
-git config --global alias.cm "commit -m"
-git config --global alias.aa "add -A"
-git config --global alias.sw switch
 
