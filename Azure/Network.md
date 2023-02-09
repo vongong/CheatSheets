@@ -65,3 +65,9 @@ Part of Virtual Network.
     - or virtual network manager
   
 ## onprem connectivity
+- point to site
+- Site to site
+- Express Route aka private peering
+  - connect to azure via ms backbone. 
+  - connect on 'meet me' point
+  - private connect. not encrypted
