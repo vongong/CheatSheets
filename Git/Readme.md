@@ -40,7 +40,6 @@ this folder stores the repo.
 - git checkout split into switch and restore 
   - `git switch branch-name` = switch to branch
   - `git restore filename` = restore filename
-- `git diff` = see changes
 - `git fetch` = get meta data changes from origin
 - `git pull` = get changes from origin
 - `git push` =  upload changes from working directory to origin
@@ -48,9 +47,11 @@ this folder stores the repo.
 
 ## Branch
 - `git branch` = get branch names
+- `git branch -a` = all
 - `git branch new-branch-name` = create branch names
 - `git switch -c new-branch-name` = create new branch names and switch to it
 - `git branch -d branch-name` = delete branch names
+- `git branch -v` = verbose
 
 ## restore
 - `git restore --staged index.html` = unstage index.html
@@ -72,8 +73,11 @@ this folder stores the repo.
 - `git stash drop 0`  = Remove from stash
 - `git stash clear`   = Remove all stashes
 
-## Merge
+## Diff
+- `git diff branch1...branch2` = see diff between branches
+- `git diff main new_branch ./diff_test.txt` = see diff in file between 2 branches
 
+## Merge
 **Merge Hotfix into main branch**
 ```sh
 git checkout main
