@@ -15,12 +15,18 @@ Update-Module -Name Az
 
 ## Uninstall
 
-Get Module
+Get All Az Modules
 ```powershell
 Get-InstalledModule -Name Az -AllVersions -OutVariable AzVersions
 ```
 
-Find & Remove Dependencies
+Get All Previous Az Modules??
+```powershell
+$latestVer = (Get-InstalledModule -Name Az).Version
+$AzVersions = Get-InstalledModule -Name Az -AllVersions | Where-Object {$_.Version -ne $latestVer}
+```
+
+Find Dependencies
 ```powershell
 ($AzVersions |
   ForEach-Object {
