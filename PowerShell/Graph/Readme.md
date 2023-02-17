@@ -33,7 +33,8 @@ Uninstall-Module Microsoft.Graph.Authentication
 Note: % => For-Each
 
 ## Change API version
-By default it uses v1.o. Can change with command: `Select-MgProfile -Name "beta"`
+By default it uses `v1.0`. Can change to beta with command: `Select-MgProfile -Name "beta"`
+See Profile: `Get-MgProfile`
 
 ## Sign-in
 `Connect-MgGraph` command to sign in and needs scope.
@@ -41,3 +42,10 @@ By default it uses v1.o. Can change with command: `Select-MgProfile -Name "beta"
 Connect-MgGraph -Scopes "User.Read.All","Group.ReadWrite.All"
 ```
 
+## Find 
+Find Module by command: `Find-Module -command "Get-MGUserMessage"`
+Find Module by url: `Find-MgGraphCommand -Uri "/security/alerts"`
+Find permission: `Find-MgGraphCommand -Command "Get-MGDirectorySetting" | select Permission`
+
+## Call rest endpoint
+Invoke-MgGraphRequest -Method GET -Uri $uri -OutputPathFile $path
