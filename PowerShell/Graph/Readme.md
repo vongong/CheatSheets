@@ -8,7 +8,10 @@
 - There are many Graph Module (40+), recommend installing only ones needed.
 - Support 5.1 and 7
 - **Authentication** Module is Requied; its used to connect. `Microsoft.Graph.Authentication`
-- Find modules: `Find-Module Microsoft.Graph*`
+- modules to install:
+  - Microsoft.Graph.Authentication
+  - Microsoft.Graph.Users
+  - Microsoft.Graph.Groups
 
 ## Install
 **Install**
