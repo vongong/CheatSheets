@@ -1,7 +1,10 @@
 
+
+## Helpful doc
+[link 1](https://github.com/lebinh/nginx-conf)
+
 ## install 
 - Consider docker instead of local install
-- [nginx mastery repo](https://github.com/veryacademy/yt-nginx-mastery-series)
 - vscode docker extension
 
 ## nginx basic
@@ -32,3 +35,26 @@ Nginx will spawn master process. Master process will spawn worker processes. pro
   - process request or serve connections
   - max number of connections 512
   - generally start number of workers process to cpu cores
+
+## Server Static Content
+`conf.d/default.conf` - each server for different site
+- listen - what port to listen
+  - `listen [::]:80;` - for IPv6
+- server_name - name of server. can have different server. May need to setup dns locally.
+- location - info on static content
+  - root - folder for content
+  - index - files to server
+- error - error pages
+```nginx
+server {
+    listen 80;
+    server_name main.com ns.main.com *.main.com;
+
+    location / {
+        root /usr/share/nginx/html/main;
+        index index.html;
+    }
+}
+```
+
+## Reverse Proxy
