@@ -4,6 +4,13 @@ Built on top of ARM. Designed for Type safety, modular, code reuse, readability.
 
 Bicep registry - Azure Container Registry Instance - call templates
 
+## install error
+Error with Azure CLI 2.46.0 and Bicep if no bicep configuration exists
+```sh
+az config set bicep.use_binary_from_path=False
+az bicep install
+```
+
 ## Link
 [github](https://github.com/Azure/bicep)
 [ms-doc](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
