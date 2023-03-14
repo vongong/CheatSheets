@@ -14,16 +14,19 @@ Get-AzContainerRegistryRepository -RegistryName YOUR_CONTAINER_REGISTRY_NAME
 ```
 
 **Publish**
-```sh
-az bicep publish \
-   --file module.bicep \
-   --target 'br:toycompany.azurecr.io/mymodules/modulename:moduleversion'
+```powershell
+az bicep publish `
+   --file module.bicep `
+   --target 'br:exampleregistry.azurecr.io/bicep/modules/storage:v1'
+
+Publish-AzBicepModule -FilePath './module.bicep' -Target 'br:exampleregistry.azurecr.io/bicep/modules/storage:v1  '
 ```
+
 Target contains four segments:
 - *Scheme:* Bicep supports several module types, which are called schemes. When you work with Bicep registries, the scheme is `br`.
-- *Registry:* This is the name of the registry that contains the module you want to use. In the preceding example, the registry name is `toycompany.azurecr.io`, which is the name of the container registry.
-- *Module identifier:* This is the full path to the module within the registry. `mymodules/modulename`
-- *Tag:* Tags typically represent versions of modules, because a single module can have multiple versions published. You'll learn more about tags and versions shortly. `moduleversion`
+- *Registry:* This is the name of the registry that contains the module you want to use. In the preceding example, the registry name is `exampleregistry.azurecr.io`, which is the name of the container registry.
+- *Module identifier:* This is the full path to the module within the registry. `modules/storage`
+- *Tag:* Tags typically represent versions of modules, because a single module can have multiple versions published. You'll learn more about tags and versions shortly. `v1`
 
 Versioning schemes
 Your versioning scheme determines how you generate version numbers. Common versioning schemes include:
