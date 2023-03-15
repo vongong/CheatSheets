@@ -13,6 +13,14 @@ New-AzContainerRegistry `
 Get-AzContainerRegistryRepository -RegistryName YOUR_CONTAINER_REGISTRY_NAME
 ```
 
+**login??**
+Needed for Docker. Not needed for bicep?
+```powershell
+az acr login --name <registry-name>
+
+Connect-AzContainerRegistry -Name $registry.Name
+```
+
 **Publish**
 ```powershell
 az bicep publish `
