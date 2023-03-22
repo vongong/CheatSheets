@@ -1,11 +1,14 @@
 param (
 	[string] $Method
+	,[int] $Sub = -1
+    ,[switch] $silent
 )
 
-if ($Method -notin 'AzCli','Pwsh' ) {
+if ($Method -notin 'AzCli','Pwsh','Both' ) {
     $options = @()
     $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Az', 'Azure Cli'
     $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Pwsh', 'PowerShell (default)'
+    $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Both', 'Both'
 
     $title = 'Azure Method'
     $message = 'Login Protocol?'
@@ -18,6 +21,9 @@ if ($Method -notin 'AzCli','Pwsh' ) {
         1 {
             $Method = 'Pwsh'             
         }    
+        2 {
+            $Method = 'Both'             
+        }    
         default {
             $Method = 'Pwsh'             
         }
@@ -25,25 +31,33 @@ if ($Method -notin 'AzCli','Pwsh' ) {
 
 }
 
-$options = @()
-$options += New-Object System.Management.Automation.Host.ChoiceDescription '&Dev', 'BPB Dev-Test (Default)'
-$options += New-Object System.Management.Automation.Host.ChoiceDescription '&Prod', 'BPB Production'
+if ($Sub -notin 0,1 ) {
+    $options = @()
+    $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Dev', 'BPB Dev-Test (Default)'
+    $options += New-Object System.Management.Automation.Host.ChoiceDescription '&Prod', 'BPB Production'
+    
+    $title = 'Azure Subscription'
+    $message = 'Subscription?'
+    $Sub = $host.ui.PromptForChoice($title, $message, $options, 0)
+    
+} 
 
-$title = 'Azure Subscription'
-$message = 'Subscription?'
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
-
-$SubscriptionID = ''
-switch ($result) {
-    0 { $SubscriptionID = "1efa4976-74c8-48ff-be80-65eaf8643661" }
-    1 { $SubscriptionID = "b011b7ee-749e-447f-bbf7-79191dfc1b6c"  }    
-    default { $SubscriptionID = "1efa4976-74c8-48ff-be80-65eaf8643661" }
+switch ($sub) {
+    0 { $SubscriptionID = "DevTest-SubscriptionID" }
+    1 { $SubscriptionID = "Prod-SubscriptionID"  }    
+    default { $SubscriptionID = "DevTest-SubscriptionID" }
 }
+    
 
-
-if ($Method -eq 'AzCli') {
+if ($Method -in ('AzCli','Both')) {
     az account set --subscription $SubscriptionID
-    az account show
-} else{
-    Set-AzContext -SubscriptionID $SubscriptionID
+    if (-not $silent) {
+        az account show        
+    }
+} 
+if ($Method -in ('Pwsh','Both')){
+    $msg = Set-AzContext -SubscriptionID $SubscriptionID
+    if (-not $silent) {
+        $msg
+    }
 }

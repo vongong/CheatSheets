@@ -6,6 +6,7 @@ Winget - winget install -e --id Microsoft.AzureCLI
 ## Authicate
 az login
 az login --use-device-code
+az login --service-principal -u $saUsername -p $saPassword --tenant $tenant
 
 ## Common
 *note*: az cli account = pwsh context
