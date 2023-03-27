@@ -28,4 +28,5 @@ switch ($result) {
     2 { $resultVal = 'Yellow' }
     default { $resultVal = '' }
 }
-Write-Host "You choose: "$resultVal
+Write-Host "You choose: $resultVal"
+# Write-Host "You choose: $($options[$result].Label)"
