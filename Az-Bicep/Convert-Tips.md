@@ -13,6 +13,7 @@ param asp_name string = 'example_name'
 output out_interpolation string = 'AutoScale ${asp_name}'
 output out_concat string = concat('AutoScale ',asp_name) 
 output out_format string = format('{0} {1}','AutoScale',asp_name) 
+output out_format string = format('AutoScale {0}',asp_name) 
 ```
 
 ## Use resourceId instead of concat
