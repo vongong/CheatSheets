@@ -52,3 +52,11 @@ Get-AzContext -List
 
 Set-AzContext -Subscription "xxxx-xxxx-xxxx-xxxx"
 ```
+
+## Get ftp data from webapp
+```powershell
+Get-AzWebAppPublishingProfile -Name <app_name> -ResourceGroupName <rg_name>
+
+$xml = [xml](Get-AzWebAppPublishingProfile -Name <app_name> -ResourceGroupName <rg_name> -OutputFile null)
+$xml.SelectNodes("//publishProfile[@publishMethod=`"FTP`"]/@publishUrl").value
+```
