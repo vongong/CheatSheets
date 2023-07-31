@@ -24,6 +24,7 @@ az rest --method get --url <site>
  
 ## Config
 az config set core.output=yamlc
+az config set core.output=jsonc
 az config set core.output=table
 az config set core.collect_telemetry=false
 
