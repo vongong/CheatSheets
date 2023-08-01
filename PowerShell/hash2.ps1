@@ -17,3 +17,17 @@ Write-Host "loop:"
 ForEach ($key in $foods.Keys) {
 Write-Host "$key = $($foods[$key])"
 }
+
+###
+
+$foods = @{}
+$foods.Add('Corn', 'Yellow')
+$foods.ContainsKey('Corn')
+$foods.ContainsKey('Beef')
+
+$foods.Add('Corn', 'Purple') # Error
+$foods.Set_Item('Corn', 'Purple') 
+$foods.'Corn'
+
+$foods.Set_Item('Beef', 'Brown') 
+$foods.'Brown'
