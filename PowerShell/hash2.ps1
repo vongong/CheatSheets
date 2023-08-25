@@ -31,3 +31,4 @@ $foods.'Corn'
 
 $foods.Set_Item('Beef', 'Brown') 
 $foods.'Brown'
+$foods['Brown']
