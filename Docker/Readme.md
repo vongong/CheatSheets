@@ -58,6 +58,8 @@ docker logs [container-Id] | tail
 ```
 docker exec -it /bin/bash [container-Id] 
 docker exec -it /bin/sh [container-Id] 
+docker exec -it powershell.exe [container-Id] 
+docker exec -it cmd.exe [container-Id] 
 ```
 
 ## docker network
