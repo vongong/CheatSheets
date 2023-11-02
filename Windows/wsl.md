@@ -7,6 +7,44 @@ You can list your installed Linux distributions and check the version of WSL eac
 
 To set the default version to WSL 1 or WSL 2 when a new Linux distribution is installed, use the command: `wsl --set-default-version <Version#>`
 
-
 ## Access file system
 WSL mounts your machine's fixed drives under the /mnt/<drive> folder in your Linux distros. For example, your C: drive is mounted under /mnt/c/
+
+## override sudo
+- open visudo
+```sh
+sudo visudo
+```
+- scroll to bottom and add: `linuxadmin ALL=(ALL) NOPASSWD: ALL`
+- save and exit
+
+## enable systemd
+```sh
+sudo nano /etc/wsl.conf
+```
+
+```ini
+[boot]
+systemd=true
+```
+
+```powershell
+wsl.exe --shutdown ubuntu
+```
+
+## wsl bash alias
+```sh
+cd ~
+touch .bash_aliases
+nano .bash_aliases
+```
+add to file:
+```sh
+alias gongdir="cd /mnt/c/Gong"
+```
+
+## fix dns
+```sh
+sudo nano /etc/resolv.conf
+```
+update nameserver to 8.8.8.8

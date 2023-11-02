@@ -6,7 +6,7 @@
 **docker cmds**
 ```sh
 docker pull nginx
-docker run -it -rm -d -p 8000:80 --name website nginx
+docker run -it -rm -d -p 8000:80 --name mynginx nginx
 ```
 
 **docker compose for volumes**
