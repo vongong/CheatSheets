@@ -44,6 +44,12 @@ alias gongdir="cd /mnt/c/Gong"
 ```
 
 ## fix dns
+Update /etc/wsl.conf
+```ini
+[network]
+generateResolvConf = false
+```
+
 ```sh
 sudo nano /etc/resolv.conf
 ```
