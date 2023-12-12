@@ -1,0 +1,87 @@
+trigger: none
+
+parameters:
+  - name: DevNorth
+    displayName: 'Dev North'
+    type: boolean
+    default: true
+  - name: DevSouth
+    displayName: 'Dev South'
+    type: boolean
+    default: true
+  - name: TestNorth
+    displayName: 'Test North'
+    type: boolean
+    default: true
+  - name: TestSouth
+    displayName: 'Test South'
+    type: boolean
+    default: true
+  - name: StageNorth
+    displayName: 'Stage North'
+    type: boolean
+    default: true
+  - name: Stage South
+    displayName: 'Stage South'
+    type: boolean
+    default: true
+  - name: ProdNorth
+    displayName: 'Prod North'
+    type: boolean
+    default: true
+  - name: Prod South
+    displayName: 'Prod South'
+    type: boolean
+    default: true
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+- name: defValue
+  value: default-value
+
+stages:
+  - ${{ each parameter in parameters }}:
+    - ${{ if eq(parameter.Value, 'true') }}:
+      - stage: ${{ parameter.Key }}
+        displayName: ${{ parameter.Key }} Stage
+        variables:
+        - ${{ if contains(parameter.Key, 'Dev') }}:
+            - group: DEV TEST Subscription Info
+            - name: subscription
+              value: Azure_BPB_DevTest_ResourceManager            
+            - name: envName
+              value: dev
+        - ${{ if contains(parameter.Key, 'Test') }}:
+            - group: DEV TEST Subscription Info
+            - name: subscription
+              value: Azure_BPB_DevTest_ResourceManager            
+            - name: envName
+              value: test
+        - ${{ if contains(parameter.Key, 'Stage') }}:
+            - group: PROD Subscription Info
+            - name: subscription
+              value: Azure_BPB_Production_ResourceManager            
+            - name: envName
+              value: stage
+        - ${{ if contains(parameter.Key, 'Prod') }}:
+            - group: PROD Subscription Info
+            - name: subscription
+              value: Azure_BPB_Production_ResourceManager            
+            - name: envName
+              value: prod
+        - ${{ if contains(parameter.Key, 'North') }}:
+            - name: locName
+              value: north
+        - ${{ if contains(parameter.Key, 'South') }}:
+            - name: locName
+              value: south
+        - name: location
+          value: $(locName)CentralUS
+        jobs:
+          - job: ${{ parameter.Key }}_j01
+            steps:
+              - script: |
+                  echo $(envName)
+                  echo $(location)

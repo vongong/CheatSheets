@@ -1,0 +1,106 @@
+parameters:
+  # environment
+  - name: envSep
+    displayName: ----- Environments -----
+    type: boolean
+    default: false
+  - name: envDev
+    displayName: Environment Dev
+    type: boolean
+    default: true
+  - name: envTest
+    displayName: Environment Test
+    type: boolean
+    default: true
+  - name: envProd
+    displayName: Environment Test
+    type: boolean
+    default: true
+  # location
+  - name: locSep
+    displayName: ----- Locations -----
+    type: boolean
+    default: false
+  - name: locNorth
+    displayName: Location North
+    type: boolean
+    default: true
+  - name: locSouth
+    displayName: Location South
+    type: boolean
+    default: true
+  # deploy
+  - name: depSep
+    displayName: ----- ASP -----
+    type: boolean
+    default: false
+  - name: deploygen01
+    displayName: Deploy Asp Gen 01
+    type: boolean
+    default: false
+  - name: deploygen02
+    displayName: Deploy Asp Gen 02
+    type: boolean
+    default: false
+  - name: deploygen03
+    displayName: Deploy Asp Gen 03
+    type: boolean
+    default: false
+
+variables:
+  - name: Environments
+    value: 'Dev,Test,Prod'
+  - name: Locations
+    value: 'North,South'
+  - name: Instances
+    value: 'GEN01,GEN02,GEN03'
+
+stages:
+  - stage: Init
+    jobs:
+      - job: InitVars
+        steps:
+          - powershell: |
+              $keyStr = '${{ variables.Environments }}'
+              $valStr = '${{ parameters.envDev }},${{ parameters.envTest }},${{ parameters.envTest }}'
+              .\scripts\SetOutVar.ps1 -keyStr $keyStr -valStr $valStr -SetVar 'EnvSelected'
+
+              $keyStr = '${{ variables.Locations }}'
+              $valStr = '${{ parameters.locNorth }},${{ parameters.locSouth }}'
+              .\scripts\SetOutVar.ps1 -keyStr $keyStr -valStr $valStr -SetVar 'LocSelected'
+
+              $keyStr = '${{ variables.Instances }}'
+              $valStr = '${{ parameters.deploygen01 }},${{ parameters.deploygen02 }},${{ parameters.deploygen03 }}'
+              .\scripts\SetOutVar.ps1 -keyStr $keyStr -valStr $valStr -SetVar 'InstSelected'
+            name: SetOutVars
+  - ${{ each env in split(variables.Environments, ',') }}:
+    - ${{ each loc in split(variables.Locations, ',') }}:
+      - stage: ${{ env }}${{ loc }}
+        displayName: ${{ env }} ${{ loc }} Stage
+        variables:
+          - ${{ if contains(env, 'Dev') }}:
+              - group: DEV TEST Subscription Info
+              - name: subscription
+                value: Azure_BPB_DevTest_ResourceManager
+          - ${{ if contains(env, 'Test') }}:
+              - group: DEV TEST Subscription Info
+              - name: subscription
+                value: Azure_BPB_DevTest_ResourceManager
+          - ${{ if contains(env, 'Prod') }}:
+              - group: PROD Subscription Info
+              - name: subscription
+                value: Azure_BPB_Production_ResourceManager
+        dependsOn: Init
+        condition: |
+          and( eq(dependencies.Init.result, 'Succeeded'),           
+          contains(dependencies.Init.outputs['InitVars.SetOutVars.envSelected'],'${{ env }}'), 
+          contains(dependencies.Init.outputs['InitVars.SetOutVars.LocSelected'],'${{ loc }}') )
+        jobs:
+          - ${{ each inst in split(variables.Instances, ',') }}:
+            - job: ${{ inst }}
+              condition: contains(stageDependencies.Init.InitVars.outputs['SetOutVars.InstSelected'],'${{ inst }}')
+              # variables:
+              #   - template: vars\t0_${{ env }}-${{ loc }}-${{ inst }}.yml
+              steps:
+                - script: |
+                    echo subscription: $(subscription)

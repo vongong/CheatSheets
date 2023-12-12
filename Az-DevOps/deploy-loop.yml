@@ -1,0 +1,146 @@
+trigger: none
+
+# parameters:
+# - name: Environments
+#   displayName: Environments
+#   type: object
+#   default:
+#   - Dev
+#   - Test
+# - name: Locations
+#   displayName: Locations
+#   type: string
+#   default: North,South
+#   values:
+#   - North
+#   - South
+#   - North,South
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+- name: Environments
+  value: 'Dev'
+- name: Locations
+  value: 'North,South'
+- name: defValue
+  value: default-value
+
+# Working
+# steps:
+# - ${{ each value in parameters.Environments }}:
+#   - script: echo ${{ value }}
+
+# steps:
+# - ${{ each var in split(variables.Environments, ',') }}:
+#   - script: |
+#       echo ${{ var }}
+
+stages:
+- ${{ each env in split(variables.Environments, ',') }}:
+  - ${{ each loc in split(variables.Locations, ',') }}:
+    - stage: ${{ env }}_${{ loc }}
+      dependsOn: []
+      # condition: eq('${{ env }}','${{ parameters.Environment }}')
+      variables:
+        # - template: vars\vars-${{ env }}-${{ loc }}.yaml
+        - ${{ if contains(env, 'Dev') }}:
+            - group: DEV TEST Subscription Info
+            - name: subscription
+              value: 'Azure_BPB_DevTest_ResourceManager'
+            - name: envName
+              value: 'dev'
+        - ${{ if and(contains(env, 'Dev'),contains(loc, 'North')) }}:
+            - name: fruit
+              value: Apple1
+        - ${{ if and(contains(env, 'Dev'),contains(loc, 'South')) }}:
+            - name: fruit
+              value: Apple2
+            - name: defValue
+              value: override-value
+        - ${{ if contains(env, 'Test') }}:
+            - group: DEV TEST Subscription Info
+            - name: subscription
+              value: 'Azure_BPB_DevTest_ResourceManager'
+            - name: fruit
+              value: Orange
+            - name: envName
+              value: 'test'
+        - ${{ if contains(loc, 'North') }}:
+            - name: locName
+              value: north
+        - ${{ if contains(loc, 'South') }}:
+            - name: locName
+              value: south
+        - name: gVar00
+          value: Airplane
+        - name: gVar00a
+          value: $[lower(variables['gVar00'])]
+          # not working
+        - name: gVar01
+          value: $(fruit) Fly
+        - name: gVar02
+          value: 'diskimages-$(env)-$(loc)-rg'
+          # not working
+        - name: gVar03
+          value: diskimages-$(env)-$(loc)-rg
+          # not working
+        - name: gVar04
+          value: diskimages-${{env}}-${{loc}}-rg
+        - name: gVar10
+          value: diskimages-$(envName)-$(locName)-rg
+        - name: gVar11
+          value: 'diskimages-$(envName)-$(locName)-rg'
+        - name: gVar20
+          value: .\var\pipeline-$(envName)-$(locName).yaml
+        - name: rg
+          value: InfraPOC-Dev-rg
+        - name: rgLocation
+          value: NorthCentralUS
+      jobs:
+        - deployment: ${{ env }}${{ loc }}Deploy
+          environment: ${{ env }}
+        - job: p0_${{ env }}_${{ loc }}
+          dependsOn:
+            - ${{ env }}${{ loc }}Deploy
+          steps:
+            - script: |
+                echo ${{ env }}
+                echo ${{ loc }}
+                echo $(fruit)
+                echo defValue: $(defValue)
+                echo gVar00: ${{ variables.gVar00 }}
+                echo gVar00a: ${{ variables.gVar00a }}
+                echo gVar01: ${{ variables.gVar01 }}
+                echo gVar02: ${{ variables.gVar02 }}
+                echo gVar03: ${{ variables.gVar03 }}
+                echo gVar04: ${{ variables.gVar04 }}
+                echo gVar10: ${{ variables.gVar10 }}
+                echo gVar11: ${{ variables.gVar11 }}
+                echo gVar20: ${{ variables.gVar20 }}
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: template variables
+              condition: false
+              inputs:
+                action: 'Create Or Update Resource Group'
+                deploymentScope: 'Resource Group'
+                deploymentMode: 'Incremental'
+                azureResourceManagerConnection: ${{ variables.subscription }}
+                subscriptionId: ${{ variables.subscriptionId }}
+                resourceGroupName: $(rg)
+                location: $(rgLocation)
+                templateLocation: 'Linked artifact'
+                csmFile: 'templates\test02b.json'
+                overrideParameters: >
+                  -var2 ${{ variables.fruit }}
+        - job: p1_${{ env }}_${{ loc }}
+          dependsOn: 
+            - p0_${{ env }}_${{ loc }}
+          steps:
+            - script: |
+                echo ${{ env }}
+                echo ${{ loc }}
+                echo $(fruit)
+                echo ${{ variables.gVar00 }}
+                echo ${{ variables.gVar01 }}
