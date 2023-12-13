@@ -1,0 +1,128 @@
+trigger: none
+
+parameters:
+- name: envDev
+  displayName: Environment Dev
+  type: boolean
+  default: true
+- name: envTest
+  displayName: Environment Test
+  type: boolean
+  default: false
+- name: envProd
+  displayName: Environment Prod
+  type: boolean
+  default: false
+- name: locNorth
+  displayName: Location North
+  type: boolean
+  default: false
+- name: locSouth
+  displayName: Location South
+  type: boolean
+  default: true
+- name: deploygen01
+  displayName: Deploy Gen 01
+  type: boolean
+  default: true
+- name: deploygen02
+  displayName: Deploy Gen 02
+  type: boolean
+  default: false
+- name: deploygen03
+  displayName: Deploy Gen 03
+  type: boolean
+  default: false
+- name: deploygen04
+  displayName: Deploy Gen 04
+  type: boolean
+  default: false
+
+pool:
+  vmImage: windows-2019
+
+variables:
+- name: Environments
+  value: 'Dev,Test,Prod'
+- name: Locations
+  value: 'North,South'
+- name: Instances
+  value: 'GEN01,GEN02,GEN03,GEN04'
+
+stages:
+  - stage: Init
+    variables:
+    - name: EnvSelected
+      value: ''
+    - name: LocSelected
+      value: ''
+    # - name: InstSelected
+    #   value: ''
+    jobs:
+      - job: InitVars
+        steps:
+          - powershell: |
+               $msgHash = @{
+                  'Dev'  = $${{ parameters.envDev }}
+                  'Test' = $${{ parameters.envTest }}
+                  'Prod' = $${{ parameters.envProd }}
+                }
+                $MsgArr = @()
+                ForEach ($key in $msgHash.Keys) {
+                  if ($msgHash[$key]) { $MsgArr += $key }
+                }
+                $myValue = $MsgArr -join ","
+                Write-Host "Setting value to $myValue"
+                Write-Host "##vso[task.setvariable variable=EnvSelected;isOutput=true]$myValue"
+            name: InitEnv
+          - powershell: |
+               $msgHash = @{
+                  'North'  = $${{ parameters.locNorth }}
+                  'South' = $${{ parameters.locSouth }}
+                }
+                $MsgArr = @()
+                ForEach ($key in $msgHash.Keys) {
+                  if ($msgHash[$key]) { $MsgArr += $key }
+                }
+                $myValue = $MsgArr -join ","
+                Write-Host "Setting value to $myValue"
+                Write-Host "##vso[task.setvariable variable=LocSelected;isOutput=true]$myValue"
+            name: InitLoc
+          - powershell: |
+               $msgHash = @{
+                  'GEN01' = $${{ parameters.deploygen01 }}
+                  'GEN02' = $${{ parameters.deploygen02 }}
+                  'GEN03' = $${{ parameters.deploygen03 }}
+                  'GEN04' = $${{ parameters.deploygen04 }}
+                }
+                $MsgArr = @()
+                ForEach ($key in $msgHash.Keys) {
+                  if ($msgHash[$key]) { $MsgArr += $key }
+                }
+                $myValue = $MsgArr -join ","
+                Write-Host "Setting value to $myValue"
+                Write-Host "##vso[task.setvariable variable=InstSelected;isOutput=true]$myValue"
+            name: InitInst
+  - ${{ each env in split(variables.Environments, ',') }}:
+    - ${{ each loc in split(variables.Locations, ',') }}:
+      - stage: ${{ env }}${{ loc }}
+        displayName: ${{ env }} ${{ loc }}
+        dependsOn: Init
+        # condition: contains('Dev,Test','${{ env }}')                # Working
+        # condition: contains('$(EnvSelected)','${{ env }}')          # Not Working - none ran
+        # condition: contains(variables['EnvSelected'],'${{ env }}')    # Not Working - only dev ran
+        # condition: contains('$[EnvSelected]','${{ env }}')            # Not Working - none ran
+        # condition: contains(variables.EnvSelected,'${{ env }}')         # Not Working - only dev ran
+        # condition: contains(dependencies.Init.outputs['InitEnv.EnvSelected'],'${{ env }}')  # Not Working - none ran
+        condition: and(eq(dependencies.Init.result, 'Succeeded'), contains(dependencies.Init.outputs['InitVars.InitEnv.EnvSelected'],'${{ env }}'), contains(dependencies.Init.outputs['InitVars.InitLoc.LocSelected'],'${{ loc }}'))
+        jobs:
+        - ${{ each inst in split(variables.Instances, ',') }}:
+          - job: ${{ inst }}
+            # condition: contains(dependencies.Init.outputs['InitVars.InitInst.InstSelected'],'${{ inst }}')      # Not Working - none ran
+            # condition: or( and(eq('${{ inst }}', 'ASP01'), eq('${{ parameters.deployasp01 }}', true)),and(eq('${{ inst }}', 'ASP02'), eq('${{ parameters.deployasp02 }}', true)),and(eq('${{ inst }}', 'ASP03'), eq('${{ parameters.deployasp03 }}', true)),and(eq('${{ inst }}', 'ASP04'), eq('${{ parameters.deployasp04 }}', true)) )  # Working
+            condition: contains(stageDependencies.Init.InitVars.outputs['InitInst.InstSelected'],'${{ inst }}')
+            steps:
+              - script: |
+                  echo ${{ env }}
+                  echo ${{ loc }}
+                  echo ${{ inst }}
