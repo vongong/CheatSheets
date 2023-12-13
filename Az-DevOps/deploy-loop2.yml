@@ -52,25 +52,25 @@ stages:
             - name: subscription
               value: Azure_BPB_DevTest_ResourceManager            
             - name: envName
-              value: dev
+              value: 'dev'
         - ${{ if contains(parameter.Key, 'Test') }}:
             - group: DEV TEST Subscription Info
             - name: subscription
               value: Azure_BPB_DevTest_ResourceManager            
             - name: envName
-              value: test
+              value: 'test'
         - ${{ if contains(parameter.Key, 'Stage') }}:
             - group: PROD Subscription Info
             - name: subscription
               value: Azure_BPB_Production_ResourceManager            
             - name: envName
-              value: stage
+              value: 'stage'
         - ${{ if contains(parameter.Key, 'Prod') }}:
             - group: PROD Subscription Info
             - name: subscription
               value: Azure_BPB_Production_ResourceManager            
             - name: envName
-              value: prod
+              value: 'prod'
         - ${{ if contains(parameter.Key, 'North') }}:
             - name: locName
               value: north
@@ -80,6 +80,8 @@ stages:
         - name: location
           value: $(locName)CentralUS
         jobs:
+          - deployment: ${{ parameter.Key }}Deploy
+            environment: ${{ variables.envName }}
           - job: ${{ parameter.Key }}_j01
             steps:
               - script: |

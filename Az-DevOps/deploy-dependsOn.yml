@@ -1,0 +1,94 @@
+trigger: none
+
+parameters:
+- name: BuildDevNorth
+  displayName: 'Build Dev North'
+  type: boolean
+  default: true
+- name: BuildDevSouth
+  displayName: 'Build Dev South'
+  type: boolean
+  default: true
+- name: DeployDevNorth
+  displayName: 'Deploy Dev North'
+  type: boolean
+  default: true
+- name: DeployDevSouth
+  displayName: 'Deploy Dev South'
+  type: boolean
+  default: true
+- name: BuildTestNorth
+  displayName: 'Build Test North'
+  type: boolean
+  default: true
+- name: BuildTestSouth
+  displayName: 'Build Test South'
+  type: boolean
+  default: true
+- name: DeployTestNorth
+  displayName: 'Deploy Test North'
+  type: boolean
+  default: true
+- name: DeployTestSouth
+  displayName: 'Deploy Test South'
+  type: boolean
+  default: true
+
+pool:
+  vmImage: 'windows-2019'
+
+stages:
+- ${{ each parameter in parameters }}:
+  - ${{ if contains(parameter.Key, 'Build') }}:
+    - stage: ${{ parameter.Key }}
+      displayName: ${{ parameter.Key }}
+      condition: ${{ parameter.Value }}
+      dependsOn: []
+      variables:
+        - ${{ if contains(parameter.Key, 'Dev') }}:
+            - name: envName
+              value: dev
+        - ${{ if contains(parameter.Key, 'Test') }}:
+            - name: envName
+              value: test
+      jobs:
+        - deployment: ${{ parameter.Key }}Deploy
+          environment: ${{ variables.envName }}
+        - job: ${{ parameter.Key }}_b01
+          dependsOn: ${{ parameter.Key }}Deploy
+          steps:
+            - script: |
+                echo build
+                echo envName: $(envName)
+- ${{ each parameter in parameters }}:
+  - ${{ if contains(parameter.Key, 'Deploy') }}:
+    - stage: ${{ parameter.Key }}
+      displayName: ${{ parameter.Key }}
+      condition: ${{ parameter.Value }}
+      dependsOn:
+      - ${{ if contains(parameter.Key, 'DevSouth') }}:
+        - BuildDevSouth
+      - ${{ if contains(parameter.Key, 'TestSouth') }}:
+        - BuildTestSouth
+      - ${{ if contains(parameter.Key, 'DevNorth') }}:
+        - BuildDevNorth
+        - DeployDevSouth
+      - ${{ if contains(parameter.Key, 'TestNorth') }}:
+        - BuildTestNorth
+        - DeployTestSouth
+      variables:
+        - ${{ if contains(parameter.Key, 'Dev') }}:
+            - name: envName
+              value: dev
+        - ${{ if contains(parameter.Key, 'Test') }}:
+            - name: envName
+              value: test
+      jobs:
+        - deployment: ${{ parameter.Key }}Deploy2
+          environment: ${{ variables.envName }}
+        - job: ${{ parameter.Key }}_d01
+          dependsOn: ${{ parameter.Key }}Deploy2
+          steps:
+            - script: |
+                echo deploy
+                echo envName: $(envName)

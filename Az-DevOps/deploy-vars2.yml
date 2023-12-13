@@ -1,0 +1,81 @@
+trigger: none
+
+variables:
+  - name: Environments
+    value: Dev
+  - name: var00
+    value: ThisIsATest
+  - name: defValue
+    value: default-value
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - ${{ each env in split(variables.Environments, ',') }}:
+    - stage: ${{ env }}_stage
+      dependsOn: []
+      variables:
+        # - name: var
+        #   value: ${{ lower(variables.env) }}
+        #   # not working
+        # - name: var
+        #   value: $[ lower(variables.env) ]
+        #   # not working
+        # - name: var
+        #   value: ${{ lower('${{ env }}') }}
+        #   # not working. err
+        - name: var01
+          value: ${{ env }}
+        - name: var02
+          value: ${{ lower(variables.var01) }}
+      jobs:
+        - job: Job1
+          steps:
+            - script: |
+                echo env1: ${{ env }}
+                echo env2: $(env)
+                echo var01: $(var01)
+                echo var02: $(var02)
+  - stage: stageA
+    dependsOn: []
+    variables:
+      - name: fruit
+        value: Apple
+      - name: var00a
+        value: $[ lower(variables.var00) ]
+      - name: var00b
+        value: ${{ lower(variables.var00) }}
+    jobs:
+      - job: Job1
+        steps:
+          - script: |
+              echo fruit: $(fruit)
+              echo defValue: $(defValue)
+              echo var00: $(var00)
+              echo var00a: $(var00a)
+              echo var00b: $(var00b)
+  - stage: stageB
+    dependsOn: []
+    variables:
+      - name: fruit
+        value: Orange
+      - name: defValue
+        value: override-value
+    jobs:
+      - job: Job1
+        steps:
+          - script: |
+              echo fruit: $(fruit)
+              echo defValue: $(defValue)
+  - stage: stageC
+    dependsOn: []
+    variables:
+      - template: vars\t-base.yaml
+      - template: vars\t-extend.yaml
+    jobs:
+      - job: Job1
+        steps:
+          - script: |
+              echo carName: $(carName)
+              echo myCar: $(myCar)

@@ -21,7 +21,7 @@ pool:
 
 variables:
 - name: Environments
-  value: 'Dev'
+  value: 'Dev,Test'
 - name: Locations
   value: 'North,South'
 - name: defValue

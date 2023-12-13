@@ -55,6 +55,9 @@ variables:
   - name: Instances
     value: 'GEN01,GEN02,GEN03'
 
+pool:
+  vmImage: 'windows-2019'
+  
 stages:
   - stage: Init
     jobs:
