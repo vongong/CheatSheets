@@ -56,10 +56,10 @@ docker logs [container-Id] | tail
 ## run command aka shell
 - -it = interactive terminal
 ```
-docker exec -it /bin/bash [container-Id] 
-docker exec -it /bin/sh [container-Id] 
-docker exec -it powershell.exe [container-Id] 
-docker exec -it cmd.exe [container-Id] 
+docker exec -it [container-Id] /bin/bash
+docker exec -it [container-Id] /bin/sh
+docker exec -it [container-Id] powershell.exe
+docker exec -it [container-Id] cmd.exe
 ```
 
 ## docker network
