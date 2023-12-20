@@ -118,4 +118,9 @@ git config --global alias.sw switch
 	br = branch
 ```
 
+## unset credentials
+```sh
+git config --system --unset credential.helper
+```
 
+or Windows Credential Manager
