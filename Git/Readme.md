@@ -112,7 +112,7 @@ git config --global alias.sw switch
   aa = !git add -A && git status
 	st = status
 	cm = commit -m
-  ft = fetch
+	ft = fetch
 	sw = switch
 	co = checkout
 	br = branch
