@@ -40,7 +40,7 @@ nano .bash_aliases
 ```
 add to file:
 ```sh
-alias gongdir="cd /mnt/c/Gong"
+alias cd..="cd .."
 ```
 
 ## fix dns
@@ -53,4 +53,4 @@ generateResolvConf = false
 ```sh
 sudo nano /etc/resolv.conf
 ```
-update nameserver to 8.8.8.8
+nameserver 8.8.8.8
