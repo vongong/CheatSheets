@@ -26,6 +26,9 @@ openssl req -text -in example.csr -noout -verify
 
 # self sign cert from keypair
 openssl x509 -in example.csr -out example.crt -rep -signkey keyPair.key -days 365
+
+# Get Expire date
+openssl x509 -enddate -noout -in file.pem
 ```
 
 ## commands from Ryan
