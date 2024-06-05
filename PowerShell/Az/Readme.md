@@ -24,18 +24,14 @@ Get All Previous Az Modules??
 ```powershell
 $latestVer = (Get-InstalledModule -Name Az).Version
 $AzVersions = Get-InstalledModule -Name Az -AllVersions | Where-Object {$_.Version -ne $latestVer}
-```
 
-Find Dependencies
-```powershell
+# Find Dependencies
 ($AzVersions |
   ForEach-Object {
       Import-Clixml -Path (Join-Path -Path $_.InstalledLocation -ChildPath PSGetModuleInfo.xml)
   }).Dependencies.Name | Sort-Object -Descending -Unique -OutVariable AzModules
-```
 
-Remove Az Modules
-```powershell
+# Remove Az Modules
 $AzModules |
   ForEach-Object {
     Remove-Module -Name $_ -ErrorAction SilentlyContinue
