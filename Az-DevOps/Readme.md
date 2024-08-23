@@ -1,5 +1,38 @@
 
 
+## ReplaceTokens@1
+**File Data**
+```xml
+<cors allow-credentials="true">
+  <allowed-origins>
+    <origin>https://__apimServiceName__.developer.azure-api.net</origin>
+  </allowed-origins>
+  <allowed-methods preflight-result-max-age="300">
+    <method>*</method>
+  </allowed-methods>
+  <allowed-headers>
+    <header>*</header>
+  </allowed-headers>
+  <expose-headers>
+    <header>*</header>
+  </expose-headers>
+</cors>
+```
+
+**Task yaml**
+```yaml
+variables:
+  apimServiceName: 'ABC-Dev-North-Apim'
+
+steps:
+- task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
+  displayName: 'Replace tokens in _VCGTest00'
+  inputs:
+    sourcePath: '$(System.DefaultWorkingDirectory)/_VCGTest'
+    filePattern: '**/*.xml'
+    secretTokens: 'apimServiceName:$(apimServiceName)'
+  enabled: false
+```
 
 ## Cron
 
