@@ -1,6 +1,6 @@
 
 
-## ReplaceTokens@1
+## ReplaceTokens@1 Example
 **File Data**
 ```xml
 <cors allow-credentials="true">
