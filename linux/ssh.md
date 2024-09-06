@@ -23,3 +23,8 @@ Connecting via SSH: `ssh username@SSHserver`
 
 **Convert it to classic**
 ssh-keygen -p -f .ssh/id_rsa -m pem -P "" -N""
+
+## Remove host from known_hosts
+man ssh-keygen: -R hostname
+Removes all keys belonging to hostname from a known_hosts file. This option is useful to delete hashed hosts (see the -H option above).
+
