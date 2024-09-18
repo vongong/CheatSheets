@@ -65,3 +65,4 @@ sudo visudo
 - Open VScode
 - Go to Settings `Ctrl + ,`
 - add `wsl.localhost` and `wsl$` to Allow UNCHosts
+- Restart vscode
