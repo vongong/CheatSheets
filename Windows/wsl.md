@@ -60,3 +60,8 @@ sudo visudo
 ```
 - scroll to bottom and add: `linuxadmin ALL=(ALL) NOPASSWD: ALL`
 - save and exit
+
+## Unable to open wsl file in vscode
+- Open VScode
+- Go to Settings `Ctrl + ,`
+- add `wsl.localhost` and `wsl$` to Allow UNCHosts
