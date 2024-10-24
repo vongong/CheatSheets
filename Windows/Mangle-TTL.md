@@ -1,6 +1,6 @@
 
 ## Unlimited LTE Hotspot on PC 
-
+Mangle TTL
 ```sh
 # Windows Commands (run cmd as administrator):
 netsh int ipv4 set glob defaultcurhoplimit=65
