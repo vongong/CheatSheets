@@ -6,6 +6,8 @@ A feature-rich command-line audio/video downloader
 ```sh
 # Download video
 yt-dlp mp3 https://www.youtube.com/watch?v=WOg93THAyE0
+yt-dlp mp3 https://www.youtube.com/watch?v=WOg93THAyE0 -o m:\new.mp4
+yt-dlp mp3 https://www.youtube.com/watch?v=WOg93THAyE0 --no-mtime
 
 # Download & convert to mp3 (assume ffmpeg is installed)
 yt-dlp -x --audio-format mp3 https://www.youtube.com/watch?v=WOg93THAyE0
