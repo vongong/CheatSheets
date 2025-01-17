@@ -2,7 +2,7 @@
 A distributed network name (DNN) listener replaces the traditional virtual network name (VNN) availability group listener when used with Always On availability groups on SQL Server VMs. This negates the need for an Azure Load Balancer to route traffic, simplifying deployment, maintenance, and improving failover.
 
 ## Example
-add_dnn_listener.ps1 -Ag "PIM_Dev_AG" -Dns "PIMD01AG" -Port 1999
+.\add_dnn_listener.ps1 -Ag "PIM_Dev_AG" -Dnn "PIMPD01AG" -Port 1806
 
 #>
 
