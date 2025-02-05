@@ -42,12 +42,12 @@ alias cd..="cd .."
 ```
 
 ## fix dns
-Update /etc/wsl.conf
+- Disable Generate resolv.conf
 ```ini
 [network]
 generateResolvConf = false
 ```
-
+- Update /etc/wsl.conf
 ```sh
 sudo nano /etc/resolv.conf
 ```
