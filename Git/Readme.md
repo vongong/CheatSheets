@@ -21,6 +21,7 @@ this folder stores the repo.
 ## Init
 - `git config --global user.name "John Doe"` = Set Name
 - `git config --global user.email johndoe@example.com` = Set Email
+- `git config --global core.editor "nano"`
 - `git config --list ` = View Config
 
 
