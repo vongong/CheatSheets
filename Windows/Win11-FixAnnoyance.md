@@ -13,7 +13,7 @@
 ## Setting | Personalization | Lock Screen
 - Disable fun facts
 
-## Setting | Personalization | Additional Settings
+## Setting | System | Notification | Additional Settings
 - Disable Show Windows Welcome Experience
 - Disable Get tips and suggestions
 
