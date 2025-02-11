@@ -109,7 +109,7 @@ git config --global alias.sw switch
 **Add to File:** ~/.gitconfig
 ```ini
 [alias]
-  aa = !git add -A && git status
+	aa = !git add -A && git status
 	st = status
 	cm = commit -m
 	ft = fetch
