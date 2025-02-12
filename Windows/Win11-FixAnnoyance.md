@@ -84,3 +84,12 @@ DWORD Key: BingSearchEnabled; Value=0
 - Select Account 
 - Unlink this PC
 
+## Remove "Learn about this picture"
+```ini
+Windows Registry Editor Version 5.00
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{2cc5ca98-6485-489a-920e-b3e88a6ccce3}]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
+"{2cc5ca98-6485-489a-920e-b3e88a6ccce3}"=dword:00000001
+```
