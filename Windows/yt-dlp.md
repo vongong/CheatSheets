@@ -22,6 +22,6 @@ yt-dlp --help
 yt-dlp --update
 
 # update to version (Channel@Version)
-yt-dlp yt-dlp --update-to stable@2024.04.09
+yt-dlp --update-to stable@2024.04.09
 
 ```
