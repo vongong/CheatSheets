@@ -51,3 +51,26 @@ cat .\filename | clip
 
 ## Host file location
 c:\Windows\System32\Drivers\etc\hosts
+
+## Create Shortcut
+```powershell
+# Info
+$targetFile = "C:\path\to\your\target.exe"
+$shortcutFile = "$env:Public\Desktop\YourShortcut.lnk"
+
+# Create COM object
+$WScriptShell = New-Object -ComObject WScript.Shell
+
+# Create Shortcut
+$shortcut = $WScriptShell.CreateShortcut($shortcutFile)
+
+# Set shortcut properties.
+$shortcut.TargetPath = $targetFile
+$shortcut.WorkingDirectory = "C:\path\to\working\directory" # Optional
+$shortcut.Arguments = "" # Optional arguments
+$shortcut.Description = "Description of the shortcut" # Optional
+$shortcut.IconLocation = "C:\path\to\icon.ico,0" # Optional icon path and index
+
+# Save the shortcut
+$shortcut.Save()
+```
