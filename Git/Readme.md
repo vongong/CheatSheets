@@ -1,3 +1,5 @@
+# Git
+
 ## different enviroment
 - `working` = dir
 - `staging` = git status
@@ -18,14 +20,16 @@ this folder stores the repo.
   - subfolder of first 2 char of hash
 
 
-## Init
+## Commands
+
+### Init
 - `git config --global user.name "John Doe"` = Set Name
 - `git config --global user.email johndoe@example.com` = Set Email
 - `git config --list ` = View Config
 - `git config --global core.editor "nano"`
   - Add to path: `C:\Program Files\Git\usr\bin`
 
-## Common
+### Common
 - `git help [command]` = Get Help on command
 - `git init ` = Initalize directory for git
 - `git log` = Display logs
@@ -46,7 +50,7 @@ this folder stores the repo.
 - `git push` =  upload changes from working directory to origin
   - `git push -- all` = push all branch
 
-## Branch
+### Branch
 - `git branch` = get branch names
 - `git branch -a` = all
 - `git branch new-branch-name` = create branch names
@@ -54,18 +58,18 @@ this folder stores the repo.
 - `git branch -d branch-name` = delete branch names
 - `git branch -v` = verbose
 
-## restore
+### Restore
 - `git restore --staged index.html` = unstage index.html
 - `git restore --staged *.css` = unstage multiple files
 - `git restore index.html` = discard umcommited change
 - `git restore --source 7173808e index.html` = restore file from specific commit
 - `git restore --source main~2 index.html` = restore file from 2 commits before HEAD of the main branch
 
-## Remote
+### Remote
 - `git remote add origin https://github.com/example/repo.git` = adds origin remote
 - `git remote set-url origin https://github.com/example/repo.git` = updates origin remote
 
-## stash
+### Stash
 - `git stash save "comment on save"` = add files to stash and name it
 - `git stash -u`      = Add Untracked files files
 - `git stash list`    = List stash id and comments
@@ -74,9 +78,31 @@ this folder stores the repo.
 - `git stash drop 0`  = Remove from stash
 - `git stash clear`   = Remove all stashes
 
-## Diff
+### Diff
 - `git diff branch1...branch2` = see diff between branches
 - `git diff main new_branch ./diff_test.txt` = see diff in file between 2 branches
+
+### Alias
+**Command:**
+- git config --global alias.ft fetch
+- git config --global alias.cm "commit -m"
+- git config --global alias.aa "add -A"
+- git config --global alias.sw switch
+
+**get config:** git config --list --show-origin
+
+**Add to File:** ~/.gitconfig
+```ini
+[alias]
+	aa = !git add -A && git status
+	st = status
+	cm = commit -m
+	ft = fetch
+	sw = switch
+	co = checkout
+	br = branch
+```
+
 
 ## Merge
 **Merge Hotfix into main branch**
@@ -93,35 +119,18 @@ git checkout work-branch
 git merge main
 ```
 
-
 **Merge Conflict**
 Look at files that were identified. They will have sections with markers like `<<<<<<<`, `=======`, and `>>>>>>>`. Fix the section and completely removed those markers. You can run `git status` again to verify that all conflicts have been resolved. Once verified that everything that had conflicts has been staged, you can type `git commit` to finalize the merge commit.
 
 
-## Alias
-**Command:**
-git config --global alias.ft fetch
-git config --global alias.cm "commit -m"
-git config --global alias.aa "add -A"
-git config --global alias.sw switch
-
-**get config:** git config --list --show-origin
-
-**Add to File:** ~/.gitconfig
-```ini
-[alias]
-	aa = !git add -A && git status
-	st = status
-	cm = commit -m
-	ft = fetch
-	sw = switch
-	co = checkout
-	br = branch
-```
-
 ## unset credentials
+- Use Windows Credential Manager
+- cmd:
 ```sh
 git config --system --unset credential.helper
 ```
 
-or Windows Credential Manager
+## Windows Install
+Bash `.\Bin` files are included with windows Git install. See `C:\Program Files\Git\usr\bin` for programs like `nano.exe`, `grep.exe`, and the like.
+
+The `git.exe` and `bash.exe` are found in `C:\Program Files\Git\bin`.
