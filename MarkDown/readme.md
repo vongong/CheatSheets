@@ -58,8 +58,10 @@ Strikethrough uses two tildes. ~~Scratch this~~.
 <mark>Highlighted text</mark>  
 ==Highlighted text2==
 ```
+
 <mark>Highlighted text</mark>  
 ==Highlighted text2==
+
 ## Line Breaks
 ```markdown
 First line with two spaces after.  
@@ -111,6 +113,7 @@ First Term
 Second Term
 : This is one definition of the second term.
 : This is another definition of the second term.
+
 ## Horizontal Rule
 ```markdown
 > Blockquotes are very handy in email to emulate reply text.
@@ -238,11 +241,12 @@ Inline `code` has `back-ticks around` it.
 
 
 ### Blocks of Code
-```markdown
+````markdown
 ```python
 s = "Python syntax highlighting"
 print s
 ```
+````
  
 ```python
 s = "Python syntax highlighting"
@@ -265,7 +269,7 @@ The outer pipes (|) are optional, and you don't need to make the raw Markdown li
 | col1 | col2 | col3 |
 | col1 | col2 | col3 |
 
-### table Alignment
+### Table Alignment
 ```markdown
 | Syntax      | Description | Test Text     |
 | :---        |    :----:   |          ---: |
