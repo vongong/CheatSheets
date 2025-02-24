@@ -39,6 +39,12 @@ Set-Alias -Name touch -Value New-Item
 
 # Setup oh-my-posh
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\negligible.omp.json" | Invoke-Expression
+
+# manual upgrade
+oh-my-posh upgrade
+
+# auto upgrade
+oh-my-posh enable upgrade
 ```
 
 ## Winget
