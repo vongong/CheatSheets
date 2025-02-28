@@ -1,0 +1,53 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-2019'
+
+stages:
+  - stage: Stage1
+    jobs:
+      - job: Stage1A
+        displayName: "Stage1A"
+        steps:      
+          - script: dir data
+            displayName: "check file"
+      - job: Stage1B
+        displayName: "Stage1B"        
+        steps:      
+          - script: dir data
+            displayName: "check file"
+      - job: Stage1C
+        displayName: "Stage1C"        
+        steps:      
+          - script: dir data
+            displayName: "check file"
+  - stage: Stage2
+    dependsOn:
+      - Stage1      
+    jobs:
+      - job: Stage2A
+        displayName: "Stage2A"
+        steps:
+          - script: dir data
+            displayName: "check file"
+      - job: Stage2B
+        displayName: "Stage2B"
+        dependsOn: Stage2A
+        steps:
+          - script: dir data
+            displayName: "check file"
+  - stage: Stage3
+    dependsOn:
+      - Stage2
+    jobs:
+      - job: Stage3A
+        displayName: "Stage3A"                
+        steps:      
+          - script: dir data
+            displayName: "check file"
+      - job: Stage3B
+        displayName: "Stage3B"        
+        dependsOn: Stage3A
+        steps:      
+          - script: dir data
+            displayName: "check file"
