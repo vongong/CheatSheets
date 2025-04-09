@@ -41,7 +41,7 @@ add to file:
 alias cd..="cd .."
 ```
 
-## fix dns
+## fix dns - temp
 - Disable Generate resolv.conf
 ```ini
 [network]
@@ -52,6 +52,14 @@ generateResolvConf = false
 sudo nano /etc/resolv.conf
 ```
 nameserver 8.8.8.8
+
+## fix dns
+- Access the /etc/systemd/resolved.conf file 
+- Locate the [Resolve] section
+- Add/Modify
+  - DNS=1.1.1.1 1.0.0.1 
+  - FallbackDNS=8.8.8.8 8.8.4.4
+- Restart systemd-resolve: `sudo systemctl restart systemd-resolved`
 
 ## override sudo
 - open visudo
