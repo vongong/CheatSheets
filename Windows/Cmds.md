@@ -1,17 +1,11 @@
 
 ## Run Command on remote server
 ```powershell
-# Open shell as User
-runas /netonly /user:Domain\user powershell.exe
+# Reboot Immediately 
+shutdown /r /t 0
 
-# Test Connection 
-Test-WsMan COMPUTER
-
-# Invoke single command
-Invoke-Command -ComputerName COMPUTER -ScriptBlock { COMMAND } -credential USERNAME
-
-# Start Remote Session
-Enter-PSSession -ComputerName COMPUTER -Credential USER
+# Shutdown Immediately
+shutdown /s /t 0
 ```
 
 ## Change Time Zone
@@ -73,4 +67,19 @@ $shortcut.IconLocation = "C:\path\to\icon.ico,0" # Optional icon path and index
 
 # Save the shortcut
 $shortcut.Save()
+```
+
+## Run Command on remote server
+```powershell
+# Open shell as User
+runas /netonly /user:Domain\user powershell.exe
+
+# Test Connection 
+Test-WsMan COMPUTER
+
+# Invoke single command
+Invoke-Command -ComputerName COMPUTER -ScriptBlock { COMMAND } -credential USERNAME
+
+# Start Remote Session
+Enter-PSSession -ComputerName COMPUTER -Credential USER
 ```
