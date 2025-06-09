@@ -54,9 +54,13 @@ this folder stores the repo.
 - `git branch` = get branch names
 - `git branch -a` = all
 - `git branch new-branch-name` = create branch names
-- `git switch -c new-branch-name` = create new branch names and switch to it
+- `git branch -c new-branch-name` = create new branch names and switch to it
 - `git branch -d branch-name` = delete branch names
 - `git branch -v` = verbose
+
+### Reset
+- `git reset --soft HEAD~1` = Undo last git commit; keep changes in working dir
+- `git reset --hard HEAD~1` = Undo last git commit; discard changes
 
 ### Restore
 - `git restore --staged index.html` = unstage index.html
