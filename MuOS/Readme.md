@@ -48,3 +48,20 @@ Systems match the catalogue= entry in MUOS/info/assign/<system>.ini
 - Image Size Box 324x300
 - [Skraper mixes and Artwork for the Tiny Best Set](https://github.com/antiKk/muOS-Artwork)
 - [GarlicOS system Icons](https://github.com/Vidnez/retro-systems-icons-for-GarlicOS)
+
+## Scrape
+- [Screen Scraper](https://www.screenscraper.fr/)
+- [Skraper App](https://www.skraper.net/)
+- [tutorial](https://youtu.be/hf9zdMqKndI)
+- [xml configs](https://github.com/antiKk/muOS-Artwork)
+
+1. Install Skraper App
+2. Validate Screen scraper account
+3. Select Roms Folder
+4. For Roms, update correct <system> folder
+5. For Media, Media Type User Provided mix
+6. Use xml from AntiKk/muOS-Artwork/Skraper Mixes
+7. remove manuals
+8. For box, save to MUOS\info\catelogue\<system>\box 
+9. For preview, save to MUOS\info\catelogue\<system>\preview 
+10. Select Play
