@@ -2,6 +2,7 @@
 OS designed for retro handhelds. Document based on Pixie.
 - [Homepage](https://muos.dev/)
 - [Forum](https://community.muos.dev/)
+- [Themes](https://github.com/MustardOS/theme)
 
 ## Install
 Pull Image to muos homepage. Flash to sd card.
@@ -57,11 +58,27 @@ Systems match the catalogue= entry in MUOS/info/assign/<system>.ini
 
 1. Install Skraper App
 2. Validate Screen scraper account
-3. Select Roms Folder
-4. For Roms, update correct <system> folder
-5. For Media, Media Type User Provided mix
-6. Use xml from AntiKk/muOS-Artwork/Skraper Mixes
-7. remove manuals
-8. For box, save to MUOS\info\catelogue\<system>\box 
-9. For preview, save to MUOS\info\catelogue\<system>\preview 
-10. Select Play
+3. Loading Resource can take a while
+4. Select Generic Emulation
+5. Select Roms Folder
+6. For Roms, update correct <system> folder
+7. For Media, Media Type User Provided mix
+8. Use xml from AntiKk/muOS-Artwork/Skraper Mixes
+9. remove manuals
+10. For box, save to MUOS\info\catelogue\<system>\box 
+11. For preview, save to MUOS\info\catelogue\<system>\preview 
+12. Select Play
+
+## Recommend Settings
+- Sleep Function: Sleep 1m + shutdown
+- Interface Options
+  - Network: Visable
+- Adv Settings
+  - Button Swap?
+  - RetroArch Network Wait: Enable for RetroAchievements
+- Wifi Network
+  - Enable: yes
+  - Save Profile
+- Web Services
+  - Filebrowser: Enable for WebAccess (muos:muos)
+  - 
