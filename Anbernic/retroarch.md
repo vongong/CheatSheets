@@ -5,6 +5,22 @@
 - [YT Shader Guide 2]( https://youtu.be/-J0TU42Ixn8?si=9w27ASwq1L0X1aH3)
 - [Guide: Shaders & Overlays](https://retrogamecorps.com/2024/09/01/guide-shaders-and-overlays-on-retro-handhelds/)
 
+## games aspect ratio
+- 10:9
+  - Games: GB GBC GameGear
+- 3:2 
+  - Games: GBA
+- 4:3
+  - Games: NDS A7800 N64 Sega32X DC PS1
+- 10:7
+  - Games: Genesis NeoGeo
+- 5:6
+  - Games: A2600
+- 16:15
+  - Games: NES
+- 8:7
+  - Games: SNES
+
 ## Retroarch setting 
 - In Game, goto Retroarch quick menu
 - Back out to settings | video
