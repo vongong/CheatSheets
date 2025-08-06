@@ -93,3 +93,19 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
 "{2cc5ca98-6485-489a-920e-b3e88a6ccce3}"=dword:00000001
 ```
+
+## Prevent Windows Update install drivers
+Sometime when windows automatically installs driver could cause issues with the system. This can be done via group policy (Pro) or system properties.
+
+### System Properties
+- Open System Properties (`sysdm.cpl`)
+- Go To Hardware Tab
+- Click on Device Installation Settings
+- Select "No, let me choose what to do" and "Never Install drivers software from Windows Update"
+- Save Changes
+
+### Group Policy
+- Open Group Policy (`gpedit.msc`)
+- Go to Computer Configuration > Administrative Templates > Windows Components > Windows Update
+- Enable "Do not include drivers with Windows Updates
+- Restart your computer
