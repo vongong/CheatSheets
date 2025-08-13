@@ -1,13 +1,13 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-02-04T13:29:12.792-00:00",
+	"CreationDate" : "2025-08-13T12:06:26.324-00:00",
 	"Sources" : 
 	[
 		{
 			"Packages" : 
 			[
 				{
-					"PackageIdentifier" : "ScooterSoftware.BeyondCompare.5"
+					"PackageIdentifier" : "7zip.7zip"
 				},
 				{
 					"PackageIdentifier" : "Git.Git"
@@ -23,9 +23,21 @@
 				},
 				{
 					"PackageIdentifier" : "Notepad++.Notepad++"
-				},				
+				},
 				{
-					"PackageIdentifier" : "7zip.7zip"
+					"PackageIdentifier" : "TechSmith.Snagit.2024"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.AzureCLI"
+				},
+				{
+					"PackageIdentifier" : "Google.GoogleDrive"
+				},
+				{
+					"PackageIdentifier" : "Logitech.OptionsPlus"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisioViewer"
 				},
 				{
 					"PackageIdentifier" : "Zoom.Zoom"
@@ -34,43 +46,43 @@
 					"PackageIdentifier" : "Google.Chrome"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.AzureCLI"
-				},
-				{
-					"PackageIdentifier" : "TechSmith.Snagit.2024"
-				},								
-				{
-					"PackageIdentifier" : "Google.GoogleDrive"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VisioViewer"
-				},
-				{
 					"PackageIdentifier" : "PuTTY.PuTTY"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.PowerShell"
 				},
 				{
 					"PackageIdentifier" : "MPC-BE.MPC-BE"
 				},
 				{
-					"PackageIdentifier" : "WinSCP.WinSCP"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.PowerToys"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.LogParser"
+					"PackageIdentifier" : "Microsoft.PowerShell"
 				},
 				{
 					"PackageIdentifier" : "Microsoft.SQLServerManagementStudio"
 				},
 				{
+					"PackageIdentifier" : "Microsoft.LogParser"
+				},
+				{
 					"PackageIdentifier" : "Bitwarden.Bitwarden"
 				},
 				{
+					"PackageIdentifier" : "ScooterSoftware.BeyondCompare.5"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Edit"
+				},
+				{
 					"PackageIdentifier" : "Postman.Postman"
+				},
+				{
+					"PackageIdentifier" : "Spotify.Spotify"
+				},
+				{
+					"PackageIdentifier" : "WinSCP.WinSCP"
+				},
+				{
+					"PackageIdentifier" : "LocalSend.LocalSend"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerToys"
 				},
 				{
 					"PackageIdentifier" : "Microsoft.Azure.StorageExplorer"
@@ -89,7 +101,22 @@
 				"Name" : "winget",
 				"Type" : "Microsoft.PreIndexed.Package"
 			}
+		},
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "XP8K0HKJFRXGCK"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+				"Identifier" : "StoreEdgeFD",
+				"Name" : "msstore",
+				"Type" : "Microsoft.Rest"
+			}
 		}
 	],
-	"WinGetVersion" : "1.9.25200"
+	"WinGetVersion" : "1.11.430"
 }
