@@ -3,6 +3,10 @@
 ## Install
 run as Admin: `wsl --install`
 
+See list of available Linux: `wsl.exe --list --online`
+
+Install Linux Distro: `wsl.exe --install [Distro]`
+
 ## Check which version of WSL 
 You can list your installed Linux distributions and check the version of WSL each is set to by entering the command: `wsl --list --verbose`
 
