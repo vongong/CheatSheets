@@ -65,3 +65,8 @@ winget export -o .\apps.json
 # Import Apps (Run as Admin)
 winget import -i .\apps.json
 ```
+
+## Add to Path
+- C:\Gong\tools
+- C:\Program Files\Git\usr\bin
+- C:\Users\vgong\.azure\bin\
