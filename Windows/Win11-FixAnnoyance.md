@@ -109,3 +109,25 @@ Sometime when windows automatically installs driver could cause issues with the 
 - Go to Computer Configuration > Administrative Templates > Windows Components > Windows Update
 - Enable "Do not include drivers with Windows Updates
 - Restart your computer
+
+## Registery Fixes
+
+### Menu Delay
+- Key: HKEY_CURRENT_USER\Control Panel\Desktop
+  - Item: MenuShowDelay   
+  - Value: 200
+
+### Verbose Status
+- Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+  - Item: VerboseStatus   
+  - Value: 1
+
+### Disable Web Search
+- Key: HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer
+  - Item: DisableSearchBoxSuggestions   
+  - Value: 1
+
+### Show Seconds in System Clock
+- Key: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+  - Item: ShowSecondsInSystemClock
+  - Value: 1

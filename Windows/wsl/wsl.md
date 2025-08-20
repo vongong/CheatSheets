@@ -51,7 +51,7 @@ alias cd..="cd .."
 [network]
 generateResolvConf = false
 ```
-- Update /etc/wsl.conf
+- Update /etc/resolv.conf
 ```sh
 sudo nano /etc/resolv.conf
 ```
