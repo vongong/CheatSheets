@@ -29,6 +29,15 @@ openssl x509 -in example.csr -out example.crt -rep -signkey keyPair.key -days 36
 
 # Get Expire date
 openssl x509 -enddate -noout -in file.pem
+
+###########
+# Convert Cert to Pem
+cat pkcs12.b64 | base64 -d > pkcs12.bin
+openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
+openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > pub.pem
+wget https://certs.godaddy.com/repository/gdig2.crt.pem
+cat priv.pem pub.pem gdig2.crt.pem > cert.pem
+
 ```
 
 ## commands from Ryan
