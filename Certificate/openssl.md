@@ -36,7 +36,10 @@ cat pkcs12.b64 | base64 -d > pkcs12.bin
 openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
 openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > pub.pem
 wget https://certs.godaddy.com/repository/gdig2.crt.pem
-cat priv.pem pub.pem gdig2.crt.pem > cert.pem
+cat priv.pem pub.pem gdig2.crt.pem > thecert.pem
+
+# split pem
+awk 'BEGIN {c=0;} /BEGIN CERTIFICATE/{c++} { print > "cert." c ".pem"}' thecert.pem
 
 ```
 
