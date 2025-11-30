@@ -60,10 +60,10 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\negligible.omp.json" | Invo
 - See AppList in winget folder
 ```Powershell
 # Get List of apps
-winget export -o .\apps.json 
+winget export -o .\winget-apps.json 
 
 # Import Apps (Run as Admin)
-winget import -i .\apps.json
+winget import -i .\winget-apps.json
 ```
 
 ## Add to Path
