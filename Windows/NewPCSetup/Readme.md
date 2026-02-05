@@ -36,7 +36,7 @@ Function Get-ChildItemForce($item) {Get-ChildItem -Force $item}
 Set-Alias -Name ll -Value Get-ChildItemForce
 Set-Alias -Name wget -Value Invoke-WebRequest
 Set-Alias -Name touch -Value New-Item
-$homeDir = "C:\Gong"
+$homeDir = "C:\dev"
 
 # Setup oh-my-posh
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\negligible.omp.json" | Invoke-Expression
@@ -67,6 +67,6 @@ winget import -i .\winget-apps.json
 ```
 
 ## Add to Path
-- C:\Gong\tools
+- C:\dev\tools
 - C:\Program Files\Git\usr\bin
 - C:\Users\vgong\.azure\bin\
