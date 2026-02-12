@@ -28,8 +28,12 @@ version: [1.7, 1.9, 2.0]
 
 ## multiline string
 ```yaml
-multilineString: |
+multilineString1: |
   this is a
   multiline string
-multilineString2: "this is a /n multiline string"
+multilineString1conv: "this is a /n multiline string"
+multilineString2: >
+  this is a
+  multiline string
+multilineString2conv: "this is a multiline string"
 ```
