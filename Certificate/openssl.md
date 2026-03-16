@@ -35,7 +35,7 @@ openssl x509 -enddate -noout -in file.pem
 cat pkcs12.b64 | base64 -d > pkcs12.bin
 openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
 openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > pub.pem
-wget https://certs.godaddy.com/repository/gdig2.crt.pem
+wget https://certs.godaddy.com/repository/gdig2.crt.pem # Get Intermediate Cert
 cat priv.pem pub.pem gdig2.crt.pem > thecert.pem
 
 # split pem
@@ -55,12 +55,14 @@ openssl req -out "./sslcert.csr" -newkey rsa:2048 -nodes -keyout "./private.key"
 openssl pkcs12 -export -out "./Cert.p12" -in "./star_batteriesplus_com.pem" -inkey "./private.key" -passin pass:zzzzzz -passout pass:zzzzzz
 
 # Create PEM from pk12 Certificate
-openssl pkcs12 -in "./Cert.p12" -out newfile.crt.pem -clcerts -nokeys -passin pass:zzzzzz
+openssl pkcs12 -in "./Cert.p12" -out "./newfile.crt.pem" -clcerts -nokeys -passin pass:zzzzzz
 
-# Split cert to .crt and .key for FTP server
-openssl pkcs12 -in "./Cert.p12" -nocerts -out Cert.key -passin pass:zzzzzz
+## for FTP server
+# Extract Key from cert (Is it needed? isn't this just the private key)
+openssl pkcs12 -in "./Cert.p12" -nocerts -out "./Cert.key" -passin pass:zzzzzz
 
-openssl pkcs12 -in "./Cert.p12" -clcerts -nokeys -out Cert.crt -passin pass:zzzzzz
+# Extract Crt from cert (Is it needed? isn't this just the PEM)
+openssl pkcs12 -in "./Cert.p12" -clcerts -nokeys -out "./Cert.crt" -passin pass:zzzzzz
 
 ```
 
