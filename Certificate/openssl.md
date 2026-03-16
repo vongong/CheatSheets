@@ -30,8 +30,7 @@ openssl x509 -in example.csr -out example.crt -rep -signkey keyPair.key -days 36
 # Get Expire date
 openssl x509 -enddate -noout -in file.pem
 
-###########
-# Convert Cert to Pem
+# Azure Import Cert Logic
 cat pkcs12.b64 | base64 -d > pkcs12.bin
 openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
 openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > pub.pem
@@ -40,7 +39,6 @@ cat priv.pem pub.pem gdig2.crt.pem > thecert.pem
 
 # split pem
 awk 'BEGIN {c=0;} /BEGIN CERTIFICATE/{c++} { print > "cert." c ".pem"}' thecert.pem
-
 ```
 
 ## commands from Ryan
