@@ -44,20 +44,23 @@ awk 'BEGIN {c=0;} /BEGIN CERTIFICATE/{c++} { print > "cert." c ".pem"}' thecert.
 ```
 
 ## commands from Ryan
+- if in cmd, replace openssl with `"C:\Program Files\Git\mingw64\bin\openssl.exe"`
+- if in powershell, replace openssl with `& 'C:\Program Files\Git\mingw64\bin\openssl.exe'`
 
-```powershell
+```sh
 # Create KeyPair and CSR with Password zzzzz
-& 'C:\Program Files\Git\mingw64\bin\openssl.exe' req -out "C:\openssl\sslcert.csr" -newkey rsa:2048 -nodes -keyout "C:\openssl\private.key" -passout pass:zzzzz -config "C:\openssl\san.cnf.txt"
+openssl req -out "./sslcert.csr" -newkey rsa:2048 -nodes -keyout "./private.key" -passout pass:zzzzz -config "./san.cnf.txt"
 
 # Create pk12\pfx Certificate from PEM
-& 'C:\Program Files\Git\mingw64\bin\openssl.exe' pkcs12 -export -out "C:\openssl\Cert.p12" -in "C:\openssl\star_batteriesplus_com.pem" -inkey "C:\openssl\private.key" -passin pass:zzzzzz -passout pass:zzzzzz
+openssl pkcs12 -export -out "./Cert.p12" -in "./star_batteriesplus_com.pem" -inkey "./private.key" -passin pass:zzzzzz -passout pass:zzzzzz
 
 # Create PEM from pk12 Certificate
-& 'C:\Program Files\Git\mingw64\bin\openssl.exe' pkcs12 -in "C:\openssl\Cert.p12" -out newfile.crt.pem -clcerts -nokeys -passin pass:zzzzzz
+openssl pkcs12 -in "./Cert.p12" -out newfile.crt.pem -clcerts -nokeys -passin pass:zzzzzz
 
 # Split cert to .crt and .key for FTP server
-& "C:\Program Files\Git\mingw64\bin\openssl.exe" pkcs12 -in "C:\openssl\Cert.p12" -nocerts -out Cert.key -passin pass:zzzzzz
-& "C:\Program Files\Git\mingw64\bin\openssl.exe" pkcs12 -in "C:\openssl\Cert.p12" -clcerts -nokeys -out Cert.crt -passin pass:zzzzzz
+openssl pkcs12 -in "./Cert.p12" -nocerts -out Cert.key -passin pass:zzzzzz
+
+openssl pkcs12 -in "./Cert.p12" -clcerts -nokeys -out Cert.crt -passin pass:zzzzzz
 
 ```
 
