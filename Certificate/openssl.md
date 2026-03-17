@@ -77,7 +77,7 @@ openssl verify -CAfile ca_bundle.pem server.crt
 
 ```sh
 ## Create KeyPair and CSR with Password zzzzz
-#   -nodes: "no DES" Private Key not encrypted
+#   -nodes: "no DES" Private Key not encrypted (deprecated use -noenc)
 #   -passout: Set password for Key
 # Notes: -nodes & -passout conflict. No password will be set
 openssl req -newkey rsa:2048 -nodes -keyout "./private.key" -out "./sslcert.csr" -passout pass:zzzzz -config "./san.cnf.txt"
