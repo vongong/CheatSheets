@@ -1,4 +1,8 @@
 # openssl
+- `RSA`: This is a widely used public-key cryptography algorithm. By default, generated private keys are often in the "traditional" PKCS#1 format, which can be converted to other formats.
+- `PKCS#8`: This is a standard that defines a format for storing private keys for various algorithms, not just RSA
+- `PKCS#12`: This standard defines an archive file format (often .pfx or .p12 extensions) that can store a private key along with its associated X.509 certificates in a single, password-protected binary file
+- `X.509`: This is an internationally recognized standard for public key certificates. An X.509 certificate binds a public key to an identity (such as a person, organization, or website) and is signed by a Certificate Authority (CA)
 
 ## commands
 ```sh
@@ -22,7 +26,6 @@ openssl rsa -in keyPair.key -pubout -out public.key
 
 # Create CSR from keypair (need to fill out info. -config pass params )
 openssl req -new -key keyPair.key -pubout -out example.csr
-
 
 # Check CSR
 openssl req -text -in example.csr -noout -verify
