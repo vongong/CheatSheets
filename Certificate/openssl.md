@@ -7,7 +7,7 @@
   - openssl req: Creates and Processes certificate requests (CSRs) in PKCS#10 format [Link](https://docs.openssl.org/master/man1/openssl-req/)
   - openssl pkc12: Created and Parsed PKCS#12 file (sometimes referred to as PFX files) [Link](https://docs.openssl.org/master/man1/openssl-pkcs12/)
   - openssl x509: Certificate display and signing command [Link](https://docs.openssl.org/master/man1/openssl-x509/)
-- Glossary
+- **Glossary**
   - `MD5`: a deprecated cryptographic hash function and is not considered secure for security-related applications like digital signatures or password hashing due to known vulnerabilities
   - `Modulus`: large integer, often 2048 or 4096 bits long, that serves as the foundation of RSA cryptography in both public and private keys. In RSA, its the product of 2 prime numbers.
   - `RSA`: This is a widely used public-key cryptography algorithm. By default, generated private keys are often in the "traditional" PKCS#1 format, which can be converted to other formats.
@@ -43,6 +43,13 @@ openssl x509 -signkey keyPair.key -in example.csr -req -days 365 -out server.crt
 
 # Get Expire date  - wip
 openssl x509 -enddate -noout -in server.crt
+
+# Extract Private Key from PFX/P12
+openssl pkcs12 -in "Cert.p12" -nocerts -out "Cert.key" -passin pass:zzzzz -passout pass:zzzzz
+openssl pkcs12 -in "Cert.p12" -nocerts -out "Cert.key" -passin pass:zzzzz -noenc # No Encrypt
+
+# Extract PEM from PFX/P12
+openssl pkcs12 -in "Cert.p12" -clcerts -nokeys -out "Cert.pem" -passin pass:zzzzz
 ```
 
 ### san.cnf.txt
@@ -89,7 +96,7 @@ openssl x509 -noout -modulus -in certificate.crt -text
 openssl s_client -connect www.example.com:443 | openssl x509 -noout -modulus -text
 
 # Key - rsa
-openssl rsa -noout -modulus -in private.key -txt
+openssl rsa -noout -modulus -in private.key -text
 
 ## Verify a Certificate Chain
 openssl verify -CAfile ca_bundle.pem server.crt
