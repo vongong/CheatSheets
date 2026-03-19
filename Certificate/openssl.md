@@ -1,12 +1,6 @@
 # openssl
 
 ## Info
-- [openssl doc cmds](https://docs.openssl.org/master/man1/openssl-cmds/)
-  - openssl genrsa: Generate RSA Key Pair [Link](https://docs.openssl.org/master/man1/openssl-genrsa/)
-  - openssl rsa: Process RSA Keys [Link](https://docs.openssl.org/master/man1/openssl-rsa/)
-  - openssl req: Creates and Processes certificate requests (CSRs) in PKCS#10 format [Link](https://docs.openssl.org/master/man1/openssl-req/)
-  - openssl pkc12: Created and Parsed PKCS#12 file (sometimes referred to as PFX files) [Link](https://docs.openssl.org/master/man1/openssl-pkcs12/)
-  - openssl x509: Certificate display and signing command [Link](https://docs.openssl.org/master/man1/openssl-x509/)
 - **Glossary**
   - `MD5`: a deprecated cryptographic hash function and is not considered secure for security-related applications like digital signatures or password hashing due to known vulnerabilities
   - `Modulus`: large integer, often 2048 or 4096 bits long, that serves as the foundation of RSA cryptography in both public and private keys. In RSA, its the product of 2 prime numbers.
@@ -14,6 +8,12 @@
   - `PKCS#8`: This is a standard that defines a format for storing private keys for various algorithms, not just RSA
   - `PKCS#12`: This standard defines an archive file format (often .pfx or .p12 extensions) that can store a private key along with its associated X.509 certificates in a single, password-protected binary file
   - `X.509`: This is an internationally recognized standard for public key certificates. An X.509 certificate binds a public key to an identity (such as a person, organization, or website) and is signed by a Certificate Authority (CA)
+- [openssl documentation](https://docs.openssl.org/master/man1/openssl-cmds/)
+  - openssl genrsa: Generate RSA Key Pair [Link](https://docs.openssl.org/master/man1/openssl-genrsa/)
+  - openssl rsa: Process RSA Keys [Link](https://docs.openssl.org/master/man1/openssl-rsa/)
+  - openssl req: Creates and Processes certificate requests (CSRs) in PKCS#10 format [Link](https://docs.openssl.org/master/man1/openssl-req/)
+  - openssl pkc12: Created and Parsed PKCS#12 file (sometimes referred to as PFX files) [Link](https://docs.openssl.org/master/man1/openssl-pkcs12/)
+  - openssl x509: Certificate display and signing command [Link](https://docs.openssl.org/master/man1/openssl-x509/)
 
 ## Commands
 ```sh
@@ -59,44 +59,9 @@ openssl pkcs12 -in "Cert.p12" -nocerts -out "Cert.key" -passin pass:zzzzz -noenc
 openssl pkcs12 -in "Cert.p12" -clcerts -nokeys -out "Cert.pem" -passin pass:zzzzz
 ```
 
-### san.cnf.txt
-```ini
-[ req ]
-prompt = no
-default_bits       = 2048
-distinguished_name = req_distinguished_name
-req_extensions     = req_ext
-[ req_distinguished_name ]
-countryName                 = US
-localityName               = Hartland
-organizationName           = Example, LLC
-commonName                 = *.example.com
-[ req_ext ]
-subjectAltName = @alt_names
-[alt_names]
-DNS.1   = *.example.com
-DNS.2   = example.com
-DNS.2   = ivan.example.com
-```
-
-### -Param `-passin` & `-passout` Options
-- pass:*password*: The actual password
-- env:*var*: Obtain the password from the environment variable *var*
-- file:*filepath*: Reads the password from the specified file pathname. Only the first line, up to the newline character, is read from the stream.
-- stdin: Reads password from Standard Input
- 
-```sh
-# File Example
-printf Hello123 > pass.txt
-cat .\pass.txt
-openssl genrsa -aes256 -passout file:pass.txt -out keyPair.key 2048
-openssl rsa -in keyPair.key -check
-openssl rsa -in keyPair.key -check -passin pass:Hello123
-openssl rsa -in keyPair.key -check -passin file:pass.txt
-
-```
-
-## Verify Key/CSR
+### Verify Key/CSR Base64
+- if key is not encrypted, `-----BEGIN PRIVATE KEY-----`
+- if key is encrypted, `-----BEGIN ENCRYPTED PRIVATE KEY-----`
 - cmd: 
 ```sh
 ## Verify Key
@@ -124,12 +89,54 @@ openssl rsa -noout -modulus -in private.key -text
 ## Verify a Certificate Chain
 openssl verify -CAfile ca_bundle.pem server.crt
 ```
-- if key is encrypted, "-----BEGIN ENCRYPTED PRIVATE KEY-----"
-- if key is not encrypted, "-----BEGIN PRIVATE KEY-----"
 
-## Other Logic
+### -Param `-passin` & `-passout` Options
+- pass:*password*: The actual password
+- env:*var*: Obtain the password from the environment variable *var*
+- file:*filepath*: Reads the password from the specified file pathname. Only the first line, up to the newline character, is read from the stream.
+  - **Issue:** Problem using echo. Most likely windows using CRLF (Carriage Return Line Feed `\r\n`) while linux uses LF (Line Feed `\n`).
+- stdin: Reads password from Standard Input
+ 
 ```sh
-##############
+# Examples Setup
+openssl genrsa -aes256 -passout pass:Hello123 -out keyPair.key 2048
+openssl rsa -in keyPair.key -check
+
+# Pass Example
+openssl rsa -in keyPair.key -check -passin pass:Hello123
+
+# File Example
+printf Hello123 > pass.txt
+openssl rsa -in keyPair.key -check -passin file:pass.txt
+
+# Env Example
+$env:cert_pass = 'Hello123'
+openssl rsa -in keyPair.key -check -passin env:cert_pass
+```
+
+### san.cnf.txt
+```ini
+[ req ]
+prompt = no
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+[ req_distinguished_name ]
+countryName                 = US
+localityName               = Hartland
+organizationName           = Example, LLC
+commonName                 = *.example.com
+[ req_ext ]
+subjectAltName = @alt_names
+[alt_names]
+DNS.1   = *.example.com
+DNS.2   = example.com
+DNS.2   = ivan.example.com
+```
+
+
+## Other Logic - wip
+```sh
 # Azure Import Cert Logic
 cat pkcs12.b64 | base64 -d > pkcs12.bin
 openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
