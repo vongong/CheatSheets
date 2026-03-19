@@ -29,7 +29,7 @@ openssl rsa -in keyPair.key -check -passin pass:zzzzz # check with pass
 # Encrypt Existing RSA key
 openssl genrsa -out your_unencrypted.key 2048
 openssl rsa -in your_unencrypted.key -out your_encrypted.key -passout pass:zzzzz
-openssl rsa -in your_unencrypted.key -out your_encrypted.key -passout pass:zzzzz -aes256 # Use aes256
+openssl rsa -in your_unencrypted.key -out your_encrypted.key -passout pass:zzzzz -aes256 # Using aes256
 openssl rsa -in your_encrypted.key -check -passin pass:zzzzz
 
 # Export Public Key from keypair
@@ -79,6 +79,22 @@ DNS.2   = example.com
 DNS.2   = ivan.example.com
 ```
 
+### -Param `-passin` & `-passout` Options
+- pass:*password*: The actual password
+- env:*var*: Obtain the password from the environment variable *var*
+- file:*filepath*: Reads the password from the specified file pathname. Only the first line, up to the newline character, is read from the stream.
+- stdin: Reads password from Standard Input
+ 
+```sh
+# File Example
+printf Hello123 > pass.txt
+cat .\pass.txt
+openssl genrsa -aes256 -passout file:pass.txt -out keyPair.key 2048
+openssl rsa -in keyPair.key -check
+openssl rsa -in keyPair.key -check -passin pass:Hello123
+openssl rsa -in keyPair.key -check -passin file:pass.txt
+
+```
 
 ## Verify Key/CSR
 - cmd: 
