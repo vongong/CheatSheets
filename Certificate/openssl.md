@@ -1,4 +1,4 @@
-# openssl
+# OpenSSL Commands and Glossary for RSA Key Management and Certificate Handling
 
 ## Info
 - **Glossary**
