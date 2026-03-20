@@ -34,7 +34,7 @@ openssl rsa -in your_encrypted.key -check -passin pass:zzzzz
 
 # Export Public Key from keypair
 openssl rsa -in keyPair.key -pubout -out public.key
-openssl rsa -noout -text -inform PEM -in public.key -pubin # key info
+openssl rsa -noout -text -inform PEM -in public.key -pubin # Verify Public Key
 
 # Create CSR from keypair (see below for san.cnf.txt)
 openssl req -new -key keyPair.key -out example.csr # need to fill out info
