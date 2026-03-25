@@ -55,8 +55,22 @@ openssl x509 -enddate -noout -in server.crt
 openssl pkcs12 -in "Cert.p12" -nocerts -out "Cert.key" -passin pass:zzzzz -passout pass:zzzzz
 openssl pkcs12 -in "Cert.p12" -nocerts -out "Cert.key" -passin pass:zzzzz -noenc # No Encrypt
 
-# Extract PEM from PFX/P12
-openssl pkcs12 -in "Cert.p12" -clcerts -nokeys -out "Cert.pem" -passin pass:zzzzz
+# Get Thumbprint and ExpireDate from PFX/P12
+openssl pkcs12 -in "Cert.p12" -nokeys -clcerts -passin pass:zzzzz | openssl x509 -fingerprint -sha1 -noout -enddate
+
+#### Extract For PEM from PFX/P12
+# Private Key
+openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nocerts -noenc | openssl rsa
+# Leaf Cert - non CA
+openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nokeys -clcerts -noenc | openssl x509
+# CA Cert
+openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nokeys -cacerts -noenc
+# full chain
+openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -noenc
+# full chain - no private key
+openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nokeys -noenc
+# Verify PEM
+openssl x509 -in "fullchain.pem" -text -noout
 ```
 
 ### Verify Key/CSR Base64
@@ -81,6 +95,7 @@ openssl x509 -noout -modulus -in certificate.crt | openssl md5
 ## Info
 # Cert
 openssl x509 -noout -modulus -in certificate.crt -text
+openssl x509 -noout -modulus -text -in certificate.crt
 openssl s_client -connect www.example.com:443 | openssl x509 -noout -modulus -text
 
 # Key - rsa
