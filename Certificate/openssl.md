@@ -63,7 +63,7 @@ openssl pkcs12 -in "Cert.p12" -nokeys -clcerts -passin pass:zzzzz | openssl x509
 openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nocerts -noenc | openssl rsa
 # Leaf Cert - non CA
 openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nokeys -clcerts -noenc | openssl x509
-# CA Cert
+# CA Certs (Root CA Issuer = Subject; otherwise intermediate) 
 openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -nokeys -cacerts -noenc
 # full chain
 openssl pkcs12 -in "Cert.p12" -passin pass:zzzzz -noenc
@@ -152,13 +152,33 @@ DNS.2   = ivan.example.com
 
 ## Other Logic - wip
 ```sh
-# Azure Import Cert Logic
+#### Azure Import Cert Logic
 cat pkcs12.b64 | base64 -d > pkcs12.bin
-openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > priv.pem
-openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > pub.pem
+openssl pkcs12 -nocerts -passin pass: -in pkcs12.bin -nodes | openssl rsa > private.pem
+openssl pkcs12 -nokeys -clcerts -passin pass: -in pkcs12.bin -nodes | openssl x509 > leaf.pem
 wget https://certs.godaddy.com/repository/gdig2.crt.pem # Get Intermediate Cert
-cat priv.pem pub.pem gdig2.crt.pem > thecert.pem
+cat private.pem leaf.pem gdig2.crt.pem > thecert.pem
 
-# split pem
-awk 'BEGIN {c=0;} /BEGIN CERTIFICATE/{c++} { print > "cert." c ".pem"}' thecert.pem
+#### cacerts
+# export CAs
+openssl pkcs12 -nokeys -cacerts -passin pass: -in pkcs12.bin  > cacerts.pem
+
+# Split CAs
+awk 'BEGIN {n=1; file="cert-"n".pem"}
+     /Bag Attributes:/ {file="cert-"n".pem"; print > file; next}
+     /-----END CERTIFICATE-----/ {print > file; n++; next}
+     {print > file}' cacerts.pem
+
+# rename CA files
+for f in cert-*.pem; do
+  subject=$(openssl x509 -in $f -subject -noout 2>/dev/null | sed 's/subject=//')
+  issuer=$(openssl x509 -in $f -issuer -noout 2>/dev/null | sed 's/issuer=//')
+  if [ "$subject" != "$issuer" ]; then
+    cp $f intermediate.pem
+    echo "Intermediate found: $f"    
+  else
+    cp $f root-ca.pem
+    echo "Root CA: $f"
+  fi
+done
 ```
