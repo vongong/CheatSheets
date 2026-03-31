@@ -94,8 +94,8 @@ openssl x509 -noout -modulus -in certificate.crt | openssl md5
 
 ## Info
 # Cert
-openssl x509 -noout -modulus -in certificate.crt -text
-openssl x509 -noout -modulus -text -in certificate.crt
+openssopenssl x509 -noout -modulus -text -in certificate.pfx
+openssopenssl x509 -noout -modulus -text -in certificate.crt
 openssl s_client -connect www.example.com:443 | openssl x509 -noout -modulus -text
 
 # Key - rsa
@@ -164,10 +164,7 @@ cat private.pem leaf.pem gdig2.crt.pem > thecert.pem
 openssl pkcs12 -nokeys -cacerts -passin pass: -in pkcs12.bin  > cacerts.pem
 
 # Split CAs
-awk 'BEGIN {n=1; file="cert-"n".pem"}
-     /Bag Attributes:/ {file="cert-"n".pem"; print > file; next}
-     /-----END CERTIFICATE-----/ {print > file; n++; next}
-     {print > file}' cacerts.pem
+awk 'BEGIN {n=1; file="cert-"n".pem"} /Bag Attributes:/ {file="cert-"n".pem"; print > file; next} /-----END CERTIFICATE-----/ {print > file; n++; next} {print > file}' cacerts.pem
 
 # rename CA files
 for f in cert-*.pem; do
@@ -175,7 +172,7 @@ for f in cert-*.pem; do
   issuer=$(openssl x509 -in $f -issuer -noout 2>/dev/null | sed 's/issuer=//')
   if [ "$subject" != "$issuer" ]; then
     cp $f intermediate.pem
-    echo "Intermediate found: $f"    
+    echo "Intermediate found: $f"
   else
     cp $f root-ca.pem
     echo "Root CA: $f"
