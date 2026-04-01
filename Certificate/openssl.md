@@ -121,8 +121,10 @@ openssl rsa -in keyPair.key -check
 openssl rsa -in keyPair.key -check -passin pass:Hello123
 
 # File Example
-printf Hello123 > pass.txt
+printf zzzzz > pass.txt
 openssl rsa -in keyPair.key -check -passin file:pass.txt
+printf zzzzz > passin.txt
+printf zzzzz > passout.txt
 
 # Env Example
 $env:cert_pass = 'Hello123'
