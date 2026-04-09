@@ -96,7 +96,9 @@ openssl x509 -noout -modulus -in certificate.crt | openssl md5
 # Cert
 openssopenssl x509 -noout -modulus -text -in certificate.pfx
 openssopenssl x509 -noout -modulus -text -in certificate.crt
-openssl s_client -connect www.example.com:443 | openssl x509 -noout -modulus -text
+
+# Cert from site
+openssl s_client -connect www.example.com:443 </dev/null
 
 # Key - rsa
 openssl rsa -noout -modulus -in private.key -text
