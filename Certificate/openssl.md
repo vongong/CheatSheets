@@ -20,11 +20,17 @@
 # Get Version
 openssl version
 
-# Generate keypair (Some refer as private key, but it contains both)
+# Generate RSA keypair (Some refer as private key, but it contains both)
 openssl genrsa -out keyPair.key 2048 # no pass
 openssl genrsa -aes256 -passout pass:zzzzz -out keyPair.key 2048 # set pass
 openssl rsa -in keyPair.key -check # check
 openssl rsa -in keyPair.key -check -passin pass:zzzzz # check with pass
+
+## Generate DKIM
+openssl genrsa -out dkim_private.pem 2048
+openssl rsa -in dkim_private.pem -pubout -out dkim_public.pem
+grep -v "^-----" dkim_public.pem | tr -d '\n' 
+
 
 # Encrypt Existing RSA key
 openssl genrsa -out your_unencrypted.key 2048
