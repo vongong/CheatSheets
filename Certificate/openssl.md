@@ -29,8 +29,7 @@ openssl rsa -in keyPair.key -check -passin pass:zzzzz # check with pass
 ## Generate DKIM
 openssl genrsa -out dkim_private.pem 2048
 openssl rsa -in dkim_private.pem -pubout -out dkim_public.pem
-grep -v "^-----" dkim_public.pem | tr -d '\n' 
-
+grep -v "^-----" dkim_public.pem | tr -d '\n' # excludes lines that start with '-----'; remove \n
 
 # Encrypt Existing RSA key
 openssl genrsa -out your_unencrypted.key 2048
