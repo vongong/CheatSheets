@@ -1,17 +1,45 @@
 # ssh
 
-## Connecting
-Connecting via SSH: `ssh username@SSHserver`
-- `ssh root@159.89.14.94`= Connect with root user to 159.89.14.94 server address
-- `ssh-keygen -t rsa`= Create SSH Key Pair with 'rsa' algorithm. SSH Key Pair is stored to the default location `~/.ssh`
-- `ls .ssh/`= Display contents of .ssh folder, which has:
-  - `id_rsa` = Private Key
-  - `id_rsa.pub` = Public Key
-- `ssh -i .ssh/id_rsa root@159.89.14.94` = Connect with root user to 159.89.14.94 server address with specified private key file location (.ssh/id_rsa = default, but you can specify a different one like this)
-- `ssh-copy-id root@10.10.10.222` = Command to copy public key to remote server
+## Commands
+```sh
+# Generate 
+## Current best algorithm is ed25519 (prev was rsa)
+## ~\.ssh\ed25519 = Private Key
+## ~\.ssh\ed25519.pub = Public Key
+ssh-keygen -t ed25519 -C "comment-on-key"
+
+# Connect to server
+ssh user1@159.89.14.94
+
+# Copy Pubic Key to server
+ssh-copy-id -i ~\.ssh\ed25519.pub user1@159.89.14.94
+
+# Connect to server with ssh key
+ssh -i ~\.ssh\ed25519.pub user1@159.89.14.94
+
+# Remove host from Known_hosts
+ssh-keygen -R $hostname_or_ip
+
+# ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+ssh-add -l # Verify
+```
+
+### Powershell ssh-agent
+```powershell
+# Set the service to start automatically (recommended) or manually
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Start the service
+Start-Service ssh-agent
+
+# Add your default key
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
+```
 
 
-**Two Files used by SSH:**
+## Two Files used by SSH
 - `~/.ssh/known_hosts` = lets the client authenticate the server to check that it isn't connecting to an impersonator
 - `~/.ssh/authorized_keys` = lets the server authenticate the user
 
@@ -20,11 +48,3 @@ Connecting via SSH: `ssh username@SSHserver`
 - The new format can be identified when looking at the key.
 - new format: `-----BEGIN OPENSSH PRIVATE KEY-----`
 - classic format: `-----BEGIN RSA PRIVATE KEY-----`
-
-**Convert it to classic**
-ssh-keygen -p -f .ssh/id_rsa -m pem -P "" -N""
-
-## Remove host from known_hosts
-man ssh-keygen: -R hostname
-Removes all keys belonging to hostname from a known_hosts file. This option is useful to delete hashed hosts (see the -H option above).
-
