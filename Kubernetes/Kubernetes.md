@@ -22,6 +22,24 @@ its an orchestration platform. It Manages containers and manage container enviro
 - volumes: data storage; persistant data
   - attached storage (local, remote, cloud) to pod
 
+## Architecture
+- Worker Nodes 
+  - process
+    - Container runtime
+    - kublet: scheduler for container and server
+    - kube proxy: routes request to correct service on worker nodes
+  - needs more resources
+- Master Nodes 
+  - process
+    - api server
+      - acts like gateway to cluster (web/kubectl)
+      - authenticator
+    - scheduler: start work on worker nodes (kublet)
+    - coller manager: detect state change of pods
+    - etcd: key value store state (cluster brain)
+      - not app data
+  - needs less resources
+
 ## kubectl commands
 ```sh
 kubectl get ns
