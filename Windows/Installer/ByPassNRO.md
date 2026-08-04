@@ -2,7 +2,7 @@
 Shift-F10 to Enter CMD Shell
 
 ## Call NRO Script
-- Open cmd with `Shift + F10 `
+- Open cmd with `Shift + F10`
 - Type: `OOBE\BYPASSNRO`; your system will reboot
 - Unplug network
 - Select "I don't have internet"
