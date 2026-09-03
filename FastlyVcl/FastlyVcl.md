@@ -11,6 +11,6 @@
 - Fastly
   - [About Fastly VCL](https://www.fastly.com/documentation/guides/full-site-delivery/fastly-vcl/about-fastly-vcl/)
   - [Fastly VCL Doc](https://www.fastly.com/documentation/reference/vcl/)
-  - [Use Case - Static Content](https://www.fastly.com/documentation/solutions/use-cases/static-content/)
   - [Example GCP Private Bucket](https://www.fastly.com/documentation/solutions/examples/google-cloud-storage-origin-private/)
+  - [Use Case - Static Content](https://www.fastly.com/documentation/solutions/use-cases/static-content/)
 
