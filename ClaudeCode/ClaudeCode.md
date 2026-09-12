@@ -30,3 +30,8 @@
 - `Alt + m` - allow edits
 - `Alt + m twice` - planning mode
 - `Thinking mode` - add "think" | "think hard" in the text/comment to claude
+
+## mcp server
+- [list of mcp servers](https://www.pulsemcp.com/)
+- windows may need to add `cmd /c` 
+- conside using scope flag; local (default) | project | global
