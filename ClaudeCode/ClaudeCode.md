@@ -1,11 +1,16 @@
 # Claude Code
 
 ## cmds
+- `/` - see slash commands 
+- `#` - Add to memory of claude.md
 - `/init` - initialize claude.md file for codebase
   - Keep claude.md in repo. If need machine specific use claude.local.md and add to gitignore
 - `/terminal-setup` - terminal integration
   - Shift + Enter keybinding to add new line
-- `#` - Add to memory of claude.md
+- `/allowed-tools` - permission rules add to local
+
+### custom cmd
+- create in .claude\commands\cmd-name.md
 
 ## context
 - `@Filepath\filename` - add to context; can add multiple files
@@ -23,3 +28,5 @@
 - [tool ref](https://code.claude.com/docs/en/tools-reference)
 - `/allowed-tools` - permission rules
 - `Alt + m` - allow edits
+- `Alt + m twice` - planning mode
+- `Thinking mode` - add "think" | "think hard" in the text/comment to claude
