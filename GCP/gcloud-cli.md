@@ -1,18 +1,26 @@
 # Google Cloud CLI
 
-The Google Cloud CLI (commonly known as the gcloud CLI) is the primary command-line tool used to create, manage, and automate Google Cloud Platform (GCP) resources.
+The Google Cloud CLI (commonly known as the gcloud CLI) is the primary command-line tool used to create, manage, and automate Google Cloud Platform (GCP) resources. 
 
 ## Getting Started
 - [install guide](https://docs.cloud.google.com/sdk/docs/install-sdk)
+- Google Cloud CLI requires Python; supported versions are Python 3.10 to 3.14. By default, the Windows version of Google Cloud CLI comes bundled with Python 3.
+```sh
+# Debian/Ubuntu
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt-get update 
+sudo apt-get install google-cloud-cli
+gcloud version
+```
 
 ### Initialize the gcloud CLI
 It Creates a configuration named default for you and sets it as the active configuration
 ```sh
 # Default
 gcloud init
-
-# remote terminal session
-gcloud init --console-only
+gcloud init --no-browser    # no browser on local machine; can run gcloud cli on another machine with browser
+gcloud init --console-only  # no browser on local machine; cannot run gcloud cli on another machine with browser
 
 # View configuration properties
 gcloud config list
@@ -25,6 +33,7 @@ Initializing walks you through an authentication flow, sets up a gcloud CLI conf
 ```sh
 # Google Cloud user credentials
 gcloud auth login
+gcloud auth login --no-launch-browser
 
 # Google Cloud Service Account
 gcloud auth activate-service-account
