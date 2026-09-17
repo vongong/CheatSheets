@@ -1,4 +1,14 @@
 # Claude Code
+- [doc](https://code.claude.com/docs/en/overview)
+
+## install
+```sh
+# windows powershell
+irm https://claude.ai/install.ps1 | iex
+
+# Linux | WSL
+curl -fsSL https://claude.ai/install.sh | bash
+```
 
 ## cmds
 - `/` - see slash commands 
